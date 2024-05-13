@@ -10,6 +10,7 @@ public class MoveCharacter : MonoBehaviour
     Vector3 move;
 
     bool shiftDown;
+    bool spaceDown;
     float moveSpeed;
 
 
@@ -45,6 +46,7 @@ public class MoveCharacter : MonoBehaviour
         vAxis = Input.GetAxisRaw("Vertical");
         hAxis = Input.GetAxisRaw("Horizontal");
         shiftDown = Input.GetButton("Dash");
+        spaceDown = Input.GetButton("Roll");
     }
 
     void SetAnimation()
@@ -54,5 +56,6 @@ public class MoveCharacter : MonoBehaviour
         anim.SetBool("isLeft", hAxis < 0);
         anim.SetBool("isRight", hAxis > 0);
         anim.SetBool("isDash", shiftDown);
+        anim.SetBool("isRoll", spaceDown);
     }
 }
