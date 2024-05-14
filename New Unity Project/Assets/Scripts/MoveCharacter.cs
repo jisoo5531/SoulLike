@@ -12,6 +12,7 @@ public class MoveCharacter : MonoBehaviour
 
     bool shiftDown;
     bool spaceDown;
+    bool isLeftClick;
     bool isRoll = false;
     float moveSpeed;
 
@@ -35,10 +36,7 @@ public class MoveCharacter : MonoBehaviour
     }
     void Move()
     {
-        if (shiftDown)
-        {
-            moveSpeed *= 2;
-        }
+        
         if (isRoll)
         {
             moveVec = rollVec;
@@ -53,11 +51,14 @@ public class MoveCharacter : MonoBehaviour
     }
     void Dash()
     {
-        shiftDown = Input.GetButton("Dash");
+        if (shiftDown)
+        {
+            moveSpeed *= 2;
+        }
     }
     void Roll()
     {
-        spaceDown = Input.GetButton("Roll");
+        
         if (spaceDown)
         {
             isRoll = true;
@@ -70,10 +71,17 @@ public class MoveCharacter : MonoBehaviour
     {
         isRoll = false;
     }
+    void Jump()
+    {
+
+    }
     void GetInputKey()
     {
         vAxis = Input.GetAxisRaw("Vertical");
         hAxis = Input.GetAxisRaw("Horizontal");
+        spaceDown = Input.GetButton("Roll");
+        shiftDown = Input.GetButton("Dash");
+        isLeftClick = Input.GetMouseButton(0);
     }
 
     void SetAnimation()
@@ -84,6 +92,6 @@ public class MoveCharacter : MonoBehaviour
         anim.SetBool("isRight", hAxis > 0);
         anim.SetBool("isDash", shiftDown);
         anim.SetBool("isRoll", spaceDown);
-        
+        anim.SetBool("isJump", isLeftClick);
     }
 }
