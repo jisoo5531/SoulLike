@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveCharacter : MonoBehaviour
+public class Player : MonoBehaviour
 {
     float hAxis;
     float vAxis;
@@ -12,11 +12,12 @@ public class MoveCharacter : MonoBehaviour
 
     bool shiftDown;
     bool spaceDown;
-    bool isLeftClick;
+    bool isFire;
     bool isRoll = false;
     float moveSpeed;
-
-
+    float delayTime;
+    [SerializeField]
+    GameObject shoot;
     Animator anim;
 
     void Awake()
@@ -32,11 +33,12 @@ public class MoveCharacter : MonoBehaviour
         Move();
         Dash();
         Roll();
+        attack();
         SetAnimation();
     }
     void Move()
     {
-        
+
         if (isRoll)
         {
             moveVec = rollVec;
@@ -58,14 +60,13 @@ public class MoveCharacter : MonoBehaviour
     }
     void Roll()
     {
-        
+
         if (spaceDown)
         {
             isRoll = true;
             rollVec = moveVec;
             Invoke("RollOut", 0.7f);
         }
-        
     }
     void RollOut()
     {
@@ -75,13 +76,21 @@ public class MoveCharacter : MonoBehaviour
     {
 
     }
+    void attack()
+    {
+        if (isFire)
+        {
+            shoot.GetComponent<Shoot>().Use();
+            anim.SetTrigger("doShot");
+        }
+    }
     void GetInputKey()
     {
         vAxis = Input.GetAxisRaw("Vertical");
         hAxis = Input.GetAxisRaw("Horizontal");
         spaceDown = Input.GetButton("Roll");
         shiftDown = Input.GetButton("Dash");
-        isLeftClick = Input.GetMouseButton(0);
+        isFire = Input.GetMouseButtonDown(0);
     }
 
     void SetAnimation()
@@ -92,6 +101,6 @@ public class MoveCharacter : MonoBehaviour
         anim.SetBool("isRight", hAxis > 0);
         anim.SetBool("isDash", shiftDown);
         anim.SetBool("isRoll", spaceDown);
-        anim.SetBool("isJump", isLeftClick);
+        anim.SetBool("isJump", isFire);
     }
 }
