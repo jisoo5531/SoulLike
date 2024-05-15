@@ -13,9 +13,13 @@ public class Player : MonoBehaviour
     bool shiftDown;
     bool spaceDown;
     bool isFire;
+    bool isSingleFire;
+
     bool isRoll = false;
     float moveSpeed;
-    float delayTime;
+    float fireTimer = 0.0f;
+
+
     [SerializeField]
     GameObject shoot;
     Animator anim;
@@ -80,9 +84,34 @@ public class Player : MonoBehaviour
     {
         if (isFire)
         {
-            shoot.GetComponent<Shoot>().Use();
+            anim.SetLayerWeight(1, 1);
+            if (anim.GetCurrentAnimatorStateInfo(1).IsName("ShootAutoshot_AR"))
+            {
+                if (fireTimer > 0.15f)
+                {
+                    shoot.GetComponent<Shoot>().Use();
+                    fireTimer = 0.0f;
+                }
+                
+                fireTimer += Time.deltaTime;
+                return;
+            }
             anim.SetTrigger("doShot");
         }
+        else
+        {
+            anim.SetLayerWeight(1, 0);
+            anim.SetTrigger("doNotShot");
+        }
+        if (isSingleFire)
+        {
+            SingleAttack();
+        }
+    }
+    void SingleAttack()
+    {
+        anim.SetTrigger("doSingleShot");
+        shoot.GetComponent<Shoot>().Use();
     }
     void GetInputKey()
     {
@@ -90,7 +119,8 @@ public class Player : MonoBehaviour
         hAxis = Input.GetAxisRaw("Horizontal");
         spaceDown = Input.GetButton("Roll");
         shiftDown = Input.GetButton("Dash");
-        isFire = Input.GetMouseButtonDown(0);
+        isFire = Input.GetMouseButton(0);
+        isSingleFire = Input.GetMouseButtonDown(1);
     }
 
     void SetAnimation()
@@ -101,6 +131,7 @@ public class Player : MonoBehaviour
         anim.SetBool("isRight", hAxis > 0);
         anim.SetBool("isDash", shiftDown);
         anim.SetBool("isRoll", spaceDown);
-        anim.SetBool("isJump", isFire);
+        
     }
+
 }
