@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
 
     bool shiftDown;
     bool spaceDown;
+
+    [HideInInspector]
     bool isFire;
     bool isSingleFire;
 
@@ -23,10 +25,12 @@ public class Player : MonoBehaviour
     [SerializeField]
     GameObject shoot;
     Animator anim;
+    
 
     void Awake()
     {
         anim = GetComponentInChildren<Animator>();
+        
     }
 
     // Update is called once per frame
@@ -80,7 +84,7 @@ public class Player : MonoBehaviour
     {
 
     }
-    void attack()
+    public void attack()
     {
         if (isFire)
         {
@@ -89,6 +93,7 @@ public class Player : MonoBehaviour
             {
                 if (fireTimer > 0.15f)
                 {
+ 
                     shoot.GetComponent<Shoot>().Use();
                     fireTimer = 0.0f;
                 }

@@ -4,20 +4,26 @@ using UnityEngine;
 
 public class Shoot : MonoBehaviour
 {
+    ObjectPooling objPool;
     public GameObject bullet;
     public Transform bulletPos;
 
-    public void Use()
+    private void Awake()
     {
-        StartCoroutine("Shot");
+        objPool = FindObjectOfType<ObjectPooling>();
     }
 
-    IEnumerator Shot()
+    public void Use()
     {
-        GameObject instantBullet = Instantiate(bullet, bulletPos.position, bulletPos.rotation);
+        StartCoroutine(BulletMove());
+    }
+
+    IEnumerator BulletMove()
+    {
+        GameObject instantBullet = Instantiate(bullet, bulletPos.position, bullet.transform.rotation);
         Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
         bulletRigid.velocity = bulletPos.forward * 50.0f;
-
+        
         yield return null;
     }
 }
