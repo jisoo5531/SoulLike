@@ -4,14 +4,7 @@ using UnityEngine;
 
 public class Shoot : MonoBehaviour
 {
-    ObjectPooling objPool;
-    public GameObject bullet;
     public Transform bulletPos;
-
-    private void Awake()
-    {
-        objPool = FindObjectOfType<ObjectPooling>();
-    }
 
     public void Use()
     {
@@ -20,10 +13,13 @@ public class Shoot : MonoBehaviour
 
     IEnumerator BulletMove()
     {
-        GameObject instantBullet = Instantiate(bullet, bulletPos.position, bullet.transform.rotation);
+
+        //GameObject instantBullet = Instantiate(bullet, bulletPos.position, bullet.transform.rotation);
+        var instantBullet = ObjectPoolManager.instance.Pool.Get();
+        instantBullet.transform.position = bulletPos.transform.position;
         Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
         bulletRigid.velocity = bulletPos.forward * 50.0f;
-        
+
         yield return null;
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.6236598, g: 0.6895267, b: 0.7507635, a: 1}
+  m_IndirectSpecularColor: {r: 0.62365985, g: 0.6895269, b: 0.75076383, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -145,7 +145,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3c603f0482889d4cab188b0bb55c462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 5169544028801069467, guid: 1f87444bb86f2bf48ad136e0bce0953d, type: 3}
   bulletPos: {fileID: 1422580516}
 --- !u!1 &170076733
 GameObject:
@@ -286,6 +285,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ae62756e27d8f44a8a61c5151350462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultCapacity: 10
+  maxPoolSize: 15
+  bulletPrefab: {fileID: 0}
 --- !u!114 &293413062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -897,6 +899,53 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0aa068246263dd4ba7a61b712d2c765, type: 3}
+--- !u!1 &868842892
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 868842894}
+  - component: {fileID: 868842893}
+  m_Layer: 0
+  m_Name: PoolingTest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &868842893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868842892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ae62756e27d8f44a8a61c5151350462, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultCapacity: 10
+  maxPoolSize: 15
+  bulletPrefab: {fileID: 5169544028801069467, guid: 1f87444bb86f2bf48ad136e0bce0953d, type: 3}
+--- !u!4 &868842894
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868842892}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.365201, y: 1.6473529, z: 11.272472}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &942237487 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 069a7f6cb92f25d41ab78e95830737cd, type: 3}
