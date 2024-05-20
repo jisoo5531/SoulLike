@@ -6,10 +6,13 @@ public class EnemyTest : MonoBehaviour
 {
     public float maxHP;
     public float currentHP;
+    
+    public Animator anim;
 
     Rigidbody rigid;
     BoxCollider collider;
     Material mat;
+
 
     void Awake()
     {
