@@ -30,34 +30,21 @@ public class Player : MonoBehaviour
     void Awake()
     {
         anim = GetComponentInChildren<Animator>();
-        
+
+        StartCoroutine(MoveCoroutine());
+        StartCoroutine(AttackCoroutine());
+        //StartCoroutine(AnimationCoroutine());
     }
 
     // Update is called once per frame
     void Update()
     {
-        moveSpeed = 5.0f;
-        GetInputKey();
-        Move();
-        Dash();
-        Roll();
-        attack();
+        //GetInputKey();
+        //Move();
+        //Dash();
+        //Roll();
+        //attack();
         SetAnimation();
-    }
-    void Move()
-    {
-
-        if (isRoll)
-        {
-            moveVec = rollVec;
-            moveSpeed *= 1.5f;
-        }
-        else
-        {
-            moveVec = new Vector3(hAxis, 0.0f, vAxis).normalized;
-        }
-        this.transform.Translate(moveVec * moveSpeed * Time.deltaTime);
-
     }
     void Dash()
     {
@@ -68,10 +55,10 @@ public class Player : MonoBehaviour
     }
     void Roll()
     {
-
         if (spaceDown)
         {
             isRoll = true;
+            moveSpeed *= 1.5f;
             rollVec = moveVec;
             Invoke("RollOut", 0.7f);
         }
@@ -79,10 +66,6 @@ public class Player : MonoBehaviour
     void RollOut()
     {
         isRoll = false;
-    }
-    void Jump()
-    {
-
     }
     public void attack()
     {
@@ -136,7 +119,39 @@ public class Player : MonoBehaviour
         anim.SetBool("isRight", hAxis > 0);
         anim.SetBool("isDash", shiftDown);
         anim.SetBool("isRoll", spaceDown);
-        
     }
 
+    IEnumerator MoveCoroutine()
+    {
+        while (true)
+        {
+            moveSpeed = 5.0f;
+
+            yield return null;
+            GetInputKey();
+            moveVec = new Vector3(hAxis, 0, vAxis).normalized;
+
+            Dash();
+            Roll();
+
+            if (isRoll)
+            {
+                moveVec = rollVec;
+            }
+            this.transform.Translate(moveVec * moveSpeed * Time.deltaTime);
+        }
+    }
+    IEnumerator AttackCoroutine()
+    {
+        while (true)
+        {
+            yield return null;
+            attack();
+        }
+    }
+    IEnumerator AnimationCoroutine()
+    {
+        yield return new WaitForSeconds(0.1f);
+        SetAnimation();
+    }
 }

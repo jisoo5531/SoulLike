@@ -6,18 +6,25 @@ public class Boss : MonoBehaviour
 {
     public GameObject flame;
     public Transform flamePos;
+
+    GameObject obj;
    
     Animator anim;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
-    }
-
-    private void Start()
-    {
         StartCoroutine(Action());
     }
+
+    private void Update()
+    {
+        if (obj != null)
+        {
+            obj.transform.position = flamePos.position;
+        }
+    }
+
 
     IEnumerator Action()
     {
@@ -41,7 +48,6 @@ public class Boss : MonoBehaviour
     }
     IEnumerator AttackBasic()
     {
-        
         anim.SetTrigger("DoClawAttack");
         yield return new WaitForSeconds(3.0f);
         StartCoroutine(Action());
@@ -56,19 +62,12 @@ public class Boss : MonoBehaviour
     IEnumerator AttackFlame()
     {
         yield return new WaitForSeconds(0.5f);
-        anim.SetTrigger("DoFlameAtt");
-        GameObject obj = Instantiate(flame, flamePos.position, flamePos.rotation);
-        yield return new WaitForSeconds(3.0f);
-        yield return new WaitForSeconds(3.0f);
+        anim.SetTrigger("DoFlameAttack");
+        obj = Instantiate(flame, flamePos.position, flamePos.rotation);
 
         yield return new WaitForSeconds(3.0f);
+   
         Destroy(obj);
-        //anim.SetBool("DoFlameAttack", true);
-
-
-
-
-        //anim.SetBool("DoFlameAttack", false);
 
 
 
