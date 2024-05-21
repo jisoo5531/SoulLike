@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
+    float moveSpeed = 5.0f;
+
     public GameObject flame;
     public Transform flamePos;
 
@@ -14,7 +16,9 @@ public class Boss : MonoBehaviour
     private void Awake()
     {
         anim = GetComponent<Animator>();
-        StartCoroutine(Action());
+
+        //StartCoroutine(Action());
+        StartCoroutine(TestAction());
     }
 
     private void Update()
@@ -25,6 +29,11 @@ public class Boss : MonoBehaviour
         }
     }
 
+    IEnumerator TestAction()
+    {
+        yield return new WaitForSeconds(0.1f);
+        StartCoroutine(Flying());
+    }
 
     IEnumerator Action()
     {
@@ -69,8 +78,19 @@ public class Boss : MonoBehaviour
    
         Destroy(obj);
 
-
-
         StartCoroutine(Action());
+    }
+    IEnumerator Flying()
+    {
+        float flyingTime = 4.0f;
+        float time = 0.0f;
+        anim.SetBool("isFlying", true);
+
+        while (time >= flyingTime)
+        {
+            this.transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
+            time += Time.deltaTime;
+            yield return new WaitForSeconds(4.0f);
+        }
     }
 }

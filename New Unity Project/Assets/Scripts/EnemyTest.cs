@@ -1,17 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyTest : MonoBehaviour
 {
     public float maxHP;
     public float currentHP;
-    
+
+    public Transform target;
+
     public Animator anim;
 
     Rigidbody rigid;
     BoxCollider collider;
     Material mat;
+    NavMeshAgent nav;
+
+    Vector3 dest;
 
 
     void Awake()
@@ -19,6 +25,14 @@ public class EnemyTest : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         collider = GetComponent<BoxCollider>();
         mat = GetComponent<MeshRenderer>().material;
+        nav = GetComponent<NavMeshAgent>();
+        dest = nav.destination;
+    }
+
+    void Update()
+    {
+        dest = target.position;
+        nav.destination = dest;
     }
 
     void OnTriggerEnter(Collider other)
