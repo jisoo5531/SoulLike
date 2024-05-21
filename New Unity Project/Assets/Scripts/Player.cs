@@ -4,32 +4,57 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    #region 카메라 관련
+    CameraController cameraControl;
+    Transform cameraTransform;
+    Transform cameraParentTransform;
+    Vector3 mouseMove;
+    float mouseSensitivity = 2.0f;
+    #endregion
+
+    #region 이동
     float hAxis;
     float vAxis;
-
     Vector3 moveVec;
+    float moveSpeed;
+    #endregion
+
+    #region 구르기
+
     Vector3 rollVec;
+    bool spaceDown;
+    bool isRoll = false;
+    #endregion
+
+    #region 대쉬
 
     bool shiftDown;
-    bool spaceDown;
+    #endregion
+
+    #region Shot
 
     [HideInInspector]
     bool isFire;
     bool isSingleFire;
-
-    bool isRoll = false;
-    float moveSpeed;
     float fireTimer = 0.0f;
-
-
     [SerializeField]
     GameObject shoot;
+    #endregion
+
+    Vector3 characterRotation;
+
     Animator anim;
+
+    
     
 
     void Awake()
     {
+        cameraControl = FindObjectOfType<CameraController>();
         anim = GetComponentInChildren<Animator>();
+
+        cameraTransform = Camera.main.transform;
+        cameraParentTransform = cameraTransform.parent;
 
         StartCoroutine(MoveCoroutine());
         StartCoroutine(AttackCoroutine());
@@ -44,8 +69,81 @@ public class Player : MonoBehaviour
         //Dash();
         //Roll();
         //attack();
+
+        Turn();
+        cameraControl.ZummIOControl();
         SetAnimation();
     }
+
+    private void LateUpdate()
+    {
+        cameraParentTransform.position = this.transform.position + Vector3.up * 1.0f;
+
+
+        mouseMove += new Vector3
+            (
+                -Input.GetAxisRaw("Mouse Y") * mouseSensitivity,
+                Input.GetAxisRaw("Mouse X") * mouseSensitivity,
+                0
+            );
+        
+
+        if (mouseMove.x < -30)
+        {
+            mouseMove.x = -30;
+        }
+        if (mouseMove.x > 30)
+        {
+            mouseMove.x = 30;
+        }
+
+        cameraParentTransform.localEulerAngles = mouseMove;
+
+    }
+
+    //void ZummIOControl()
+    //{
+    //    Camera.main.transform.localPosition += new Vector3(0, 0, Input.GetAxisRaw("Mouse ScrollWheel") * 2.0f);
+
+    //    if (-2 > Camera.main.transform.localPosition.z) // 좌항과 우항에 대한 연산 속도 차이
+    //    {
+    //        Camera.main.transform.localPosition = new Vector3(
+    //                                                            Camera.main.transform.localPosition.x,
+    //                                                            Camera.main.transform.localPosition.y,
+    //                                                            -2
+    //                                                            );
+    //    }
+
+
+    //    else if (Camera.main.transform.localPosition.z < -5)
+    //    {
+    //        Camera.main.transform.localPosition = new Vector3(
+    //                                                            Camera.main.transform.localPosition.x,
+    //                                                            Camera.main.transform.localPosition.y,
+    //                                                            -5
+    //                                                            );
+    //    }
+
+    //}
+
+    void Turn()
+    {
+        characterRotation += new Vector3
+            (
+                -Input.GetAxisRaw("Mouse Y") * mouseSensitivity,
+                Input.GetAxisRaw("Mouse X") * mouseSensitivity,
+                0
+            );
+        Quaternion charRotation = Quaternion.Euler(characterRotation);
+        charRotation.x = charRotation.z = 0;
+        this.transform.rotation = Quaternion.Slerp
+            (
+                this.transform.rotation,
+                charRotation,
+                10.0f * Time.deltaTime
+            );
+    }
+
     void Dash()
     {
         if (shiftDown)
