@@ -82,17 +82,27 @@ public class Boss : MonoBehaviour
     }
     IEnumerator Flying()
     {
-        anim.SetBool("isFlying", true);
+        anim.SetTrigger("DoFly");
 
-
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("TakeOff"))
+        while (true)
         {
-            Debug.Log("날았다!~");
-            this.transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
+            yield return null;
+
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Take Off"))
+            {
+                Debug.Log("날았다!~");
+                
+                this.transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
+            }
+            else
+            {
+                break;
+            }
         }
+        
 
 
-        yield return new WaitForSeconds(4.0f);
+        
 
     }
 }
