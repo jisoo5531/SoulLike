@@ -31,7 +31,7 @@ public class Boss : MonoBehaviour
 
     IEnumerator TestAction()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.01f);
         StartCoroutine(Flying());
     }
 
@@ -82,15 +82,17 @@ public class Boss : MonoBehaviour
     }
     IEnumerator Flying()
     {
-        float flyingTime = 4.0f;
-        float time = 0.0f;
         anim.SetBool("isFlying", true);
 
-        while (time >= flyingTime)
+
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("TakeOff"))
         {
+            Debug.Log("³¯¾Ò´Ù!~");
             this.transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
-            time += Time.deltaTime;
-            yield return new WaitForSeconds(4.0f);
         }
+
+
+        yield return new WaitForSeconds(4.0f);
+
     }
 }

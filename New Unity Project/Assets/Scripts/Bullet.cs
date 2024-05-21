@@ -8,9 +8,9 @@ public class Bullet : MonoBehaviour
     public IObjectPool<GameObject> Pool { get; set; }
     public float damage;
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Wall")
+        if (other.gameObject.tag == "Wall")
         {
             //Destroy(this.gameObject);
             Pool.Release(this.gameObject);
