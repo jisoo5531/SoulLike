@@ -47,13 +47,12 @@ public class Player : MonoBehaviour
 
     Animator anim;
 
-    
-    
 
     void Awake()
     {
         cameraControl = FindObjectOfType<CameraController>();
         anim = GetComponentInChildren<Animator>();
+
 
         cameraTransform = Camera.main.transform;
         cameraParentTransform = cameraTransform.parent;
@@ -131,16 +130,17 @@ public class Player : MonoBehaviour
 
     void Turn()
     {
-        
+
         Quaternion charRotation = Quaternion.LookRotation(moveVec);
-        charRotation.x = charRotation.z = 0;
+        
         this.transform.rotation = Quaternion.Slerp
             (
                 this.transform.rotation,
                 charRotation,
                 rotateSpeed * Time.deltaTime
             );
-        moveDirection = this.transform.TransformDirection(moveVec);
+        
+        
     }
 
     void MouseTurn()
@@ -228,12 +228,19 @@ public class Player : MonoBehaviour
 
     void SetAnimation()
     {
-        anim.SetBool("isForward", vAxis > 0);
+        anim.SetBool("isRun", moveVec != Vector3.zero);
         //anim.SetBool("isBack", vAxis < 0);
-        anim.SetBool("isLeft", hAxis < 0);
-        anim.SetBool("isRight", hAxis > 0);
-        anim.SetBool("isDash", shiftDown);
-        anim.SetBool("isRoll", spaceDown);
+        //anim.SetBool("isLeft", hAxis < 0);
+        //anim.SetBool("isRight", hAxis > 0);
+
+        if (shiftDown)
+        {
+            anim.SetTrigger("doDash"); 
+        }
+        else if (spaceDown)
+        {
+            anim.SetTrigger("doRoll"); 
+        }
     }
 
     IEnumerator MoveCoroutine()
@@ -255,9 +262,11 @@ public class Player : MonoBehaviour
             {
                 moveVec = rollVec;
             }
-            moveVec = moveDirection.normalized;
 
-            this.transform.Translate(moveVec * moveSpeed * Time.deltaTime);
+            //moveVec = moveDirection;
+
+            this.transform.position += moveVec * moveSpeed * Time.deltaTime;
+            //this.transform.Translate(moveVec * moveSpeed * Time.deltaTime);
         }
     }
     IEnumerator AttackCoroutine()
