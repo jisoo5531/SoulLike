@@ -15,9 +15,10 @@ public class Player : MonoBehaviour
     #region 이동
     float hAxis;
     float vAxis;
+    Vector3 moveDirection;
     Vector3 moveVec;
     float moveSpeed;
-    float rotateSpeed;
+    float rotateSpeed = 10.0f;
     #endregion
 
     #region 구르기
@@ -71,7 +72,6 @@ public class Player : MonoBehaviour
         //Roll();
         //attack();
 
-        Turn();
         //MouseTurn();
 
         cameraControl.ZummIOControl();
@@ -131,7 +131,16 @@ public class Player : MonoBehaviour
 
     void Turn()
     {
-
+        
+        Quaternion charRotation = Quaternion.LookRotation(moveVec);
+        charRotation.x = charRotation.z = 0;
+        this.transform.rotation = Quaternion.Slerp
+            (
+                this.transform.rotation,
+                charRotation,
+                rotateSpeed * Time.deltaTime
+            );
+        moveDirection = this.transform.TransformDirection(moveVec);
     }
 
     void MouseTurn()
@@ -220,7 +229,7 @@ public class Player : MonoBehaviour
     void SetAnimation()
     {
         anim.SetBool("isForward", vAxis > 0);
-        anim.SetBool("isBack", vAxis < 0);
+        //anim.SetBool("isBack", vAxis < 0);
         anim.SetBool("isLeft", hAxis < 0);
         anim.SetBool("isRight", hAxis > 0);
         anim.SetBool("isDash", shiftDown);
@@ -235,7 +244,9 @@ public class Player : MonoBehaviour
 
             yield return null;
             GetInputKey();
+
             moveVec = new Vector3(hAxis, 0, vAxis).normalized;
+            Turn();
 
             Dash();
             Roll();
@@ -244,6 +255,8 @@ public class Player : MonoBehaviour
             {
                 moveVec = rollVec;
             }
+            moveVec = moveDirection.normalized;
+
             this.transform.Translate(moveVec * moveSpeed * Time.deltaTime);
         }
     }
