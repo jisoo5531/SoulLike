@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     float vAxis;
     Vector3 moveVec;
     float moveSpeed;
+    float rotateSpeed;
     #endregion
 
     #region ±¸¸£±â
@@ -71,6 +72,8 @@ public class Player : MonoBehaviour
         //attack();
 
         Turn();
+        //MouseTurn();
+
         cameraControl.ZummIOControl();
         SetAnimation();
     }
@@ -127,6 +130,11 @@ public class Player : MonoBehaviour
     //}
 
     void Turn()
+    {
+
+    }
+
+    void MouseTurn()
     {
         characterRotation += new Vector3
             (

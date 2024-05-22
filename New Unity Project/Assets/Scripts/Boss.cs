@@ -18,6 +18,8 @@ public class Boss : MonoBehaviour
         anim = GetComponent<Animator>();
 
         //StartCoroutine(Action());
+
+        // 테스트 코루틴
         StartCoroutine(TestAction());
     }
 
@@ -90,8 +92,6 @@ public class Boss : MonoBehaviour
 
             if (anim.GetCurrentAnimatorStateInfo(0).IsName("Take Off"))
             {
-                Debug.Log("날았다!~");
-                
                 this.transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
             }
             else
@@ -99,10 +99,5 @@ public class Boss : MonoBehaviour
                 break;
             }
         }
-        
-
-
-        
-
     }
 }
