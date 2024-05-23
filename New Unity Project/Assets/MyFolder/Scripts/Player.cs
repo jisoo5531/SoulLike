@@ -43,6 +43,18 @@ public class Player : MonoBehaviour
     GameObject shoot;
     #endregion
 
+    #region 캐릭터 이동 및 카메라 이동
+    Camera camera;
+    CharacterController controller;
+
+    public float speed = 5.0f;
+    public float runSpeed = 8.0f;
+    public float smoothness = 10.0f;
+
+    public bool toggleCameraRotation;
+
+    #endregion
+
 
     Vector3 characterRotation;
 
@@ -51,6 +63,9 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
+        camera = Camera.main;
+        controller = GetComponent<CharacterController>();
+
         cameraControl = FindObjectOfType<CameraController>();
         anim = GetComponentInChildren<Animator>();
 
@@ -74,35 +89,54 @@ public class Player : MonoBehaviour
 
         //MouseTurn();
 
-        cameraControl.ZummIOControl();
+        //cameraControl.ZummIOControl();
         SetAnimation();
-    }
 
+        if (Input.GetKey(KeyCode.LeftAlt))
+        {
+            // 둘러보기 활성화
+            toggleCameraRotation = true;   
+        }
+        else
+        {
+            // 둘러보기 비활성화
+            toggleCameraRotation = false;
+        }
+    }
     private void LateUpdate()
     {
-        cameraParentTransform.position = this.transform.position + Vector3.up * 1.0f;
-
-
-        mouseMove += new Vector3
-            (
-                -Input.GetAxisRaw("Mouse Y") * mouseSensitivity,
-                Input.GetAxisRaw("Mouse X") * mouseSensitivity,
-                0
-            );
-        
-
-        if (mouseMove.x < -30)
+        if (!toggleCameraRotation)
         {
-            mouseMove.x = -30;
+            Vector3 playerRotation = Vector3.Scale(camera.transform.forward, new Vector3(1, 0, 1));
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playerRotation), Time.deltaTime * smoothness); 
         }
-        if (mouseMove.x > 30)
-        {
-            mouseMove.x = 30;
-        }
-
-        cameraParentTransform.localEulerAngles = mouseMove;
-
     }
+
+    //private void LateUpdate()
+    //{
+    //    cameraParentTransform.position = this.transform.position + Vector3.up * 1.0f;
+
+
+    //    mouseMove += new Vector3
+    //        (
+    //            -Input.GetAxisRaw("Mouse Y") * mouseSensitivity,
+    //            Input.GetAxisRaw("Mouse X") * mouseSensitivity,
+    //            0
+    //        );
+
+
+    //    if (mouseMove.x < -30)
+    //    {
+    //        mouseMove.x = -30;
+    //    }
+    //    if (mouseMove.x > 30)
+    //    {
+    //        mouseMove.x = 30;
+    //    }
+
+    //    cameraParentTransform.localEulerAngles = mouseMove;
+
+    //}
 
     //void ZummIOControl()
     //{
@@ -131,6 +165,7 @@ public class Player : MonoBehaviour
 
     void Turn()
     {
+        Vector3 forward = new Vector3(hAxis, 0, vAxis);
         if (moveVec != Vector3.zero)
         {
             Quaternion charRotation = Quaternion.LookRotation(moveVec);
@@ -261,28 +296,42 @@ public class Player : MonoBehaviour
 
     IEnumerator MoveCoroutine()
     {
+        
+
         while (true)
         {
             moveSpeed = 5.0f;
 
             yield return null;
+
             GetInputKey();
 
-            moveVec = new Vector3(hAxis, 0, vAxis).normalized;
-            Turn();
+            Vector3 forward = transform.TransformDirection(Vector3.forward);
+            Vector3 right = transform.TransformDirection(Vector3.right);
 
-            Dash();
-            Roll();
+            moveVec = forward * Input.GetAxisRaw("Vertical") + right * Input.GetAxisRaw("Horizontal");
+            
+            
+            //moveVec = new Vector3(hAxis, 0, vAxis).normalized;
 
-            if (isRoll)
-            {
-                moveVec = rollVec;
-            }
+            //Turn();
+            controller.Move(moveVec * moveSpeed * Time.deltaTime);
 
-            //moveVec = moveDirection;
 
-            this.transform.position += moveVec * moveSpeed * Time.deltaTime;
-            //this.transform.Translate(moveVec * moveSpeed * Time.deltaTime);
+
+
+            //Dash();
+            //Roll();
+
+            //if (isRoll)
+            //{
+            //    moveVec = rollVec;
+            //}
+
+            ////moveVec = moveDirection;
+
+            //this.transform.position += moveVec * moveSpeed * Time.deltaTime;
+            ////this.transform.Translate(moveVec * moveSpeed * Time.deltaTime);
         }
     }
     IEnumerator AttackCoroutine()
