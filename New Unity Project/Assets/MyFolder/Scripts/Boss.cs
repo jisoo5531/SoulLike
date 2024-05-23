@@ -5,6 +5,7 @@ using UnityEngine;
 public class Boss : MonoBehaviour
 {
     float moveSpeed = 5.0f;
+    
 
     public GameObject flame;
     public Transform flamePos;
@@ -40,7 +41,7 @@ public class Boss : MonoBehaviour
     IEnumerator TestAction()
     {
         yield return new WaitForSeconds(0.01f);
-        StartCoroutine(FireBall());
+        StartCoroutine(AttackClaw());
     }
 
     /// <summary>
@@ -96,22 +97,42 @@ public class Boss : MonoBehaviour
     /// </summary>
     IEnumerator AttackBasic()
     {
-        anim.SetTrigger("DoClawAttack");
+        anim.SetTrigger("DoBasicAttack");
         yield return new WaitForSeconds(3.0f);
         StartCoroutine(Action());
     }
     /// <summary>
     /// 돌진 공격
+    /// 테스트 코루틴 수정 필요
     /// </summary>
     IEnumerator AttackClaw()
     {
         
-        anim.SetTrigger("DoBasicAttack");
-        yield return new WaitForSeconds(2.0f);
-        StartCoroutine(Action());
+        anim.SetTrigger("DoDashAttack");
+        Rigidbody rigid = GetComponent<Rigidbody>();
+
+        while (true)
+        {
+            yield return new WaitForFixedUpdate();
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("DashAttack"))
+            {
+                yield return new WaitForSeconds(1.0f);
+                rigid.AddForce(this.transform.forward * 25.0f, ForceMode.Impulse);
+                rigid.AddForce(this.transform.up * 1.0f, ForceMode.Impulse);
+
+                
+            }
+            else
+            {
+                break;
+            }
+        }
+        
+        //StartCoroutine(Action());
     }
     /// <summary>
     /// 파이어 브레스
+    /// 테스트 coroutine 수정 필요
     /// </summary>
     IEnumerator AttackFlame()
     {
@@ -178,6 +199,4 @@ public class Boss : MonoBehaviour
             }
         }
     }
-
-    
 }

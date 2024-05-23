@@ -131,15 +131,17 @@ public class Player : MonoBehaviour
 
     void Turn()
     {
+        if (moveVec != Vector3.zero)
+        {
+            Quaternion charRotation = Quaternion.LookRotation(moveVec);
 
-        Quaternion charRotation = Quaternion.LookRotation(moveVec);
-        
-        this.transform.rotation = Quaternion.Slerp
-            (
-                this.transform.rotation,
-                charRotation,
-                rotateSpeed * Time.deltaTime
-            );
+            this.transform.rotation = Quaternion.Slerp
+                (
+                    this.transform.rotation,
+                    charRotation,
+                    rotateSpeed * Time.deltaTime
+                );
+        }
         
         
     }
