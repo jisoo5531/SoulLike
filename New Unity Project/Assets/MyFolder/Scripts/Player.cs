@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     Transform cameraTransform;
     Transform cameraParentTransform;
     Vector3 mouseMove;
-    float mouseSensitivity = 2.0f;
+    float mouseSensitivity = 3.0f;
     #endregion
 
     #region ¿Ãµø
@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     GameObject shoot;
     #endregion
+
 
     Vector3 characterRotation;
 
@@ -160,6 +161,18 @@ public class Player : MonoBehaviour
                 10.0f * Time.deltaTime
             );
     }
+    void ShotTurn()
+    {
+        this.transform.localRotation = cameraParentTransform.localRotation;
+        
+        //this.transform.rotation = Quaternion.Slerp
+        //    (
+        //        this.transform.rotation,
+        //        cameraParentTransform.rotation,
+        //        rotateSpeed * Time.deltaTime
+        //    );
+        
+    }
 
     void Dash()
     {
@@ -186,6 +199,7 @@ public class Player : MonoBehaviour
     {
         if (isFire)
         {
+            ShotTurn();
             anim.SetLayerWeight(1, 1);
             if (anim.GetCurrentAnimatorStateInfo(1).IsName("ShootAutoshot_AR"))
             {
