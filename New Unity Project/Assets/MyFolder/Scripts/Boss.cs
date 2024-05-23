@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss : MonoBehaviour
+public class Boss : EnemyTest
 {
-    float moveSpeed = 5.0f;
+    float moveSpeed = 15.0f;
     
 
     public GameObject flame;
@@ -16,20 +16,20 @@ public class Boss : MonoBehaviour
     GameObject flameBressOBJ;
     GameObject fireBallOBJ;
    
-    Animator anim;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
 
-        //StartCoroutine(Action());
+        StartCoroutine(Action());
 
         // 테스트 코루틴
-        StartCoroutine(TestAction());
+        //StartCoroutine(TestAction());
     }
 
     private void Update()
     {
+        transform.LookAt(target);
         if (flameBressOBJ != null)
         {
             flameBressOBJ.transform.position = flamePos.position;
@@ -53,28 +53,46 @@ public class Boss : MonoBehaviour
         int random = Random.Range(0, 3);
         yield return new WaitForSeconds(0.5f);
 
-        switch (random)
+        if (currentHP < 200)
         {
-            case 0:
-                StartCoroutine(AttackBasic());
-                break;
-            case 1:
-                StartCoroutine(AttackClaw());
-                break;
-            case 2:
-                StartCoroutine(AttackFlame());
-                break;
+            StartCoroutine(TakeOff());
+            yield return new WaitForSeconds(0.5f);
+            StartCoroutine(FlyingAction());
         }
-
+        else
+        {
+            switch (random)
+            {
+                case 0:
+                    StartCoroutine(AttackBasic());
+                    break;
+                case 1:
+                    StartCoroutine(AttackClaw());
+                    break;
+                case 2:
+                    StartCoroutine(AttackFlame());
+                    break;
+            }
+        }
+        
+        
     }
     /// <summary>
     /// 2페이즈. 날아다닐 때 패턴 실행
     /// </summary>
     IEnumerator FlyingAction()
     {
+        yield return new WaitForSeconds(0.1f);
         isFlying = true;
-        anim.SetTrigger("DoFly");
+        
 
+        
+        StartCoroutine(AttackFlame());
+    }
+
+    IEnumerator TakeOff()
+    {
+        anim.SetTrigger("DoFly");
         while (true)
         {
             yield return null;
@@ -87,9 +105,8 @@ public class Boss : MonoBehaviour
             {
                 break;
             }
-
         }
-        StartCoroutine(AttackFlame());
+        
     }
 
     /// <summary>
@@ -127,8 +144,8 @@ public class Boss : MonoBehaviour
                 break;
             }
         }
-        
-        //StartCoroutine(Action());
+
+        StartCoroutine(Action());
     }
     /// <summary>
     /// 파이어 브레스
@@ -157,9 +174,10 @@ public class Boss : MonoBehaviour
         }
         else
         {
+            StartCoroutine(Action());
             //anim.SetTrigger("DoFlameAttack");
         }
-        //StartCoroutine(Action());
+        
     }
     /// <summary>
     /// 맵에 남는 불덩어리 소환

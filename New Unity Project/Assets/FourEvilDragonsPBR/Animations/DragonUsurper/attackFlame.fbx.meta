@@ -802,9 +802,9 @@ ModelImporter:
       - path: 
         weight: 1
       - path: Dragon
-        weight: 1
+        weight: 0
       - path: Root
-        weight: 1
+        weight: 0
       - path: Root/joint19
         weight: 1
       - path: Root/joint19/joint20
