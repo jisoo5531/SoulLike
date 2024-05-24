@@ -108,28 +108,44 @@ public class Player : MonoBehaviour
     }
     private void LateUpdate()
     {
-        if (!toggleCameraRotation && vAxis > 0)
-        {
-            Vector3 playerRotation = Vector3.Scale(camera.transform.forward, new Vector3(1, 0, 1));
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playerRotation), Time.deltaTime * smoothness); 
-        }
+        //if (!toggleCameraRotation && moveVec != Vector3.zero)
+        //{
+        //    Vector3 playerRotation = camera.transform.forward;
+
+        //    playerRotation.y = 0;
+        //    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playerRotation), Time.deltaTime * smoothness);
+        //}
     }
 
-
+    
     void Turn()
     {
-        Vector3 forward = new Vector3(hAxis, 0, vAxis);
-        if (moveVec != Vector3.zero)
-        {
-            Quaternion charRotation = Quaternion.LookRotation(moveVec);
+        Vector3 playerRotation = Vector3.zero;
 
-            this.transform.rotation = Quaternion.Slerp
-                (
-                    this.transform.rotation,
-                    charRotation,
-                    rotateSpeed * Time.deltaTime
-                );
-        }        
+
+
+        //playerRotation = Vector3.Scale(camera.transform.forward + camera.transform.right, moveVec);
+
+        if (vAxis > 0)
+        {
+            playerRotation = camera.transform.forward;
+        }
+        else if (vAxis < 0)
+        {
+            playerRotation = -camera.transform.forward;
+        }
+        else if (hAxis > 0)
+        {
+            playerRotation = camera.transform.right;
+        }
+        else if (hAxis < 0)
+        {
+            playerRotation = -camera.transform.right;
+        }
+
+        playerRotation.y = 0;
+        transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(playerRotation), smoothness * Time.deltaTime);
+    
     }
 
     void MouseTurn()
@@ -152,14 +168,14 @@ public class Player : MonoBehaviour
     void ShotTurn()
     {
         this.transform.localRotation = cameraParentTransform.localRotation;
-        
+
         //this.transform.rotation = Quaternion.Slerp
         //    (
         //        this.transform.rotation,
         //        cameraParentTransform.rotation,
         //        rotateSpeed * Time.deltaTime
         //    );
-        
+
     }
 
     void Roll()
@@ -180,7 +196,7 @@ public class Player : MonoBehaviour
     {
         if (isFire)
         {
-            ShotTurn();
+            //ShotTurn();
             anim.SetLayerWeight(1, 1);
             if (anim.GetCurrentAnimatorStateInfo(1).IsName("ShootAutoshot_AR"))
             {
@@ -281,17 +297,17 @@ public class Player : MonoBehaviour
 
             GetInputKey();
 
+            Turn();
             Vector3 forward = transform.TransformDirection(Vector3.forward);
             Vector3 right = transform.TransformDirection(Vector3.right);
 
-            moveVec = forward * Input.GetAxisRaw("Vertical") + right * Input.GetAxisRaw("Horizontal");
+            moveVec = Vector3.forward * Input.GetAxisRaw("Vertical") + Vector3.right * Input.GetAxisRaw("Horizontal");
 
 
-            //moveVec = new Vector3(hAxis, 0, vAxis).normalized;
+            //moveVec = new Vector3(hAxis, 0, vAxis);
 
-            Turn();
 
-            controller.Move(moveVec * moveSpeed * Time.deltaTime);
+            controller.Move(moveVec.normalized * moveSpeed * Time.deltaTime);
 
 
             //Roll();
