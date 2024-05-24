@@ -4,336 +4,56 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    #region 카메라 관련
-    CameraController cameraControl;
-    Transform cameraTransform;
-    Transform cameraParentTransform;
-    Vector3 mouseMove;
-    float mouseSensitivity = 3.0f;
-    #endregion
+    #region 변수
 
-    #region 이동
-    float hAxis;
-    float vAxis;
-    Vector3 moveDirection;
-    Vector3 moveVec;
     float moveSpeed;
-    float rotateSpeed = 10.0f;
-    #endregion
 
-    #region 구르기
+    #endregion 
 
-    Vector3 rollVec;
-    bool spaceDown;
-    bool isRoll = false;
-    #endregion
-
-    #region 대쉬
-
-    bool shiftDown;
-    #endregion
-
-    #region Shot
-
-    [HideInInspector]
-    bool isFire;
-    bool isSingleFire;
-    float fireTimer = 0.0f;
-    [SerializeField]
-    GameObject shoot;
-    #endregion
-
-    #region 캐릭터 이동 및 카메라 이동
-    Camera camera;
-    CharacterController controller;
-
-    public float speed = 5.0f;
-    public float runSpeed = 8.0f;
-    public float smoothness = 10.0f;
-
-    public bool toggleCameraRotation;
-
-    #endregion
-
-    float movePow;
-
-    Vector3 characterRotation;
+    #region 컴포넌트
 
     Animator anim;
 
+    #endregion
 
-    void Awake()
+    private void Awake()
     {
-        movePow = 0f;
-
-        camera = Camera.main;
-        controller = GetComponent<CharacterController>();
-
-        cameraControl = FindObjectOfType<CameraController>();
         anim = GetComponentInChildren<Animator>();
-
-
-        cameraTransform = Camera.main.transform;
-        cameraParentTransform = cameraTransform.parent;
-
-        StartCoroutine(MoveCoroutine());
-        StartCoroutine(AttackCoroutine());
-        //StartCoroutine(AnimationCoroutine());
+        StartCoroutine(MoveAnimation());
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// 이동 관련 코루틴
+    /// 이동 애니메이션 부드럽게 수정 필요
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator MoveAnimation()
     {
-        //GetInputKey();
-        //Move();
-        //Dash();
-        //Roll();
-        //attack();
-
-        //MouseTurn();
-
-        //cameraControl.ZummIOControl();
-        SetAnimation();
-
-        if (Input.GetKey(KeyCode.LeftAlt))
+        moveSpeed = 0f;
+        while (true)
         {
-            // 둘러보기 활성화
-            toggleCameraRotation = true;   
-        }
-        else
-        {
-            // 둘러보기 비활성화
-            toggleCameraRotation = false;
-        }
-    }
-    private void LateUpdate()
-    {
-        //if (!toggleCameraRotation && moveVec != Vector3.zero)
-        //{
-        //    Vector3 playerRotation = camera.transform.forward;
+            yield return null;
 
-        //    playerRotation.y = 0;
-        //    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playerRotation), Time.deltaTime * smoothness);
-        //}
-    }
-
-    
-    void Turn()
-    {
-        Vector3 playerRotation = Vector3.zero;
-
-
-
-        //playerRotation = Vector3.Scale(camera.transform.forward + camera.transform.right, moveVec);
-
-        if (vAxis > 0)
-        {
-            playerRotation = camera.transform.forward;
-        }
-        else if (vAxis < 0)
-        {
-            playerRotation = -camera.transform.forward;
-        }
-        else if (hAxis > 0)
-        {
-            playerRotation = camera.transform.right;
-        }
-        else if (hAxis < 0)
-        {
-            playerRotation = -camera.transform.right;
-        }
-
-        playerRotation.y = 0;
-        transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(playerRotation), smoothness * Time.deltaTime);
-    
-    }
-
-    void MouseTurn()
-    {
-        characterRotation += new Vector3
-            (
-                -Input.GetAxisRaw("Mouse Y") * mouseSensitivity,
-                Input.GetAxisRaw("Mouse X") * mouseSensitivity,
-                0
-            );
-        Quaternion charRotation = Quaternion.Euler(characterRotation);
-        charRotation.x = charRotation.z = 0;
-        this.transform.rotation = Quaternion.Slerp
-            (
-                this.transform.rotation,
-                charRotation,
-                10.0f * Time.deltaTime
-            );
-    }
-    void ShotTurn()
-    {
-        this.transform.localRotation = cameraParentTransform.localRotation;
-
-        //this.transform.rotation = Quaternion.Slerp
-        //    (
-        //        this.transform.rotation,
-        //        cameraParentTransform.rotation,
-        //        rotateSpeed * Time.deltaTime
-        //    );
-
-    }
-
-    void Roll()
-    {
-        if (spaceDown)
-        {
-            isRoll = true;
-            moveSpeed *= 1.5f;
-            rollVec = moveVec;
-            Invoke("RollOut", 0.7f);
-        }
-    }
-    void RollOut()
-    {
-        isRoll = false;
-    }
-    public void attack()
-    {
-        if (isFire)
-        {
-            //ShotTurn();
-            anim.SetLayerWeight(1, 1);
-            if (anim.GetCurrentAnimatorStateInfo(1).IsName("ShootAutoshot_AR"))
+            float forward = Input.GetAxis("Vertical");
+            float right = Input.GetAxis("Horizontal");
+            if (forward == 0 && right == 0)
             {
-                if (fireTimer > 0.15f)
-                {
- 
-                    shoot.GetComponent<Shoot>().Use();
-                    fireTimer = 0.0f;
-                }
-                
-                fireTimer += Time.deltaTime;
-                return;
+                float stopSpeed = 0f;
+                anim.SetFloat("MoveSpeed", Mathf.Lerp(moveSpeed, stopSpeed, Time.deltaTime));
+                moveSpeed = stopSpeed;
             }
-            anim.SetTrigger("doShot");
+            else if (!Input.GetButton("Dash") && (forward != 0 || right != 0))
+            {
+                float walkSpeed = 0.5f;
+                anim.SetFloat("MoveSpeed", Mathf.Lerp(moveSpeed, walkSpeed, Time.deltaTime));
+                moveSpeed = walkSpeed;
+            }
+            else if (Input.GetButton("Dash") && (forward != 0 || right != 0))
+            {
+                float runSpeed = 1f;
+                anim.SetFloat("MoveSpeed", Mathf.Lerp(moveSpeed, runSpeed, Time.deltaTime));
+                moveSpeed = runSpeed;
+            }
         }
-        else
-        {
-            anim.SetLayerWeight(1, 0);
-            anim.SetTrigger("doNotShot");
-        }
-        if (isSingleFire)
-        {
-            SingleAttack();
-        }
-    }
-    void SingleAttack()
-    {
-        anim.SetTrigger("doSingleShot");
-        shoot.GetComponent<Shoot>().Use();
-    }
-    void GetInputKey()
-    {
-        vAxis = Input.GetAxisRaw("Vertical");
-        hAxis = Input.GetAxisRaw("Horizontal");
-        spaceDown = Input.GetButton("Roll");
-        shiftDown = Input.GetButton("Dash");
-        isFire = Input.GetMouseButton(0);
-        isSingleFire = Input.GetMouseButtonDown(1);
-
-
-
-        
-    }
-
-    void SetAnimation()
-    {
-        //anim.SetBool("isRun", moveVec != Vector3.zero);
-
-
-
-
-
-        if (moveVec == Vector3.zero)
-        {
-            float stopMovePow = 0f;
-            anim.SetFloat("MoveSpeed", Mathf.Lerp(movePow, stopMovePow, Time.deltaTime));
-            movePow = stopMovePow;
-        }
-            
-        if (!shiftDown && (vAxis != 0 || hAxis != 0))
-        {
-            float walkMovePow = 0.5f;
-            anim.SetFloat("MoveSpeed", Mathf.Lerp(movePow, walkMovePow, Time.deltaTime));
-            movePow = walkMovePow;
-
-        }
-        else if (shiftDown && (hAxis != 0 || vAxis != 0))
-        {
-            float runMovePow = 1.0f;
-            //moveSpeed *= 2;
-            anim.SetFloat("MoveSpeed", Mathf.Lerp(movePow, runMovePow, Time.deltaTime));
-            movePow = runMovePow;
-        }
-
-        //anim.SetBool("isBack", vAxis < 0);
-        //anim.SetBool("isLeft", hAxis < 0);
-        //anim.SetBool("isRight", hAxis > 0);
-
-        if (shiftDown)
-        {
-            anim.SetTrigger("doDash"); 
-        }
-        else if (spaceDown)
-        {
-            anim.SetTrigger("doRoll"); 
-        }
-    }
-
-    IEnumerator MoveCoroutine()
-    {
-        movePow = 0f;
-
-        while (true)
-        {
-            moveSpeed = 5.0f;
-
-            yield return null;
-
-            GetInputKey();
-
-            Turn();
-            Vector3 forward = transform.TransformDirection(Vector3.forward);
-            Vector3 right = transform.TransformDirection(Vector3.right);
-
-            moveVec = Vector3.forward * Input.GetAxisRaw("Vertical") + Vector3.right * Input.GetAxisRaw("Horizontal");
-
-
-            //moveVec = new Vector3(hAxis, 0, vAxis);
-
-
-            controller.Move(moveVec.normalized * moveSpeed * Time.deltaTime);
-
-
-            //Roll();
-
-            //if (isRoll)
-            //{
-            //    moveVec = rollVec;
-            //}
-
-            ////moveVec = moveDirection;
-
-            //this.transform.position += moveVec * moveSpeed * Time.deltaTime;
-            ////this.transform.Translate(moveVec * moveSpeed * Time.deltaTime);
-        }
-    }
-    IEnumerator AttackCoroutine()
-    {
-        while (true)
-        {
-            yield return null;
-            attack();
-        }
-    }
-    IEnumerator AnimationCoroutine()
-    {
-        yield return new WaitForSeconds(0.1f);
-        SetAnimation();
     }
 }

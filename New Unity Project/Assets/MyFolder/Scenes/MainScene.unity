@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.6236598, g: 0.6895267, b: 0.7507635, a: 1}
+  m_IndirectSpecularColor: {r: 0.62365985, g: 0.6895269, b: 0.75076383, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1395,11 +1395,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4485b39d1b21a044e86195c33be190de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shoot: {fileID: 0}
-  speed: 5
-  runSpeed: 8
-  smoothness: 10
-  toggleCameraRotation: 0
 --- !u!54 &1505814808
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1434,6 +1429,22 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.93, z: 0}
+--- !u!114 &1505814810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505814804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8622f66aaaa2c74581eb856b39dd18b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 6
+  turnSpeed: 10
+  gravity: 9.8
+  cameraTransform: {fileID: 1526665919}
 --- !u!1 &1526665918
 GameObject:
   m_ObjectHideFlags: 0
