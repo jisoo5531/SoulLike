@@ -55,6 +55,7 @@ public class Player : MonoBehaviour
 
     #endregion
 
+    float movePow;
 
     Vector3 characterRotation;
 
@@ -63,6 +64,8 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
+        movePow = 0f;
+
         camera = Camera.main;
         controller = GetComponent<CharacterController>();
 
@@ -105,63 +108,13 @@ public class Player : MonoBehaviour
     }
     private void LateUpdate()
     {
-        if (!toggleCameraRotation)
+        if (!toggleCameraRotation && vAxis > 0)
         {
             Vector3 playerRotation = Vector3.Scale(camera.transform.forward, new Vector3(1, 0, 1));
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playerRotation), Time.deltaTime * smoothness); 
         }
     }
 
-    //private void LateUpdate()
-    //{
-    //    cameraParentTransform.position = this.transform.position + Vector3.up * 1.0f;
-
-
-    //    mouseMove += new Vector3
-    //        (
-    //            -Input.GetAxisRaw("Mouse Y") * mouseSensitivity,
-    //            Input.GetAxisRaw("Mouse X") * mouseSensitivity,
-    //            0
-    //        );
-
-
-    //    if (mouseMove.x < -30)
-    //    {
-    //        mouseMove.x = -30;
-    //    }
-    //    if (mouseMove.x > 30)
-    //    {
-    //        mouseMove.x = 30;
-    //    }
-
-    //    cameraParentTransform.localEulerAngles = mouseMove;
-
-    //}
-
-    //void ZummIOControl()
-    //{
-    //    Camera.main.transform.localPosition += new Vector3(0, 0, Input.GetAxisRaw("Mouse ScrollWheel") * 2.0f);
-
-    //    if (-2 > Camera.main.transform.localPosition.z) // 좌항과 우항에 대한 연산 속도 차이
-    //    {
-    //        Camera.main.transform.localPosition = new Vector3(
-    //                                                            Camera.main.transform.localPosition.x,
-    //                                                            Camera.main.transform.localPosition.y,
-    //                                                            -2
-    //                                                            );
-    //    }
-
-
-    //    else if (Camera.main.transform.localPosition.z < -5)
-    //    {
-    //        Camera.main.transform.localPosition = new Vector3(
-    //                                                            Camera.main.transform.localPosition.x,
-    //                                                            Camera.main.transform.localPosition.y,
-    //                                                            -5
-    //                                                            );
-    //    }
-
-    //}
 
     void Turn()
     {
@@ -176,9 +129,7 @@ public class Player : MonoBehaviour
                     charRotation,
                     rotateSpeed * Time.deltaTime
                 );
-        }
-        
-        
+        }        
     }
 
     void MouseTurn()
@@ -211,13 +162,6 @@ public class Player : MonoBehaviour
         
     }
 
-    void Dash()
-    {
-        if (shiftDown)
-        {
-            moveSpeed *= 2;
-        }
-    }
     void Roll()
     {
         if (spaceDown)
@@ -275,11 +219,42 @@ public class Player : MonoBehaviour
         shiftDown = Input.GetButton("Dash");
         isFire = Input.GetMouseButton(0);
         isSingleFire = Input.GetMouseButtonDown(1);
+
+
+
+        
     }
 
     void SetAnimation()
     {
-        anim.SetBool("isRun", moveVec != Vector3.zero);
+        //anim.SetBool("isRun", moveVec != Vector3.zero);
+
+
+
+
+
+        if (moveVec == Vector3.zero)
+        {
+            float stopMovePow = 0f;
+            anim.SetFloat("MoveSpeed", Mathf.Lerp(movePow, stopMovePow, Time.deltaTime));
+            movePow = stopMovePow;
+        }
+            
+        if (!shiftDown && (vAxis != 0 || hAxis != 0))
+        {
+            float walkMovePow = 0.5f;
+            anim.SetFloat("MoveSpeed", Mathf.Lerp(movePow, walkMovePow, Time.deltaTime));
+            movePow = walkMovePow;
+
+        }
+        else if (shiftDown && (hAxis != 0 || vAxis != 0))
+        {
+            float runMovePow = 1.0f;
+            //moveSpeed *= 2;
+            anim.SetFloat("MoveSpeed", Mathf.Lerp(movePow, runMovePow, Time.deltaTime));
+            movePow = runMovePow;
+        }
+
         //anim.SetBool("isBack", vAxis < 0);
         //anim.SetBool("isLeft", hAxis < 0);
         //anim.SetBool("isRight", hAxis > 0);
@@ -296,7 +271,7 @@ public class Player : MonoBehaviour
 
     IEnumerator MoveCoroutine()
     {
-        
+        movePow = 0f;
 
         while (true)
         {
@@ -310,17 +285,15 @@ public class Player : MonoBehaviour
             Vector3 right = transform.TransformDirection(Vector3.right);
 
             moveVec = forward * Input.GetAxisRaw("Vertical") + right * Input.GetAxisRaw("Horizontal");
-            
-            
+
+
             //moveVec = new Vector3(hAxis, 0, vAxis).normalized;
 
-            //Turn();
+            Turn();
+
             controller.Move(moveVec * moveSpeed * Time.deltaTime);
 
 
-
-
-            //Dash();
             //Roll();
 
             //if (isRoll)
