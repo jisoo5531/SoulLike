@@ -92,7 +92,7 @@ TrailRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0.4642868
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -2951,7 +2951,7 @@ BoxCollider:
   m_GameObject: {fileID: 7299649836322749382}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.7, y: 1.7, z: 1.5}
   m_Center: {x: 0, y: 1, z: 0.45}
@@ -4554,21 +4554,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2144301008763993821, guid: f87c2e55b95e4894c9c30592cce6d287, type: 3}
   m_PrefabInstance: {fileID: 1038273807752976933}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1792844154236485186 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1624047688248190055, guid: f87c2e55b95e4894c9c30592cce6d287, type: 3}
-  m_PrefabInstance: {fileID: 1038273807752976933}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &630399370
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1792844154236485186}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.46, y: 1.16, z: 0.3}
-  m_Center: {x: 0, y: 0.8, z: 0}
