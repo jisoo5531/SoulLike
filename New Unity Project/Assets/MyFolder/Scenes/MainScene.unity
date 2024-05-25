@@ -644,10 +644,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3771336181764248648, guid: dc37dfc260c00c24bae37e7066e99e64, type: 3}
-      propertyPath: m_Constraints
-      value: 112
-      objectReference: {fileID: 0}
+    - target: {fileID: 304728875, guid: dc37dfc260c00c24bae37e7066e99e64, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1440113813}
     - target: {fileID: 7299649836322749382, guid: dc37dfc260c00c24bae37e7066e99e64, type: 3}
       propertyPath: m_Name
       value: Undead Horse Realistic (4)
@@ -696,8 +696,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3771336181764248648, guid: dc37dfc260c00c24bae37e7066e99e64, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc37dfc260c00c24bae37e7066e99e64, type: 3}
 --- !u!1 &705507993
 GameObject:

@@ -22,7 +22,7 @@ public class EnemyTest : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody>();
         collider = GetComponent<BoxCollider>();
-        mat = GetComponent<MeshRenderer>().material;
+        //mat = GetComponent<MeshRenderer>().material;
 
     }
 
@@ -42,16 +42,16 @@ public class EnemyTest : MonoBehaviour
     }
     IEnumerator Damaged()
     {
-        mat.color = Color.red;
+        //mat.color = Color.red;
         yield return new WaitForSeconds(0.1f);
 
         if (currentHP > 0)
         {
-            mat.color = Color.white;
+            //mat.color = Color.white;
         }
         else
         {
-            mat.color = Color.gray;
+            //mat.color = Color.gray;
             Destroy(this.gameObject, 4.0f);
         }
     }
