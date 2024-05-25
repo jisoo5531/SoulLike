@@ -501,6 +501,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4485b39d1b21a044e86195c33be190de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isShift: 0
+  isAttacking: 0
 --- !u!1 &1283002171598922282
 GameObject:
   m_ObjectHideFlags: 0
