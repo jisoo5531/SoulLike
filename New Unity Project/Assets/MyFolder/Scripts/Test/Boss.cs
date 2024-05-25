@@ -10,11 +10,14 @@ public class Boss : EnemyTest
     public GameObject flame;
     public Transform flamePos;
     public GameObject fireball;
+    public Transform target;
 
     bool isFlying;
 
     GameObject flameBressOBJ;
     GameObject fireBallOBJ;
+
+    Animator anim;
    
 
     private void Awake()

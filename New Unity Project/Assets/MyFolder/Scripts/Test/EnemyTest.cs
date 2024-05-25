@@ -10,8 +10,6 @@ public class EnemyTest : MonoBehaviour
 
     public Transform target;
 
-    public Animator anim;
-
     Rigidbody rigid;
     BoxCollider collider;
     Material mat;
@@ -25,36 +23,35 @@ public class EnemyTest : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         collider = GetComponent<BoxCollider>();
         mat = GetComponent<MeshRenderer>().material;
-        nav = GetComponent<NavMeshAgent>();
-        dest = nav.destination;
+
     }
 
     void Update()
     {
         dest = target.position;
-        nav.destination = dest;
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Bullet")
+        if (other.tag == "Melee")
         {
-            currentHP -= other.GetComponent<Bullet>().damage;
+            currentHP -= other.GetComponent<Weapon>().damage;
+            Debug.Log("CurrentHP : " + currentHP);
             StartCoroutine(Damaged());
         }
     }
     IEnumerator Damaged()
     {
-        //mat.color = Color.red;
+        mat.color = Color.red;
         yield return new WaitForSeconds(0.1f);
 
         if (currentHP > 0)
         {
-            //mat.color = Color.white;
+            mat.color = Color.white;
         }
         else
         {
-            //mat.color = Color.gray;
+            mat.color = Color.gray;
             Destroy(this.gameObject, 4.0f);
         }
     }

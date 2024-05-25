@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     float moveSpeed;
 
 
-    Coroutine moveAniCoroutine;
+    Coroutine moveCoroutine;
     Coroutine dodgeCoroutine;
     Coroutine attackCoroutine;
 
@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
 
     ThirdPersonConroller playerConroller;
     Animator anim;
+
+    Weapon equipWeapon;
 
     #endregion
 
@@ -36,10 +38,11 @@ public class Player : MonoBehaviour
 
         isAttacking = false;
 
-        moveAniCoroutine = StartCoroutine(MoveAnimation());
+        moveCoroutine = StartCoroutine(Move());
+        dodgeCoroutine = StartCoroutine(Dodge());
+        attackCoroutine = StartCoroutine(Attack());
 
-        dodgeCoroutine = StartCoroutine(DodgeAnimation());
-        attackCoroutine = StartCoroutine(AttackAnimation());
+        equipWeapon = FindObjectOfType<Weapon>();
     }
 
     /// <summary>
@@ -53,21 +56,21 @@ public class Player : MonoBehaviour
         switch (num)
         {
             case 0:
-                if (moveAniCoroutine != null)
+                if (moveCoroutine != null)
                 {
-                    moveAniCoroutine = StartCoroutine(MoveAnimation());
+                    moveCoroutine = StartCoroutine(Move());
                 }                
                 break;
             case 1:
                 if (dodgeCoroutine != null)
                 {
-                    dodgeCoroutine = StartCoroutine(DodgeAnimation());
+                    dodgeCoroutine = StartCoroutine(Dodge());
                 }                
                 break;
             case 2:
                 if (attackCoroutine != null)
                 {
-                    attackCoroutine = StartCoroutine(AttackAnimation());
+                    attackCoroutine = StartCoroutine(Attack());
                 }                
                 break;
             default:
@@ -85,9 +88,9 @@ public class Player : MonoBehaviour
         switch (num)
         {
             case 0:
-                if (moveAniCoroutine != null)
+                if (moveCoroutine != null)
                 {
-                    StopCoroutine(moveAniCoroutine);
+                    StopCoroutine(moveCoroutine);
                 }
                 break;
             case 1:
@@ -112,7 +115,7 @@ public class Player : MonoBehaviour
     /// 이동 애니메이션 부드럽게 수정 필요
     /// </summary>
     /// <returns></returns>
-    IEnumerator MoveAnimation()
+    IEnumerator Move()
     {
         moveSpeed = 0f;
         while (true)
@@ -146,7 +149,7 @@ public class Player : MonoBehaviour
     /// 회피 애니메이션
     /// </summary>
     /// <returns></returns>
-    IEnumerator DodgeAnimation()
+    IEnumerator Dodge()
     {
         while (true)
         {
@@ -163,7 +166,7 @@ public class Player : MonoBehaviour
             
         }
     }
-    IEnumerator AttackAnimation()
+    IEnumerator Attack()
     {
         while (true)
         {
@@ -172,18 +175,20 @@ public class Player : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && !isAttacking)
             {
                 isAttacking = true;
+                equipWeapon.Use();
+
                 anim.SetTrigger("Attack");
+
 
                 StopMethod(0);
                 playerConroller.StopMethod(0);
                 
-                yield return new WaitForSeconds(1.5f);
+                yield return new WaitForSeconds(1.5f);  // 공격 대기시간
 
                 isAttacking = false;
 
                 StartMethod(0);
                 playerConroller.StartMethod(0);
-                
             }
         }
     }
