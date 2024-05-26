@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Console
+  m_Title: Project
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 140
+  controlID: 142
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 29
+  controlID: 21
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -276,7 +276,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 141
+  controlID: 143
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -296,8 +296,8 @@ MonoBehaviour:
     y: 0
     width: 278
     height: 626
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -646,9 +646,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -2.022768, y: 1.7679571, z: -0.30275673}
+    m_Target: {x: 0.8012741, y: 6.0847654, z: -1.6061314}
     speed: 2
-    m_Value: {x: -2.022768, y: 1.7679571, z: -0.30275673}
+    m_Value: {x: 0.8012741, y: 6.0847654, z: -1.6061314}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -695,9 +695,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.1095324, y: -0.7712439, z: 0.13816589, w: 0.6109968}
+    m_Target: {x: 0.19309178, y: -0.7112577, z: 0.21439035, w: 0.6403454}
     speed: 2
-    m_Value: {x: 0.10957507, y: -0.7715443, z: 0.13821971, w: 0.6112348}
+    m_Value: {x: 0.19220924, y: -0.7118711, z: 0.2134118, w: 0.6408982}
   m_Size:
     m_Target: 2.3834462
     speed: 2
@@ -911,9 +911,9 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 7000fdfe1a53b7f47b056c30b79316ad, type: 2}
+  m_AnimatorController: {fileID: 9100000, guid: 4a40152e15d984a468c70373035dbe21, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 1107094165055038144, guid: 7000fdfe1a53b7f47b056c30b79316ad, type: 2}
+  - m_Target: {fileID: 1107094165055038144, guid: 4a40152e15d984a468c70373035dbe21, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -957,20 +957,20 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 7ef4ffff
+      m_SelectedIDs: 6c5a0000
       m_LastClickedID: 0
-      m_ExpandedIDs: 42f5ffff46f5ffff4af5ffff4ef5ffffcaf5ffffcef5ffffd2f5fffffef5ffffb8f8ffffbef8ffffeaf8ffffeef8fffff4f8ffffdaf9ffff
+      m_ExpandedIDs: 9cf8ffffa0f8ffffe0f8ffffe4f8ffffe8f8ffffecf8ffff44f9ffff48f9ffff4cf9ffff70f9ffff74f9ffff7cf9ffffe4f9ffffeaf9ffff16faffff1afaffff24faffff0afbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Realistic Undead Knight (4)
-        m_OriginalName: Realistic Undead Knight (4)
+        m_Name: Horse And Knight Boss
+        m_OriginalName: Horse And Knight Boss
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -1968
+        m_UserData: 23090
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
         m_OriginalEventType: 0
@@ -1024,22 +1024,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/MyFolder/Scripts/Test
+    - Assets/UndeadKnight/Horse AnimSet Pro/Undead Horse/Models
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/MyFolder/Scripts/Test
+  - Assets/UndeadKnight/Horse AnimSet Pro/Undead Horse/Models
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\admin\Documents\GitHub\UnityProject\New Unity Project
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 20660000
-    m_LastClickedID: 26144
-    m_ExpandedIDs: 0000000030630000326300003463000036630000386300003a6300003c6300003e630000406300004463000046630000486300004a6300004c6300004e6300005063000052630000546300009e63000000ca9a3b
+    m_SelectedIDs: 92610000
+    m_LastClickedID: 24978
+    m_ExpandedIDs: 00000000fc600000fe60000000610000026100000461000006610000086100000a6100000c6100000e61000010610000126100001461000016610000186100001a6100001c6100001e6100006e61000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1067,7 +1067,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000030630000326300003463000036630000386300003a6300003c6300003e63000040630000426300004463000046630000486300004a6300004c6300004e630000506300005263000054630000
+    m_ExpandedIDs: 00000000fc600000fe60000000610000026100000461000006610000086100000a6100000c6100000e61000010610000126100001461000016610000186100001a6100001c6100001e610000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
