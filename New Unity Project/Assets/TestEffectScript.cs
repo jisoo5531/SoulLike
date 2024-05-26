@@ -11,10 +11,17 @@ public class Effect
 public class TestEffectScript : MonoBehaviour
 {
     public Effect c_Effect;
+    public Transform target;
 
     // Update is called once per frame
     void Update()
     {
+        Vector3 targetPosXZ = new Vector3(target.position.x, transform.position.y, target.position.z);
+        Vector3 inputVec = new Vector3(Input.GetAxis("Horizontal") * -1.0f, 0, Input.GetAxis("Vertical") * -1.0f);
+        transform.LookAt(targetPosXZ + inputVec);
+        
+        
+
         if (Input.GetKeyDown("1"))
         {
             GameObject g_Effect = Instantiate(c_Effect.effct[0], transform.position, transform.rotation);

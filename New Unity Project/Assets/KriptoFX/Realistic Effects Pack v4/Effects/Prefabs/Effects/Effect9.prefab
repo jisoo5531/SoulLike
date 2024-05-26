@@ -4460,7 +4460,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: c7b42dc5aa79e174e916ff132e2f34cd, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5433,7 +5432,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 0
-    type: 0
+    type: 4
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
@@ -9554,7 +9553,6 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -14057,7 +14055,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 4f2c8f75a82ee6843beacdfae96df3b1, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14788,7 +14785,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 0
-    type: 0
+    type: 4
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
@@ -18909,7 +18906,6 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -23802,7 +23798,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 9f9bd5a8e2fd0c7428b56ac5728907fb, type: 2}
-  - {fileID: 2100000, guid: 9f9bd5a8e2fd0c7428b56ac5728907fb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -28304,7 +28299,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 4f2c8f75a82ee6843beacdfae96df3b1, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -33212,7 +33206,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 5d28f8f039ed69f46bd12e84ad0ebac9, type: 2}
-  - {fileID: 2100000, guid: 5d28f8f039ed69f46bd12e84ad0ebac9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -37738,7 +37731,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: c7b42dc5aa79e174e916ff132e2f34cd, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -42645,7 +42637,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 9f9bd5a8e2fd0c7428b56ac5728907fb, type: 2}
-  - {fileID: 2100000, guid: 9f9bd5a8e2fd0c7428b56ac5728907fb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -47538,7 +47529,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 5d28f8f039ed69f46bd12e84ad0ebac9, type: 2}
-  - {fileID: 2100000, guid: 5d28f8f039ed69f46bd12e84ad0ebac9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -47657,7 +47647,7 @@ MonoBehaviour:
   UseLightShadows: 1
   UseFastFlatDecalsForMobiles: 1
   UseCustomColor: 0
-  EffectColor: {r: 1, g: 0, b: 0, a: 1}
+  EffectColor: {r: 0, g: 1, b: 0.08795643, a: 1}
   IsVisible: 1
   FadeoutTime: 1.5
   UseCollisionDetection: 1
