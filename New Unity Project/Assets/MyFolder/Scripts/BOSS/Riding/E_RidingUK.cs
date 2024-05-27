@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class E_UndeadKnight : Enemy
+public class E_RidingUK : Enemy
 {
     private void Awake()
     {

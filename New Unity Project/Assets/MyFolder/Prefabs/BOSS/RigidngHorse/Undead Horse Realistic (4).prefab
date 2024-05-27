@@ -182,7 +182,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6807618154925109497}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 292302e8ac271ae4483f20027687aae0, type: 3}
+  m_Script: {fileID: 11500000, guid: 43ad502c83a870343b1e27b430fbfd2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7299649834880557199
@@ -2541,8 +2541,8 @@ GameObject:
   - component: {fileID: 7299649836155762342}
   - component: {fileID: 7299649836155762341}
   - component: {fileID: 286752485107129669}
-  - component: {fileID: 1141349983}
   - component: {fileID: 566799254}
+  - component: {fileID: 1112059865574161763}
   m_Layer: 20
   m_Name: Realistic Undead Knight Riding
   m_TagString: Untagged
@@ -2602,43 +2602,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.89, z: 0}
---- !u!114 &1141349983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7299649836155762339}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8e9d17796fd47c46976ba2f17284603, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Effects:
-  - Effect: {fileID: 2028463229419558195, guid: 5f40f7abf07a1af4facebcf50ca1e5c3, type: 3}
-    StartPositionRotation: {fileID: 3330317305346864429}
-    DestroyAfter: 4
-    UseLocalPosition: 0
-  - Effect: {fileID: 6901052922711101336, guid: a7558874d79ef4d429f7f46576ad0082, type: 3}
-    StartPositionRotation: {fileID: 3330317305346864429}
-    DestroyAfter: 4
-    UseLocalPosition: 0
-  - Effect: {fileID: 2028463229419558195, guid: 5f40f7abf07a1af4facebcf50ca1e5c3, type: 3}
-    StartPositionRotation: {fileID: 3330317305346864429}
-    DestroyAfter: 4
-    UseLocalPosition: 0
-  - Effect: {fileID: 6901052922711101336, guid: a7558874d79ef4d429f7f46576ad0082, type: 3}
-    StartPositionRotation: {fileID: 3330317305346864429}
-    DestroyAfter: 4
-    UseLocalPosition: 0
-  - Effect: {fileID: 2028463229419558195, guid: 5f40f7abf07a1af4facebcf50ca1e5c3, type: 3}
-    StartPositionRotation: {fileID: 3330317305346864429}
-    DestroyAfter: 6
-    UseLocalPosition: 0
-  - Effect: {fileID: 6901052922711101336, guid: a7558874d79ef4d429f7f46576ad0082, type: 3}
-    StartPositionRotation: {fileID: 3330317305346864429}
-    DestroyAfter: 4
-    UseLocalPosition: 0
 --- !u!114 &566799254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2649,6 +2612,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd3e8ae89e75cfd4d96655e395ed425d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP: 0
+  MaxHP: 0
+  anim: {fileID: 0}
+  playerTrans: {fileID: 0}
+--- !u!114 &1112059865574161763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7299649836155762339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56170b90c855b764e9a49e795784e323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 0

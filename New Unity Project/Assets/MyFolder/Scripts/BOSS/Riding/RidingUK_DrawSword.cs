@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UK_DrawSword : MonoBehaviour
+public class RidingUK_DrawSword : MonoBehaviour
 {
     private void Awake()
     {
@@ -10,7 +10,7 @@ public class UK_DrawSword : MonoBehaviour
     }
 
     void DrawSword()
-    {        
+    {
         this.transform.GetChild(0).gameObject.SetActive(true);
     }
 }
