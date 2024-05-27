@@ -2530,7 +2530,7 @@ GameObject:
   - component: {fileID: 286752485107129669}
   - component: {fileID: 1141349983}
   m_Layer: 20
-  m_Name: Realistic Undead Knight Rideing
+  m_Name: Realistic Undead Knight Riding
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2564,7 +2564,7 @@ Animator:
   m_GameObject: {fileID: 7299649836155762339}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 4df06bf5fe03975458ed1608570a44fa, type: 3}
-  m_Controller: {fileID: 9100000, guid: 15ed52ec29c6cf04d830d07de527f8d2, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4a40152e15d984a468c70373035dbe21, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 1
   m_ApplyRootMotion: 1
@@ -4535,7 +4535,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1624047688248190055, guid: f87c2e55b95e4894c9c30592cce6d287, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1624047688248190055, guid: f87c2e55b95e4894c9c30592cce6d287, type: 3}
       propertyPath: m_TagString
