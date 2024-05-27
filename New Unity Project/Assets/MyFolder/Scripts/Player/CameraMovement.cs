@@ -48,14 +48,14 @@ public class CameraMovement : MonoBehaviour
 
         RaycastHit hit;
 
-        //if (Physics.Linecast(transform.position, finalDir, out hit))
-        //{
-        //    finalDistance = Mathf.Clamp(hit.distance, minDistance, maxDistance);
-        //}
-        //else
-        //{
-        //    finalDistance = maxDistance;
-        //}
+        if (Physics.Linecast(transform.position, finalDir, out hit))
+        {
+            finalDistance = Mathf.Clamp(hit.distance, minDistance, maxDistance);
+        }
+        else
+        {
+            finalDistance = maxDistance;
+        }
 
         finalDistance = maxDistance;
         realCamera.localPosition = Vector3.Lerp(realCamera.localPosition, dirNormalized * finalDistance, Time.deltaTime * smoothness);

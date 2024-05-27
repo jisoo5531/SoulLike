@@ -149,6 +149,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3330317305346864429}
+  - component: {fileID: 2096437703}
   m_Layer: 0
   m_Name: SwordPos
   m_TagString: Untagged
@@ -172,6 +173,18 @@ Transform:
   m_Father: {fileID: 7299649835828878729}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2096437703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6807618154925109497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 292302e8ac271ae4483f20027687aae0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7299649834880557199
 GameObject:
   m_ObjectHideFlags: 0
@@ -2529,6 +2542,7 @@ GameObject:
   - component: {fileID: 7299649836155762341}
   - component: {fileID: 286752485107129669}
   - component: {fileID: 1141349983}
+  - component: {fileID: 566799254}
   m_Layer: 20
   m_Name: Realistic Undead Knight Riding
   m_TagString: Untagged
@@ -2564,7 +2578,7 @@ Animator:
   m_GameObject: {fileID: 7299649836155762339}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 4df06bf5fe03975458ed1608570a44fa, type: 3}
-  m_Controller: {fileID: 9100000, guid: 4a40152e15d984a468c70373035dbe21, type: 2}
+  m_Controller: {fileID: 9100000, guid: 15ed52ec29c6cf04d830d07de527f8d2, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 1
   m_ApplyRootMotion: 1
@@ -2625,6 +2639,22 @@ MonoBehaviour:
     StartPositionRotation: {fileID: 3330317305346864429}
     DestroyAfter: 4
     UseLocalPosition: 0
+--- !u!114 &566799254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7299649836155762339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd3e8ae89e75cfd4d96655e395ed425d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP: 0
+  MaxHP: 0
+  anim: {fileID: 0}
+  playerTrans: {fileID: 0}
 --- !u!1 &7299649836168752055
 GameObject:
   m_ObjectHideFlags: 0
@@ -2919,8 +2949,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7299649836322749383}
   - component: {fileID: 7299649836322749384}
-  - component: {fileID: 304728875}
   - component: {fileID: 304728876}
+  - component: {fileID: 1736473343}
   m_Layer: 20
   m_Name: Undead Horse Realistic (4)
   m_TagString: Enemy
@@ -2955,31 +2985,16 @@ Animator:
   m_GameObject: {fileID: 7299649836322749382}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 426fd7b0c517c544db927e8a39bd7af4, type: 3}
-  m_Controller: {fileID: 9100000, guid: 7000fdfe1a53b7f47b056c30b79316ad, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1d588a280c25d0b4ba940ee0ba53a2a2, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 1
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &304728875
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7299649836322749382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d60d579ddbf3e934eb97a5e5032b3ee0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHP: 200
-  currentHP: 200
-  target: {fileID: 0}
 --- !u!65 &304728876
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2993,6 +3008,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.7, y: 1.7, z: 1.5}
   m_Center: {x: 0, y: 1, z: 0.45}
+--- !u!114 &1736473343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7299649836322749382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 390f50051670fda4597ceb5111bf1aaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP: 0
+  MaxHP: 0
+  anim: {fileID: 0}
+  playerTrans: {fileID: 0}
+  moveSpeed: 10
 --- !u!1 &7299649836326931626
 GameObject:
   m_ObjectHideFlags: 0
