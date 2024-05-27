@@ -662,6 +662,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7299649836322749384, guid: dc37dfc260c00c24bae37e7066e99e64, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc37dfc260c00c24bae37e7066e99e64, type: 3}
 --- !u!1 &705507993
@@ -1250,6 +1254,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1736473335 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7299649836322749382, guid: dc37dfc260c00c24bae37e7066e99e64, type: 3}
+  m_PrefabInstance: {fileID: 630399368}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1736473339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736473335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c079bdb0523da6549bba0e4052d57d7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTrans: {fileID: 1440113813}
 --- !u!1 &1805367640
 GameObject:
   m_ObjectHideFlags: 0
