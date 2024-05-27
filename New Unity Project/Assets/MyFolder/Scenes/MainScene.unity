@@ -1196,10 +1196,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 759958591296867026, guid: bad931156be3bd544a5ff3ef786ef2b0, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2110269826669206047, guid: bad931156be3bd544a5ff3ef786ef2b0, type: 3}
       propertyPath: m_Name
       value: Realistic Undead Knight Grounded

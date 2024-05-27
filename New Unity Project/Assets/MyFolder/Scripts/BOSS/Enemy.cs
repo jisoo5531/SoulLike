@@ -9,11 +9,14 @@ public class Enemy : MonoBehaviour
     public float HP;
     public float MaxHP;
 
+
     #endregion
 
     [HideInInspector]
     public Animator anim;
     public Transform playerTrans;
+
+    public EnemyWeapon weapon;
 
 
     private void Awake()
