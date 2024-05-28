@@ -31,7 +31,6 @@ public class E_GroundedUK : Enemy
         {
             case 0:
                 StartCoroutine(SlashCombo());
-                Debug.Log(0);
                 break;
             default:
                 break;

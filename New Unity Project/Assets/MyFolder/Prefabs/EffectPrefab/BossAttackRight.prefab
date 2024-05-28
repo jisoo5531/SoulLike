@@ -4894,6 +4894,7 @@ GameObject:
   - component: {fileID: 6902224310673701472}
   - component: {fileID: 6703539904560513174}
   - component: {fileID: 6702900965474231130}
+  - component: {fileID: 5899009070582584923}
   m_Layer: 0
   m_Name: BlackRing
   m_TagString: Untagged
@@ -9765,6 +9766,18 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &5899009070582584923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6899536392723555326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 705f8ff593f338742a85b9ef89bb437b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6899605718587261566
 GameObject:
   m_ObjectHideFlags: 0
@@ -14841,6 +14854,7 @@ GameObject:
   - component: {fileID: 6905810589092345508}
   - component: {fileID: 6703154273671053072}
   - component: {fileID: 6702922735458288106}
+  - component: {fileID: 7139814017857336019}
   m_Layer: 0
   m_Name: ColorRing
   m_TagString: Untagged
@@ -19712,6 +19726,18 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &7139814017857336019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6900537572637715350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 705f8ff593f338742a85b9ef89bb437b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6900931923184601108
 GameObject:
   m_ObjectHideFlags: 0
