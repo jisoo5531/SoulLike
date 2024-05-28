@@ -5,12 +5,14 @@ using UnityEngine;
 public class E_GroundedUK : Enemy
 {
     Coroutine patternCoroutine;
-    
+    E_G_UK_AnimationEventEffect animEffect;
+
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
         weapon = GetComponentInChildren<EnemyWeapon>();
+        animEffect = GetComponent<E_G_UK_AnimationEventEffect>();
 
         patternCoroutine = StartCoroutine(ActionPattern());
     }
@@ -23,7 +25,7 @@ public class E_GroundedUK : Enemy
 
     IEnumerator ActionPattern()
     {
-        
+        animEffect.skillNum = -1;
         int random = 0;
         //int random = Random.Range(0, 5);
 
@@ -31,6 +33,10 @@ public class E_GroundedUK : Enemy
         {
             case 0:
                 StartCoroutine(SlashCombo());
+                animEffect.skillNum = 0;
+                break;
+            case 1:
+
                 break;
             default:
                 break;
@@ -45,5 +51,9 @@ public class E_GroundedUK : Enemy
         yield return new WaitForSeconds(5f);
 
         StartCoroutine(ActionPattern());
+    }
+    IEnumerator SwordEmission()
+    {
+        yield return new WaitForSeconds(0.1f);
     }
 }

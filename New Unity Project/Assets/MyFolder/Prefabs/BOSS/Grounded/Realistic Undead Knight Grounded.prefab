@@ -651,8 +651,8 @@ GameObject:
   - component: {fileID: 2910845651285329539}
   - component: {fileID: 4201417807130869916}
   - component: {fileID: -4815983164740407387}
-  - component: {fileID: 5213743096666674799}
   - component: {fileID: 7647938266078697267}
+  - component: {fileID: 3085210095434978379}
   m_Layer: 8
   m_Name: Realistic Undead Knight Grounded
   m_TagString: Untagged
@@ -728,43 +728,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &5213743096666674799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2110269826669206047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8e9d17796fd47c46976ba2f17284603, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Effects:
-  - Effect: {fileID: 2028463229419558195, guid: 5f40f7abf07a1af4facebcf50ca1e5c3, type: 3}
-    StartPositionRotation: {fileID: 8787878544016190737}
-    DestroyAfter: 4
-    UseLocalPosition: 0
-  - Effect: {fileID: 6901052922711101336, guid: a7558874d79ef4d429f7f46576ad0082, type: 3}
-    StartPositionRotation: {fileID: 8787878544016190737}
-    DestroyAfter: 4
-    UseLocalPosition: 0
-  - Effect: {fileID: 2028463229419558195, guid: 5f40f7abf07a1af4facebcf50ca1e5c3, type: 3}
-    StartPositionRotation: {fileID: 8787878544016190737}
-    DestroyAfter: 4
-    UseLocalPosition: 0
-  - Effect: {fileID: 6901052922711101336, guid: a7558874d79ef4d429f7f46576ad0082, type: 3}
-    StartPositionRotation: {fileID: 8787878544016190737}
-    DestroyAfter: 4
-    UseLocalPosition: 0
-  - Effect: {fileID: 2028463229419558195, guid: 5f40f7abf07a1af4facebcf50ca1e5c3, type: 3}
-    StartPositionRotation: {fileID: 8787878544016190737}
-    DestroyAfter: 6
-    UseLocalPosition: 0
-  - Effect: {fileID: 6901052922711101336, guid: a7558874d79ef4d429f7f46576ad0082, type: 3}
-    StartPositionRotation: {fileID: 8787878544016190737}
-    DestroyAfter: 4
-    UseLocalPosition: 0
 --- !u!114 &7647938266078697267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -781,7 +744,46 @@ MonoBehaviour:
   MaxHP: 0
   anim: {fileID: 0}
   playerTrans: {fileID: 0}
-  weapon: {fileID: 0}
+  weapon: {fileID: 627767574}
+--- !u!114 &3085210095434978379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110269826669206047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e329f9bf9a3a4646b9c65321bcd9736, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effect_slots:
+  - Effects:
+    - Effect: {fileID: 2028463229419558195, guid: 5f40f7abf07a1af4facebcf50ca1e5c3, type: 3}
+      StartPositionRotation: {fileID: 8787878544016190737}
+      DestroyAfter: 4
+      UseLocalPosition: 0
+    - Effect: {fileID: 6901052922711101336, guid: a7558874d79ef4d429f7f46576ad0082, type: 3}
+      StartPositionRotation: {fileID: 8787878544016190737}
+      DestroyAfter: 4
+      UseLocalPosition: 0
+    - Effect: {fileID: 2028463229419558195, guid: 5f40f7abf07a1af4facebcf50ca1e5c3, type: 3}
+      StartPositionRotation: {fileID: 8787878544016190737}
+      DestroyAfter: 4
+      UseLocalPosition: 0
+    - Effect: {fileID: 6901052922711101336, guid: a7558874d79ef4d429f7f46576ad0082, type: 3}
+      StartPositionRotation: {fileID: 8787878544016190737}
+      DestroyAfter: 4
+      UseLocalPosition: 0
+    - Effect: {fileID: 2028463229419558195, guid: 5f40f7abf07a1af4facebcf50ca1e5c3, type: 3}
+      StartPositionRotation: {fileID: 8787878544016190737}
+      DestroyAfter: 4
+      UseLocalPosition: 0
+    - Effect: {fileID: 6901052922711101336, guid: a7558874d79ef4d429f7f46576ad0082, type: 3}
+      StartPositionRotation: {fileID: 8787878544016190737}
+      DestroyAfter: 4
+      UseLocalPosition: 0
+  skillNum: 0
 --- !u!1 &2550321035541695401
 GameObject:
   m_ObjectHideFlags: 0

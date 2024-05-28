@@ -2,6 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+[System.Serializable]
+public class EffectInfo
+{
+    public GameObject Effect;
+    public Transform StartPositionRotation;
+    public float DestroyAfter = 10;
+    public bool UseLocalPosition = true;
+}
+
 public class AnimationEventEffects : MonoBehaviour {
     //public GameObject EffectPrefab;
     //public Transform EffectStartPosition;
@@ -12,16 +23,6 @@ public class AnimationEventEffects : MonoBehaviour {
     //public float DestroyAfterWorld = 10;
 
     public EffectInfo[] Effects;
-
-    [System.Serializable]
-
-    public class EffectInfo
-    {
-        public GameObject Effect;
-        public Transform StartPositionRotation;
-        public float DestroyAfter = 10;
-        public bool UseLocalPosition = true;
-    }
 
     //   // Update is called once per frame
     //   void CreateEffect () {
