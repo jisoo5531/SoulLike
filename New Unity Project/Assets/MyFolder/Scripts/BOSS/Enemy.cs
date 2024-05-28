@@ -29,4 +29,26 @@ public class Enemy : MonoBehaviour
     {
         
     }
+
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "PlayerMelee")
+        {
+            HP -= FindObjectOfType<PlayerWeapon>().damage;
+            Damaged();
+        }
+    }
+
+    void Damaged()
+    {
+        FadeInOut fadeIO = FindObjectOfType<FadeInOut>();
+        ChangeScene scene = FindObjectOfType<ChangeScene>();
+        
+        if (HP <= 0)
+        {
+            fadeIO.StartFadeOut();
+            scene.StartChangeScene();
+        }
+    }
 }

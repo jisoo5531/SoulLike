@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     ThirdPersonConroller playerConroller;
     Animator anim;
 
-    Weapon equipWeapon;
+    PlayerWeapon equipWeapon;
 
     #endregion
 
@@ -42,8 +42,16 @@ public class Player : MonoBehaviour
         dodgeCoroutine = StartCoroutine(Dodge());
         attackCoroutine = StartCoroutine(Attack());
 
-        equipWeapon = FindObjectOfType<Weapon>();
+        equipWeapon = FindObjectOfType<PlayerWeapon>();
     }
+
+    //private void OnEnable()
+    //{
+    //    Debug.Log("온");
+    //    moveCoroutine = StartCoroutine(Move());
+    //    dodgeCoroutine = StartCoroutine(Dodge());
+    //    attackCoroutine = StartCoroutine(Attack());
+    //}
 
     /// <summary>
     /// 0 : MoveAnimation 코루틴
@@ -83,7 +91,7 @@ public class Player : MonoBehaviour
     /// 2 : AttackAnimation 코루틴
     /// </summary>
     /// <param name="num"></param>
-    void StopMethod(int num)
+    public void StopMethod(int num)
     {
         switch (num)
         {
@@ -172,20 +180,19 @@ public class Player : MonoBehaviour
         {
             yield return null;
 
-            if (Input.GetMouseButtonDown(0) && !isAttacking)
+            if (Input.GetMouseButtonDown(0))
             {
-                isAttacking = true;
+                Debug.Log("공격");
                 equipWeapon.Use();
 
                 anim.SetTrigger("Attack");
 
-
+                // 이동 막기
                 StopMethod(0);
                 playerConroller.StopMethod(0);
                 
                 yield return new WaitForSeconds(1.5f);  // 공격 대기시간
 
-                isAttacking = false;
 
                 StartMethod(0);
                 playerConroller.StartMethod(0);

@@ -10,6 +10,7 @@ TagManager:
   - Animal
   - Melee
   - Enemy
+  - PlayerMelee
   layers:
   - Default
   - TransparentFX

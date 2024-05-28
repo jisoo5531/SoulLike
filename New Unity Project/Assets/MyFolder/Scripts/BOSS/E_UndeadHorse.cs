@@ -43,8 +43,6 @@ public class E_UndeadHorse : Enemy
             moveCoroutine = StartCoroutine(MoveCoroutine());
         }
 
-
-
     }
 
 

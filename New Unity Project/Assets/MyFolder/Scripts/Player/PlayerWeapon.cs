@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class PlayerWeapon : MonoBehaviour
 {
     public enum Type { Melee, Range };
     public Type type;
@@ -26,12 +26,13 @@ public class Weapon : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         meleeArea.enabled = false;
-    
+
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Enemy")
         {
+
             meleeArea.enabled = false;
         }
     }

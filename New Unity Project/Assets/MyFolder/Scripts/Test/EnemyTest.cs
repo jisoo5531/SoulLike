@@ -35,7 +35,7 @@ public class EnemyTest : MonoBehaviour
     {
         if (other.tag == "Melee")
         {
-            currentHP -= other.GetComponent<Weapon>().damage;
+            currentHP -= other.GetComponent<PlayerWeapon>().damage;
             Debug.Log("CurrentHP : " + currentHP);
             StartCoroutine(Damaged());
         }
