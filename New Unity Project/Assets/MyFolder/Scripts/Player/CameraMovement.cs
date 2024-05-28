@@ -28,17 +28,8 @@ public class CameraMovement : MonoBehaviour
 
         dirNormalized = realCamera.localPosition.normalized;
         finalDistance = realCamera.localPosition.magnitude;
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        rotX += -Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
-        rotY += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
-
-        rotX = Mathf.Clamp(rotX, -clampAngle, clampAngle);
-        Quaternion rot = Quaternion.Euler(rotX, rotY, 0);
-        transform.rotation = rot;
+        StartCoroutine(MouseMove());
     }
     private void LateUpdate()
     {
@@ -59,5 +50,21 @@ public class CameraMovement : MonoBehaviour
 
         finalDistance = maxDistance;
         realCamera.localPosition = Vector3.Lerp(realCamera.localPosition, dirNormalized * finalDistance, Time.deltaTime * smoothness);
+    }
+    IEnumerator MouseMove()
+    {
+        yield return new WaitForSeconds(1f);
+
+        while (true)
+        {            
+            rotX += -Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
+            rotY += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
+
+            rotX = Mathf.Clamp(rotX, -clampAngle, clampAngle);
+            Quaternion rot = Quaternion.Euler(rotX, rotY, 0);
+            transform.rotation = rot;
+
+            yield return null;
+        }
     }
 }
