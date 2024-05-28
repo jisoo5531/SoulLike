@@ -26,7 +26,11 @@ public class E_GroundedUK : Enemy
     IEnumerator ActionPattern()
     {
         animEffect.skillNum = -1;
-        int random = 0;
+
+        // 테스트용
+        int random = 1;
+
+        // 실제로 랜덤 패턴 구현할 변수
         //int random = Random.Range(0, 5);
 
         switch (random)
@@ -36,7 +40,8 @@ public class E_GroundedUK : Enemy
                 animEffect.skillNum = 0;
                 break;
             case 1:
-
+                StartCoroutine(Firebird());
+                animEffect.skillNum = 1;
                 break;
             default:
                 break;
@@ -52,8 +57,13 @@ public class E_GroundedUK : Enemy
 
         StartCoroutine(ActionPattern());
     }
-    IEnumerator SwordEmission()
+    IEnumerator Firebird()
     {
-        yield return new WaitForSeconds(0.1f);
+        anim.SetTrigger("DoFireBird");
+        
+
+        yield return new WaitForSeconds(6f);
+
+        StartCoroutine(ActionPattern());
     }
 }

@@ -22,10 +22,17 @@ public class E_G_UK_AnimationEventEffect : MonoBehaviour
 
     public int skillNum;
 
-    void Start()
+    private void Awake()
     {
+
+            
         
     }
+
+    void Start()
+    {
+    }
+
 
     void InstantiateEffect(int EffectNumber)
     {        

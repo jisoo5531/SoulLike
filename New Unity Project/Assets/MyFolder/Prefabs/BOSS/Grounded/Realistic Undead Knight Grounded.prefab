@@ -783,6 +783,11 @@ MonoBehaviour:
       StartPositionRotation: {fileID: 8787878544016190737}
       DestroyAfter: 4
       UseLocalPosition: 0
+  - Effects:
+    - Effect: {fileID: 1543153927702632, guid: 3bd033e2ba3626744805c163c1ac71cb, type: 3}
+      StartPositionRotation: {fileID: 3626257112184760055}
+      DestroyAfter: 6
+      UseLocalPosition: 0
   skillNum: 0
 --- !u!1 &2550321035541695401
 GameObject:
