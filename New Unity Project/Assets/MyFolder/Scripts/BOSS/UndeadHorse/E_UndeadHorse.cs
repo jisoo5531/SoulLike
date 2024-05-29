@@ -7,6 +7,8 @@ public class E_UndeadHorse : Enemy
     #region 전역 변수
 
     public float moveSpeed = 10.0f;
+
+    float distancePlayer = 0.0f;
     
     Coroutine turnCoroutine;
     Coroutine moveCoroutine;
@@ -37,6 +39,9 @@ public class E_UndeadHorse : Enemy
 
     void Update()
     {
+        distancePlayer = Vector3.Magnitude(playerTrans.position - this.transform.position);
+        Debug.Log("거리 : " + distancePlayer);
+
         // 보스 회전 테스트
         if (Input.GetKeyDown("1"))
         {
@@ -46,12 +51,9 @@ public class E_UndeadHorse : Enemy
         {
             moveCoroutine = StartCoroutine(MoveCoroutine());
         }
-
     }
 
     
-
-
 
     #region 이동, 회전 코루틴
 
@@ -153,7 +155,7 @@ public class E_UndeadHorse : Enemy
         switch (random)
         {
             case 0:
-                StartCoroutine(AttackFrontLeg());
+                StartCoroutine(AttackSprintJump());
                 break;
             case 1:
 
@@ -162,7 +164,20 @@ public class E_UndeadHorse : Enemy
                 break;
         }
 
-        
+
+        // 근접 공격 거리가 될 시
+        //while (true)
+        //{
+        //    yield return null;
+
+        //    if (distancePlayer <= 10.0f)
+        //    {                
+        //        StartCoroutine(AttackFrontLeg());
+
+        //        break;
+        //    }            
+        //}
+               
     }
 
     IEnumerator AttackFrontLeg()
@@ -182,4 +197,26 @@ public class E_UndeadHorse : Enemy
         StartCoroutine(HorseActionPattern());
     }
     
+    IEnumerator AttackSprintJump()
+    {
+        while (true)
+        {
+            yield return null;
+
+            if (distancePlayer > 25 && distancePlayer < 31)
+            {
+                this.transform.LookAt(playerTrans);
+
+                yield return new WaitForSeconds(0.3f);
+
+                anim.SetTrigger("DoSprintJump");
+
+                break;
+            }
+            
+        }        
+
+        yield return new WaitForSeconds(4f);
+
+    }
 }
