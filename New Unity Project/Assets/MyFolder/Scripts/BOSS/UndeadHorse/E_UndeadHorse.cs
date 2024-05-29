@@ -10,7 +10,7 @@ public class E_UndeadHorse : Enemy
 
     float distancePlayer = 0.0f;
 
-    bool isActiveTurn;
+    bool isLook;
     
     Coroutine turnCoroutine;
     Coroutine moveCoroutine;
@@ -27,7 +27,7 @@ public class E_UndeadHorse : Enemy
 
     #endregion
 
-
+    
 
     private void Awake()
     {
@@ -45,7 +45,12 @@ public class E_UndeadHorse : Enemy
     void Update()
     {
         distancePlayer = Vector3.Magnitude(playerTrans.position - this.transform.position);
-        Debug.Log("거리 : " + distancePlayer);
+        
+
+        if (isLook)
+        {
+            this.transform.LookAt(playerTrans);
+        }
 
         // 보스 회전 테스트
         if (Input.GetKeyDown("1"))
@@ -64,7 +69,7 @@ public class E_UndeadHorse : Enemy
 
     IEnumerator TurnTest()
     {
-        isActiveTurn = true;
+        isLook = true;
         while (true)
         {
             yield return null;
@@ -165,52 +170,35 @@ public class E_UndeadHorse : Enemy
     #endregion
 
     IEnumerator HorseActionPattern()
-    {
-        if (!isActiveTurn)
-        {
-            turnCoroutine = StartCoroutine(TurnTest());
-        }        
+    {        
+        
+        isLook = true;
 
-        int random = 0;
-
-        switch (random)
+        while (true)
         {
-            case 0:
+            yield return new WaitForSeconds(2f);            
+
+            if (distancePlayer <= 10)
+            {
+                StartCoroutine(AttackFrontLeg());
+
+            }
+            else if (distancePlayer > 25 && distancePlayer < 31)
+            {
                 StartCoroutine(AttackSprintJump());
-                break;
-            case 1:
+            }
 
-                break;
-            default:
-                break;
-        }
-
-        yield return new WaitForSeconds(0.5f);
-
-
-
-        // 근접 공격 거리가 될 시
-        //while (true)
-        //{
-        //    yield return null;
-
-        //    if (distancePlayer <= 10.0f)
-        //    {                
-        //        StartCoroutine(AttackFrontLeg());
-
-        //        break;
-        //    }            
-        //}
-
+            yield return null;
+        }    
     }
 
     IEnumerator AttackFrontLeg()
-    {
+    {        
         BoxCollider Attack_F_Leg = GameObject.Find("AttackFront Pos").GetComponent<BoxCollider>();
 
+        isLook = false;
         anim.SetTrigger("DoAttackFrontLeg");
-        
-        Attack_F_Leg.enabled = true;        
+        Attack_F_Leg.enabled = true;
 
         yield return new WaitForSeconds(1.5f);
 
@@ -218,31 +206,30 @@ public class E_UndeadHorse : Enemy
 
         yield return new WaitForSeconds(1f);
 
-        StartCoroutine(HorseActionPattern());
+        isLook = true;
+        //StartCoroutine(HorseActionPattern());
     }
     
     IEnumerator AttackSprintJump()
     {
-        while (true)
-        {
-            yield return null;
+        BoxCollider Attack_Sprint_Jump = GameObject.Find("SprintJumpAttack Pos").GetComponent<BoxCollider>();
 
-            StopCoroutine(turnCoroutine);
-            isActiveTurn = false;
+        isLook = false;
+        horseColider.enabled = false;
+        anim.SetTrigger("DoSprintJump");
 
-            if (distancePlayer > 25 && distancePlayer < 31)
-            {                                
-                anim.SetTrigger("DoSprintJump");
+        Attack_Sprint_Jump.enabled = true;
 
-                horseColider.enabled = false;
-
-                break;
-            }            
-        }
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
 
         horseColider.enabled = true;
+        Attack_Sprint_Jump.enabled = false;
 
-        StartCoroutine(HorseActionPattern());
+        yield return new WaitForSeconds(1f);
+
+        
+        isLook = true;
+
+        //StartCoroutine(HorseActionPattern());
     }
 }
