@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.04111985, g: 0.07249684, b: 0.12565836, a: 1}
+  m_IndirectSpecularColor: {r: 0.041117735, g: 0.07249477, b: 0.12565547, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -790,6 +790,11 @@ PrefabInstance:
       objectReference: {fileID: 740012693}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bad931156be3bd544a5ff3ef786ef2b0, type: 3}
+--- !u!4 &1140123687 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3626257112184760055, guid: bad931156be3bd544a5ff3ef786ef2b0, type: 3}
+  m_PrefabInstance: {fileID: 1140123686}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1191922832
 GameObject:
   m_ObjectHideFlags: 0
@@ -1428,6 +1433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8eaa90735d6eeb44b2cff601a899493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bossTarget: {fileID: 1140123687}
   objectToFollow: {fileID: 549829278}
   followSpeed: 10
   sensitivity: 500
@@ -1439,6 +1445,7 @@ MonoBehaviour:
   maxDistance: 3
   finalDistance: 0
   smoothness: 10
+  isFixedTarget: 0
 --- !u!1 &2131357228
 GameObject:
   m_ObjectHideFlags: 0
