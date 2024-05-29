@@ -13,6 +13,8 @@ public class E_UndeadHorse : Enemy
     Coroutine turnCoroutine;
     Coroutine moveCoroutine;
 
+    BoxCollider horseColider;
+
     #endregion
 
 
@@ -31,6 +33,7 @@ public class E_UndeadHorse : Enemy
         MaxHP = 200;
 
         anim = GetComponent<Animator>();
+        horseColider = GetComponent<BoxCollider>();
         player = FindObjectOfType<Player>();
 
         StartCoroutine(HorseActionPattern());
@@ -148,7 +151,8 @@ public class E_UndeadHorse : Enemy
 
     IEnumerator HorseActionPattern()
     {
-        yield return new WaitForSeconds(2f);
+
+
 
         int random = 0;
 
@@ -164,6 +168,9 @@ public class E_UndeadHorse : Enemy
                 break;
         }
 
+        yield return new WaitForSeconds(0.5f);
+
+
 
         // 근접 공격 거리가 될 시
         //while (true)
@@ -177,7 +184,7 @@ public class E_UndeadHorse : Enemy
         //        break;
         //    }            
         //}
-               
+
     }
 
     IEnumerator AttackFrontLeg()
@@ -203,20 +210,21 @@ public class E_UndeadHorse : Enemy
         {
             yield return null;
 
+            this.transform.LookAt(playerTrans);
+
             if (distancePlayer > 25 && distancePlayer < 31)
-            {
-                this.transform.LookAt(playerTrans);
-
-                yield return new WaitForSeconds(0.3f);
-
+            {                                
                 anim.SetTrigger("DoSprintJump");
 
+                horseColider.enabled = false;
+
                 break;
-            }
-            
-        }        
+            }            
+        }
+        yield return new WaitForSeconds(2f);
 
-        yield return new WaitForSeconds(4f);
+        horseColider.enabled = true;
 
+        StartCoroutine(HorseActionPattern());
     }
 }
