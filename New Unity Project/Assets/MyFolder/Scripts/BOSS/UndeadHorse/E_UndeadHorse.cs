@@ -9,6 +9,8 @@ public class E_UndeadHorse : Enemy
     public float moveSpeed = 10.0f;
 
     float distancePlayer = 0.0f;
+
+    bool isActiveTurn;
     
     Coroutine turnCoroutine;
     Coroutine moveCoroutine;
@@ -35,7 +37,7 @@ public class E_UndeadHorse : Enemy
         anim = GetComponent<Animator>();
         horseColider = GetComponent<BoxCollider>();
         player = FindObjectOfType<Player>();
-
+        
         StartCoroutine(HorseActionPattern());
     }
 
@@ -59,6 +61,19 @@ public class E_UndeadHorse : Enemy
     
 
     #region 이동, 회전 코루틴
+
+    IEnumerator TurnTest()
+    {
+        isActiveTurn = true;
+        while (true)
+        {
+            yield return null;
+
+            this.transform.LookAt(playerTrans);
+
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
 
     IEnumerator MoveCoroutine()
     {
@@ -151,8 +166,10 @@ public class E_UndeadHorse : Enemy
 
     IEnumerator HorseActionPattern()
     {
-
-
+        if (!isActiveTurn)
+        {
+            turnCoroutine = StartCoroutine(TurnTest());
+        }        
 
         int random = 0;
 
@@ -210,7 +227,8 @@ public class E_UndeadHorse : Enemy
         {
             yield return null;
 
-            this.transform.LookAt(playerTrans);
+            StopCoroutine(turnCoroutine);
+            isActiveTurn = false;
 
             if (distancePlayer > 25 && distancePlayer < 31)
             {                                

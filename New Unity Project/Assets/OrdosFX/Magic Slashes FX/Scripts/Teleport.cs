@@ -9,9 +9,8 @@ public class Teleport : MonoBehaviour {
 
     // Use this for initialization
     void Awake () {
-        startPos = transform.position;
-
-	}
+        startPos = transform.position;        
+    }
 	
 	// Update is called once per frame
 	void OnEnable() {
