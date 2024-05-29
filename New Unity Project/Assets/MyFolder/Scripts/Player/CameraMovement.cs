@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
+    #region 전역 변수
+
+    public Transform bossTarget;
+
     public Transform objectToFollow;
     public float followSpeed = 10.0f;
     public float sensitivity = 100.0f;
@@ -19,6 +23,12 @@ public class CameraMovement : MonoBehaviour
     public float maxDistance;
     public float finalDistance;
     public float smoothness = 10.0f;
+
+    public bool isFixedTarget = false;
+
+    #endregion
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -46,10 +56,20 @@ public class CameraMovement : MonoBehaviour
         else
         {
             finalDistance = maxDistance;
-        }
+        }        
 
         finalDistance = maxDistance;
         realCamera.localPosition = Vector3.Lerp(realCamera.localPosition, dirNormalized * finalDistance, Time.deltaTime * smoothness);
+
+        if (Input.GetKeyDown("t"))
+        {
+            isFixedTarget = !isFixedTarget;
+            
+        }
+        if (isFixedTarget)
+        {
+            this.transform.LookAt(bossTarget);
+        }
     }
     IEnumerator MouseMove()
     {
