@@ -16,6 +16,7 @@ public class Teleport : MonoBehaviour {
 	void OnEnable() {
         transform.position = startPos;
 	}
+    
 
     public void CustomTeleport(){
         var renderers = GetComponentsInChildren<Renderer>();

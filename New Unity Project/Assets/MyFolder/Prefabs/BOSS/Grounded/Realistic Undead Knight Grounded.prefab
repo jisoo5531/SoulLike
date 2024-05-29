@@ -1,5 +1,100 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1477627686
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1477627687}
+  m_Layer: 8
+  m_Name: StartPos2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1477627687
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1477627686}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1484995847}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1484995846
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1484995847}
+  m_Layer: 8
+  m_Name: Teleport
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1484995847
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484995846}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1732184733}
+  - {fileID: 1477627687}
+  m_Father: {fileID: 3626257112184760055}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1732184732
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1732184733}
+  m_Layer: 8
+  m_Name: StartPos1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1732184733
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732184732}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.69, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1484995847}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5936302102151008
 GameObject:
   m_ObjectHideFlags: 0
@@ -653,6 +748,7 @@ GameObject:
   - component: {fileID: -4815983164740407387}
   - component: {fileID: 7647938266078697267}
   - component: {fileID: 3085210095434978379}
+  - component: {fileID: 1140123693}
   m_Layer: 8
   m_Name: Realistic Undead Knight Grounded
   m_TagString: Untagged
@@ -675,6 +771,7 @@ Transform:
   - {fileID: 6718317317899498215}
   - {fileID: 1033766143826508547}
   - {fileID: 7252177439312594620}
+  - {fileID: 1484995847}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -740,10 +837,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb2b780c2dca60f41bb4abb18de92f6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 0
-  MaxHP: 0
+  HP: 200
+  MaxHP: 200
   anim: {fileID: 0}
   playerTrans: {fileID: 0}
+  player: {fileID: 0}
   weapon: {fileID: 627767574}
 --- !u!114 &3085210095434978379
 MonoBehaviour:
@@ -788,7 +886,29 @@ MonoBehaviour:
       StartPositionRotation: {fileID: 3626257112184760055}
       DestroyAfter: 6
       UseLocalPosition: 0
+  - Effects:
+    - Effect: {fileID: 1148156256932182, guid: f168af7c5d7ff4e49b08242538bb31b9, type: 3}
+      StartPositionRotation: {fileID: 1732184733}
+      DestroyAfter: 3
+      UseLocalPosition: 0
+    - Effect: {fileID: 1556941434285710, guid: dadb73315055de24fa2dce6365991ee3, type: 3}
+      StartPositionRotation: {fileID: 1477627687}
+      DestroyAfter: 7
+      UseLocalPosition: 0
   skillNum: 0
+--- !u!114 &1140123693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110269826669206047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af015252f9ca2bb489daa8508d0a0168, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Range: {x: 0, y: 0, z: 30}
 --- !u!1 &2550321035541695401
 GameObject:
   m_ObjectHideFlags: 0

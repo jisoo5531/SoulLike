@@ -28,7 +28,7 @@ public class E_GroundedUK : Enemy
         animEffect.skillNum = -1;
 
         // 테스트용
-        int random = 1;
+        int random = 2;
 
         // 실제로 랜덤 패턴 구현할 변수
         //int random = Random.Range(0, 5);
@@ -42,6 +42,10 @@ public class E_GroundedUK : Enemy
             case 1:
                 StartCoroutine(Firebird());
                 animEffect.skillNum = 1;
+                break;
+            case 2:
+                StartCoroutine(Teleport());
+                animEffect.skillNum = 2;
                 break;
             default:
                 break;
@@ -59,10 +63,17 @@ public class E_GroundedUK : Enemy
     }
     IEnumerator Firebird()
     {
-        anim.SetTrigger("DoFireBird");
-        
+        anim.SetTrigger("DoFireBird");        
 
         yield return new WaitForSeconds(6f);
+
+        StartCoroutine(ActionPattern());
+    }
+    IEnumerator Teleport()
+    {        
+        anim.SetTrigger("DoTeleport");                
+
+        yield return new WaitForSeconds(3f);
 
         StartCoroutine(ActionPattern());
     }
