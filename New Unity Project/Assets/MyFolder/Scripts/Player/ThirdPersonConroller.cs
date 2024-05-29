@@ -31,8 +31,7 @@ public class ThirdPersonConroller : MonoBehaviour
     
 
     private void Awake()
-    {
-        Debug.Log("TPC Awake ½ÇÇà");
+    {        
         characterController = GetComponent<CharacterController>();
 
 

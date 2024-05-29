@@ -6,38 +6,39 @@ public class Enemy : MonoBehaviour
 {
     #region 전역 변수
 
-    public float HP;
-    public float MaxHP;
-
+    public float HP = 200;
+    public float MaxHP = 200;
 
     #endregion
 
     [HideInInspector]
     public Animator anim;
+
     public Transform playerTrans;
 
     [HideInInspector]
     public Player player;
+
+    [HideInInspector]
     public EnemyWeapon weapon;
 
-
-    private void Awake()
+    public float Get_HP()
     {
-        anim = GetComponent<Animator>();
+        return HP;
+    }
+    public float Get_MaxHP()
+    {
+        MaxHP = 200;
+        return MaxHP;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
-    
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "PlayerMelee")
         {
             HP -= FindObjectOfType<PlayerWeapon>().damage;
+            Debug.Log("맞았다. 체력 : " + HP);
             Damaged();
         }
     }

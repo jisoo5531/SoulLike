@@ -7,9 +7,7 @@ public class E_UndeadHorse : Enemy
     #region 전역 변수
 
     public float moveSpeed = 10.0f;
-
     
-
     Coroutine turnCoroutine;
     Coroutine moveCoroutine;
 
@@ -27,6 +25,9 @@ public class E_UndeadHorse : Enemy
 
     private void Awake()
     {
+        HP = 200;
+        MaxHP = 200;
+
         anim = GetComponent<Animator>();
         player = FindObjectOfType<Player>();
 
@@ -47,6 +48,9 @@ public class E_UndeadHorse : Enemy
         }
 
     }
+
+    
+
 
 
     #region 이동, 회전 코루틴
