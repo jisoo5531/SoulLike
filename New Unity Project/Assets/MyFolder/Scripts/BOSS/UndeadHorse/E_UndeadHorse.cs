@@ -8,6 +8,8 @@ public class E_UndeadHorse : Enemy
 
     public float moveSpeed = 10.0f;
 
+    
+
     Coroutine turnCoroutine;
     Coroutine moveCoroutine;
 
@@ -16,7 +18,7 @@ public class E_UndeadHorse : Enemy
 
     #region 트랜스폼 / 스크립트
 
-    
+
 
 
     #endregion
@@ -26,8 +28,9 @@ public class E_UndeadHorse : Enemy
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        player = FindObjectOfType<Player>();
 
-
+        StartCoroutine(HorseActionPattern());
     }
 
 
@@ -46,6 +49,7 @@ public class E_UndeadHorse : Enemy
     }
 
 
+    #region 이동, 회전 코루틴
 
     IEnumerator MoveCoroutine()
     {
@@ -82,8 +86,6 @@ public class E_UndeadHorse : Enemy
     //        anim.SetFloat("MovePow", movePow);
     //    }
     //}
-
-
 
     /// <summary>
     /// 캐릭터 방향에 따라 보스 회전
@@ -135,4 +137,45 @@ public class E_UndeadHorse : Enemy
 
         yield return new WaitForSeconds(1f);
     }
+
+    #endregion
+
+    IEnumerator HorseActionPattern()
+    {
+        yield return new WaitForSeconds(2f);
+
+        int random = 0;
+
+        switch (random)
+        {
+            case 0:
+                StartCoroutine(AttackFrontLeg());
+                break;
+            case 1:
+
+                break;
+            default:
+                break;
+        }
+
+        
+    }
+
+    IEnumerator AttackFrontLeg()
+    {
+        BoxCollider Attack_F_Leg = GameObject.Find("AttackFront Pos").GetComponent<BoxCollider>();
+
+        anim.SetTrigger("DoAttackFrontLeg");
+        
+        Attack_F_Leg.enabled = true;        
+
+        yield return new WaitForSeconds(1.5f);
+
+        Attack_F_Leg.enabled = false;
+
+        yield return new WaitForSeconds(1f);
+
+        StartCoroutine(HorseActionPattern());
+    }
+    
 }

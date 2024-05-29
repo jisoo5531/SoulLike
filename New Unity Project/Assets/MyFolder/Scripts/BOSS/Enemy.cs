@@ -16,6 +16,8 @@ public class Enemy : MonoBehaviour
     public Animator anim;
     public Transform playerTrans;
 
+    [HideInInspector]
+    public Player player;
     public EnemyWeapon weapon;
 
 

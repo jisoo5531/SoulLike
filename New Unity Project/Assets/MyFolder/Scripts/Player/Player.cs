@@ -7,6 +7,9 @@ public class Player : MonoBehaviour
 
     #region 전역 변수
 
+    public int MaxHP;
+    public int HP;
+
     public bool isShift;
     public bool isAttacking;
 
