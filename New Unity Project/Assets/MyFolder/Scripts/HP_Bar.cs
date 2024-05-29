@@ -29,9 +29,7 @@ public class HP_Bar : MonoBehaviour
         HpBar = GetComponent<Slider>();
 
         if (Unit == Type.Player)
-        {
-            Debug.Log("플레이어 체력 : " + player.HP);
-            Debug.Log("플레이어 최대 체력 : " + player.MaxHP);
+        {            
             HpBar.maxValue = player.MaxHP;
             HpBar.value = player.MaxHP;
         }
@@ -65,14 +63,11 @@ public class HP_Bar : MonoBehaviour
     void Set_HPBar()
     {
         if (Unit == Type.Player)
-        {
-            float changeHP = player.HP;
-
+        {            
             HpBar.value = Mathf.Lerp(HpBar.value, player.HP, 2.0f * Time.deltaTime);
         }
         else if (Unit == Type.Enemy)
-        {
-            //HpBar.value = enemy.HP;
+        {            
             HpBar.value = Mathf.Lerp(HpBar.value, enemy.HP, 2.0f * Time.deltaTime);
         }        
     }
