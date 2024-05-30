@@ -2,28 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Teleport : MonoBehaviour {
+public class Teleport : MonoBehaviour 
+{
 
-    public Vector3 Range = new Vector3();
+    Vector3 Range;
     Vector3 startPos;
 
+    Player player;
+
     // Use this for initialization
-    void Awake () {
-        startPos = transform.position;        
+    void Awake () 
+    {
+        startPos = transform.position;
+        player = FindObjectOfType<Player>();
     }
 	
 	// Update is called once per frame
-	void OnEnable() {
+	void OnEnable() 
+    {
         transform.position = startPos;
 	}
-    
 
-    public void CustomTeleport(){
+
+    public void CustomTeleport()
+    {
         var renderers = GetComponentsInChildren<Renderer>();
         foreach (var rend in renderers) {
             rend.enabled = false;
         }
-        transform.position += Range;
+
+        this.transform.position = player.transform.position + player.transform.forward * 3.0f;
 
         foreach (var rend in renderers)
         {

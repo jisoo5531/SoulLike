@@ -6,6 +6,7 @@ using UnityEngine;
 public class EffectSlots
 {
     public Effect_Info[] Effects;
+    public float damage;
 }
 [System.Serializable]
 public class Effect_Info

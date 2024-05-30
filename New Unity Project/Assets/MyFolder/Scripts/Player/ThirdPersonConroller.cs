@@ -25,6 +25,7 @@ public class ThirdPersonConroller : MonoBehaviour
 
     private CharacterController characterController;
 
+    Player player;
 
     #endregion
 
@@ -33,7 +34,7 @@ public class ThirdPersonConroller : MonoBehaviour
     private void Awake()
     {        
         characterController = GetComponent<CharacterController>();
-
+        player = GetComponent<Player>();
 
         moveCoroutine = StartCoroutine(MoveCoroutine());
     }
@@ -117,6 +118,7 @@ public class ThirdPersonConroller : MonoBehaviour
 
             // 캐릭터 이동
             characterController.Move(moveDirection * Time.deltaTime);
+
         }
     }
 

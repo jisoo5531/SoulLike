@@ -25,7 +25,7 @@ public class E_GroundedUK : Enemy
     void Update()
     {
 
-        distanceToPlayer = Vector3.Magnitude(playerTrans.position - this.transform.position);
+        distanceToPlayer = Vector3.Magnitude(playerTrans.localPosition - this.transform.localPosition);
         //Debug.Log("거리 : " + distanceToPlayer);
         
         
@@ -38,36 +38,49 @@ public class E_GroundedUK : Enemy
 
     IEnumerator ActionPattern()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
 
         animEffect.skillNum = -1;
 
         // 테스트용
-        int random = 1;
-        
-        // 실제로 랜덤 패턴 구현할 변수
-        //int random = Random.Range(0, 5);
 
-        switch (random)
+        // 실제로 랜덤 패턴 구현할 변수
+        int random = Random.Range(0, 3);
+
+        if (distanceToPlayer < 13.0f)
         {
-            case 0:
-                StartCoroutine(SlashCombo());
-                animEffect.skillNum = 0;
-                break;
-            case 1:
-                StartCoroutine(Firebird());
-                animEffect.skillNum = 1;
-                break;
-            case 2:
-                StartCoroutine(Teleport());
-                animEffect.skillNum = 2;
-                break;
-            case 3:                
-                StartCoroutine(AttackJump());
-                break;
-            default:
-                break;
-        }        
+            switch (random)
+            {
+                case 0:
+                case 1:
+                    StartCoroutine(SlashCombo());
+                    animEffect.skillNum = 0;
+                    break;
+                case 2:
+                    StartCoroutine(Firebird());
+                    animEffect.skillNum = 1;
+                    break;
+                default:
+                    break;
+            }
+        }
+        else
+        {
+            switch (random)
+            {
+                case 0:
+                case 1:
+                    StartCoroutine(AttackRunJump());
+                    break;
+                case 2:
+                    StartCoroutine(Teleport());
+                    animEffect.skillNum = 2;
+                    break;
+                default:
+                    break;
+            }
+        }
+               
     }
     IEnumerator SlashCombo()
     {
@@ -94,7 +107,7 @@ public class E_GroundedUK : Enemy
 
         StartCoroutine(ActionPattern());
     }
-    IEnumerator AttackJump()
+    IEnumerator AttackRunJump()
     {
         while (true)
         {

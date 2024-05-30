@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     public int MaxHP = 100;
     public float HP = 100;
 
-    public bool isShift;
+    public bool isSpace;
     public bool isAttacking;
 
     float moveSpeed;
@@ -25,8 +25,9 @@ public class Player : MonoBehaviour
     #region 컴포넌트
 
     ThirdPersonConroller playerConroller;
+    CapsuleCollider playercolider;
     Animator anim;
-
+    
     PlayerWeapon equipWeapon;
 
     #endregion
@@ -36,16 +37,16 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         Debug.Log("Player Awake 실행");
-        playerConroller = FindObjectOfType<ThirdPersonConroller>();
+        playerConroller = GetComponent<ThirdPersonConroller>();
+        playercolider = GetComponent<CapsuleCollider>();
         anim = GetComponentInChildren<Animator>();
-
         isAttacking = false;
 
         moveCoroutine = StartCoroutine(Move());
         dodgeCoroutine = StartCoroutine(Dodge());
         attackCoroutine = StartCoroutine(Attack());
 
-        equipWeapon = FindObjectOfType<PlayerWeapon>();
+        equipWeapon = GetComponentInChildren<PlayerWeapon>();
     }
 
     //private void OnEnable()
@@ -166,13 +167,21 @@ public class Player : MonoBehaviour
         {
             yield return null;
 
-            isShift = Input.GetButton("Dodge");
-            if (isShift)
+            isSpace = Input.GetButtonDown("Dodge");
+
+            
+            if (isSpace)
             {
                 anim.SetTrigger("DodgeRoll");
 
+                this.gameObject.tag = "Untagged";
+
+                yield return new WaitForSeconds(1.5f);
+
+                this.gameObject.tag = "Player";
+
                 // 회피기 쿨타임
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(1.5f);
             }
             
         }

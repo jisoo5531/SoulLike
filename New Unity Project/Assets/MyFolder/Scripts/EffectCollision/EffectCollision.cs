@@ -4,23 +4,29 @@ using UnityEngine;
 
 public class EffectCollision : MonoBehaviour
 {
-    GameObject player;
+    Player player;
     ParticleSystem p_System;
+    E_G_UK_AnimationEventEffect particleInfo;
+
     List<ParticleSystem.Particle> collision_Obj = new List<ParticleSystem.Particle>();
+
+    
+
+    bool isColided = false;
 
     
 
     private void Awake()
     {
-        player = GameObject.Find("Player");
-
+        player = FindObjectOfType<Player>();
 
         p_System = GetComponent<ParticleSystem>();
+        particleInfo = FindObjectOfType<E_G_UK_AnimationEventEffect>();
         
 
         p_System.trigger.AddCollider(player.transform);
-        
 
+        isColided = false;
 
     }
 
@@ -34,9 +40,15 @@ public class EffectCollision : MonoBehaviour
     }
     private void OnParticleCollision(GameObject other)
     {
-        if (other.tag == "Player")
+        if (!isColided && other.tag == "Player")
         {
             Debug.Log("플레이어 이펙트 맞았다.");
+            Debug.LogFormat("파티클 번호 : {0}, 데미지 : {1}", particleInfo.skillNum, particleInfo.effect_slots[particleInfo.skillNum].damage);
+
+            player.HP -= particleInfo.effect_slots[particleInfo.skillNum].damage;
+
+
+            isColided = true;
         }
     }
 }

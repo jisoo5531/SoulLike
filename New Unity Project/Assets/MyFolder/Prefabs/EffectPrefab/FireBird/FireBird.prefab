@@ -19746,7 +19746,6 @@ GameObject:
   - component: {fileID: 4935879237432948}
   - component: {fileID: 198757529904151086}
   - component: {fileID: 199072303713979308}
-  - component: {fileID: 5301871497617115014}
   m_Layer: 0
   m_Name: Fire
   m_TagString: Untagged
@@ -23540,11 +23539,11 @@ ParticleSystem:
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 2
     inside: 2
     outside: 0
@@ -24569,18 +24568,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &5301871497617115014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1494998597050546}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 705f8ff593f338742a85b9ef89bb437b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1543153927702632
 GameObject:
   m_ObjectHideFlags: 0
@@ -24627,7 +24614,6 @@ GameObject:
   - component: {fileID: 4676293414105162}
   - component: {fileID: 198197787516278374}
   - component: {fileID: 199888912145290718}
-  - component: {fileID: 7269354379692581170}
   m_Layer: 0
   m_Name: Fire
   m_TagString: Untagged
@@ -28238,7 +28224,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 4
     type: 1
     collisionMode: 0
@@ -28425,7 +28411,7 @@ ParticleSystem:
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 2
     inside: 2
     outside: 0
@@ -29450,18 +29436,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &7269354379692581170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1630484500080796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 705f8ff593f338742a85b9ef89bb437b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1665381733966554
 GameObject:
   m_ObjectHideFlags: 0
@@ -29473,6 +29447,7 @@ GameObject:
   - component: {fileID: 4954616337965082}
   - component: {fileID: 198808606363845638}
   - component: {fileID: 199115570672626388}
+  - component: {fileID: 6662455017241529182}
   m_Layer: 0
   m_Name: Bird
   m_TagString: Untagged
@@ -34364,6 +34339,18 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &6662455017241529182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665381733966554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 705f8ff593f338742a85b9ef89bb437b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1821509596425834
 GameObject:
   m_ObjectHideFlags: 0
