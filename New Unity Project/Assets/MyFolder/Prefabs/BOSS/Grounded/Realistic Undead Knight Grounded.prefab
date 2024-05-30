@@ -1137,11 +1137,13 @@ MonoBehaviour:
       StartPositionRotation: {fileID: 702601151}
       DestroyAfter: 4
       UseLocalPosition: 0
+    damage: 10
   - Effects:
     - Effect: {fileID: 1543153927702632, guid: 3bd033e2ba3626744805c163c1ac71cb, type: 3}
       StartPositionRotation: {fileID: 1179287124}
       DestroyAfter: 6
       UseLocalPosition: 0
+    damage: 20
   - Effects:
     - Effect: {fileID: 1148156256932182, guid: f168af7c5d7ff4e49b08242538bb31b9, type: 3}
       StartPositionRotation: {fileID: 1732184733}
@@ -1151,6 +1153,7 @@ MonoBehaviour:
       StartPositionRotation: {fileID: 1477627687}
       DestroyAfter: 7
       UseLocalPosition: 0
+    damage: 10
   skillNum: 0
 --- !u!114 &1140123693
 MonoBehaviour:
@@ -1164,7 +1167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af015252f9ca2bb489daa8508d0a0168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Range: {x: 0, y: 0, z: 30}
 --- !u!1 &2550321035541695401
 GameObject:
   m_ObjectHideFlags: 0
