@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class E_GroundedUK : Enemy
 {
+    float distanceToPlayer;
+
     Coroutine patternCoroutine;
     E_G_UK_AnimationEventEffect animEffect;
 
@@ -22,6 +24,11 @@ public class E_GroundedUK : Enemy
     // Update is called once per frame
     void Update()
     {
+
+        distanceToPlayer = Vector3.Magnitude(playerTrans.position - this.transform.position);
+        Debug.Log("거리 : " + distanceToPlayer);
+        
+        
         Vector3 loopPostion = new Vector3(playerTrans.position.x, this.transform.position.y, playerTrans.position.z);
         if (isLook)
         {
@@ -35,7 +42,8 @@ public class E_GroundedUK : Enemy
         animEffect.skillNum = -1;
 
         // 테스트용
-        int random = 1;
+        int random = 3;
+        
 
         // 실제로 랜덤 패턴 구현할 변수
         //int random = Random.Range(0, 5);
@@ -54,7 +62,7 @@ public class E_GroundedUK : Enemy
                 StartCoroutine(Teleport());
                 animEffect.skillNum = 2;
                 break;
-            case 3:
+            case 3:                
                 StartCoroutine(AttackJump());
                 break;
             default:
@@ -89,8 +97,21 @@ public class E_GroundedUK : Enemy
     }
     IEnumerator AttackJump()
     {
-        anim.SetTrigger("DoAttackJump");
+        while (true)
+        {
+            if (distanceToPlayer > 10.0f)
+            {
+                anim.SetBool("isRun", true);
+            }
+            else
+            {
+                anim.SetBool("isRun", false);
+                break;
+            }
 
+            yield return null;
+        }        
+        anim.SetTrigger("DoAttackJump");
         
 
         yield return new WaitForSeconds(2f);
