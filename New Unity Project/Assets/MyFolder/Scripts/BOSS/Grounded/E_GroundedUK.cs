@@ -28,7 +28,7 @@ public class E_GroundedUK : Enemy
         animEffect.skillNum = -1;
 
         // 테스트용
-        int random = 2;
+        int random = 3;
 
         // 실제로 랜덤 패턴 구현할 변수
         //int random = Random.Range(0, 5);
@@ -46,6 +46,9 @@ public class E_GroundedUK : Enemy
             case 2:
                 StartCoroutine(Teleport());
                 animEffect.skillNum = 2;
+                break;
+            case 3:
+                StartCoroutine(AttackJump());
                 break;
             default:
                 break;
@@ -74,6 +77,14 @@ public class E_GroundedUK : Enemy
         anim.SetTrigger("DoTeleport");                
 
         yield return new WaitForSeconds(3f);
+
+        StartCoroutine(ActionPattern());
+    }
+    IEnumerator AttackJump()
+    {
+        anim.SetTrigger("DoAttackJump");
+
+        yield return new WaitForSeconds(2f);
 
         StartCoroutine(ActionPattern());
     }

@@ -23,22 +23,24 @@ public class E_G_UK_AnimationEventEffect : MonoBehaviour
     public int skillNum;
 
     void InstantiateEffect(int EffectNumber)
-    {        
-       
-        Debug.Log(EffectNumber);
-        if (effect_slots[skillNum].Effects == null || effect_slots[skillNum].Effects.Length <= EffectNumber)
+    {
+        if (skillNum >= 0)
         {
-            Debug.LogError("Incorrect effect number or effect is null");
-        }
+            Debug.Log(EffectNumber);
+            if (effect_slots[skillNum].Effects == null || effect_slots[skillNum].Effects.Length <= EffectNumber)
+            {
+                Debug.LogError("Incorrect effect number or effect is null");
+            }
 
-        var instance = Instantiate(effect_slots[skillNum].Effects[EffectNumber].Effect, effect_slots[skillNum].Effects[EffectNumber].StartPositionRotation.position, effect_slots[skillNum].Effects[EffectNumber].StartPositionRotation.rotation);
+            var instance = Instantiate(effect_slots[skillNum].Effects[EffectNumber].Effect, effect_slots[skillNum].Effects[EffectNumber].StartPositionRotation.position, effect_slots[skillNum].Effects[EffectNumber].StartPositionRotation.rotation);
 
-        if (effect_slots[skillNum].Effects[EffectNumber].UseLocalPosition)
-        {
-            instance.transform.parent = effect_slots[skillNum].Effects[EffectNumber].StartPositionRotation.transform;
-            instance.transform.localPosition = Vector3.zero;
-            instance.transform.localRotation = new Quaternion();
-        }
-        Destroy(instance, effect_slots[skillNum].Effects[EffectNumber].DestroyAfter);
+            if (effect_slots[skillNum].Effects[EffectNumber].UseLocalPosition)
+            {
+                instance.transform.parent = effect_slots[skillNum].Effects[EffectNumber].StartPositionRotation.transform;
+                instance.transform.localPosition = Vector3.zero;
+                instance.transform.localRotation = new Quaternion();
+            }
+            Destroy(instance, effect_slots[skillNum].Effects[EffectNumber].DestroyAfter);
+        }        
     }
 }
