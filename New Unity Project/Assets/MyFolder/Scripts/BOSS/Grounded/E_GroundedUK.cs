@@ -9,7 +9,7 @@ public class E_GroundedUK : Enemy
     Coroutine patternCoroutine;
     E_G_UK_AnimationEventEffect animEffect;
 
-    bool isLook;
+    bool isLook = true;
 
 
     private void Awake()
@@ -38,13 +38,13 @@ public class E_GroundedUK : Enemy
 
     IEnumerator ActionPattern()
     {
-        isLook = true;
+        yield return new WaitForSeconds(0.5f);
+
         animEffect.skillNum = -1;
 
         // 테스트용
         int random = 3;
         
-
         // 실제로 랜덤 패턴 구현할 변수
         //int random = Random.Range(0, 5);
 
@@ -67,8 +67,7 @@ public class E_GroundedUK : Enemy
                 break;
             default:
                 break;
-        }
-        yield return new WaitForSeconds(0.1f);
+        }        
     }
     IEnumerator SlashCombo()
     {
@@ -99,6 +98,7 @@ public class E_GroundedUK : Enemy
     {
         while (true)
         {
+            yield return null;
             if (distanceToPlayer > 10.0f)
             {
                 anim.SetBool("isRun", true);
@@ -108,13 +108,14 @@ public class E_GroundedUK : Enemy
                 anim.SetBool("isRun", false);
                 break;
             }
-
-            yield return null;
-        }        
+        }
         anim.SetTrigger("DoAttackJump");
-        
 
+        
+        
         yield return new WaitForSeconds(2f);
+
+        
 
         
         StartCoroutine(ActionPattern());

@@ -63,9 +63,7 @@ public class CameraMovement : MonoBehaviour
     }
 
     private void LateUpdate()
-    {
-        this.transform.LookAt(bossTarget);
-
+    {        
         transform.position = Vector3.MoveTowards(transform.position, objectToFollow.position, followSpeed * Time.deltaTime);
 
         finalDir = transform.TransformPoint(dirNormalized * maxDistance);
@@ -83,7 +81,8 @@ public class CameraMovement : MonoBehaviour
 
         finalDistance = maxDistance;
         realCamera.localPosition = Vector3.Lerp(realCamera.localPosition, dirNormalized * finalDistance, Time.deltaTime * smoothness);
-                      
+
+        this.transform.LookAt(bossTarget);
     }
 
     /// <summary>
