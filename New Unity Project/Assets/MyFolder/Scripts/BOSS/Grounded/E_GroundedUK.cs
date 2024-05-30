@@ -22,9 +22,10 @@ public class E_GroundedUK : Enemy
     // Update is called once per frame
     void Update()
     {
+        Vector3 loopPostion = new Vector3(playerTrans.position.x, this.transform.position.y, playerTrans.position.z);
         if (isLook)
         {
-            this.transform.LookAt(playerTrans);
+            this.transform.LookAt(loopPostion);
         }
     }
 
@@ -34,7 +35,7 @@ public class E_GroundedUK : Enemy
         animEffect.skillNum = -1;
 
         // 테스트용
-        int random = 0;
+        int random = 1;
 
         // 실제로 랜덤 패턴 구현할 변수
         //int random = Random.Range(0, 5);

@@ -31,9 +31,6 @@ public class EffectCollision : MonoBehaviour
         int numInside = p_System.GetTriggerParticles(ParticleSystemTriggerEventType.Inside, collision_Obj);
 
         
-
-
-        
     }
     private void OnParticleCollision(GameObject other)
     {
