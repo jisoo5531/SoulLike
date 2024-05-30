@@ -26,7 +26,7 @@ public class E_GroundedUK : Enemy
     {
 
         distanceToPlayer = Vector3.Magnitude(playerTrans.position - this.transform.position);
-        Debug.Log("거리 : " + distanceToPlayer);
+        //Debug.Log("거리 : " + distanceToPlayer);
         
         
         Vector3 loopPostion = new Vector3(playerTrans.position.x, this.transform.position.y, playerTrans.position.z);
@@ -43,7 +43,7 @@ public class E_GroundedUK : Enemy
         animEffect.skillNum = -1;
 
         // 테스트용
-        int random = 3;
+        int random = 1;
         
         // 실제로 랜덤 패턴 구현할 변수
         //int random = Random.Range(0, 5);
