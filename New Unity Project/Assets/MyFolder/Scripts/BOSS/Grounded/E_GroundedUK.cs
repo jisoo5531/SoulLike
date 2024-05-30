@@ -35,7 +35,7 @@ public class E_GroundedUK : Enemy
         animEffect.skillNum = -1;
 
         // 테스트용
-        int random = 0;
+        int random = 1;
 
         // 실제로 랜덤 패턴 구현할 변수
         //int random = Random.Range(0, 5);

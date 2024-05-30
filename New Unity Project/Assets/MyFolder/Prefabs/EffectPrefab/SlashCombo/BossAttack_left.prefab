@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 2030925238256528559}
   - component: {fileID: 2224867680860842305}
   - component: {fileID: 2226312979505483665}
-  - component: {fileID: 4541205828756465708}
+  - component: {fileID: 8487884780544498630}
   m_Layer: 0
   m_Name: ColorRing
   m_TagString: Untagged
@@ -4036,7 +4036,7 @@ ParticleSystem:
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
@@ -5065,7 +5065,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &4541205828756465708
+--- !u!114 &8487884780544498630
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10007,7 +10007,6 @@ GameObject:
   - component: {fileID: 2031513843083398017}
   - component: {fileID: 2224865400985312519}
   - component: {fileID: 2226281154437313923}
-  - component: {fileID: 6410213464060631336}
   m_Layer: 0
   m_Name: BlackRing
   m_TagString: Untagged
@@ -14874,18 +14873,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &6410213464060631336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2028526386560453247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 705f8ff593f338742a85b9ef89bb437b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2028555273879894971
 GameObject:
   m_ObjectHideFlags: 0
