@@ -7,6 +7,8 @@ public class E_GroundedUK : Enemy
     Coroutine patternCoroutine;
     E_G_UK_AnimationEventEffect animEffect;
 
+    bool isLook;
+
 
     private void Awake()
     {
@@ -20,15 +22,19 @@ public class E_GroundedUK : Enemy
     // Update is called once per frame
     void Update()
     {
-        
+        if (isLook)
+        {
+            this.transform.LookAt(playerTrans);
+        }
     }
 
     IEnumerator ActionPattern()
     {
+        isLook = true;
         animEffect.skillNum = -1;
 
         // 테스트용
-        int random = 3;
+        int random = 0;
 
         // 실제로 랜덤 패턴 구현할 변수
         //int random = Random.Range(0, 5);
@@ -84,8 +90,11 @@ public class E_GroundedUK : Enemy
     {
         anim.SetTrigger("DoAttackJump");
 
+        
+
         yield return new WaitForSeconds(2f);
 
+        
         StartCoroutine(ActionPattern());
     }
 }

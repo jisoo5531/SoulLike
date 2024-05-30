@@ -2010,7 +2010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8eaa90735d6eeb44b2cff601a899493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossTarget: {fileID: 1140123687}
+  Phase: 1
   objectToFollow: {fileID: 549829278}
   followSpeed: 10
   sensitivity: 500

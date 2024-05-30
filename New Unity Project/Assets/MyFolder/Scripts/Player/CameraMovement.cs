@@ -6,7 +6,11 @@ public class CameraMovement : MonoBehaviour
 {
     #region 전역 변수
 
-    public Transform bossTarget;
+    public enum Type { One, Two }
+    public Type Phase;
+
+    GameObject enemy;
+    Transform bossTarget;
 
     public Transform objectToFollow;
     public float followSpeed = 10.0f;
@@ -28,11 +32,27 @@ public class CameraMovement : MonoBehaviour
 
     #endregion
 
-
+    private void Awake()
+    {
+       
+        
+        
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        if (Phase == Type.One)
+        {
+            enemy = GameObject.Find("Enemy_Red");
+            bossTarget = enemy.transform;
+        }
+        else if (Phase == Type.Two)
+        {
+            enemy = GameObject.Find("Realistic Undead Knight Grounded");
+            bossTarget = enemy.transform;
+        }
+
         rotX = transform.localRotation.eulerAngles.x;
         rotY = transform.localRotation.eulerAngles.y;
 
@@ -44,6 +64,8 @@ public class CameraMovement : MonoBehaviour
 
     private void LateUpdate()
     {
+        this.transform.LookAt(bossTarget);
+
         transform.position = Vector3.MoveTowards(transform.position, objectToFollow.position, followSpeed * Time.deltaTime);
 
         finalDir = transform.TransformPoint(dirNormalized * maxDistance);
@@ -61,9 +83,7 @@ public class CameraMovement : MonoBehaviour
 
         finalDistance = maxDistance;
         realCamera.localPosition = Vector3.Lerp(realCamera.localPosition, dirNormalized * finalDistance, Time.deltaTime * smoothness);
-
-        
-        this.transform.LookAt(bossTarget);        
+                      
     }
 
     /// <summary>
