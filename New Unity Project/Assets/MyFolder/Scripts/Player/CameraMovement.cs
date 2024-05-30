@@ -24,7 +24,7 @@ public class CameraMovement : MonoBehaviour
     public float finalDistance;
     public float smoothness = 10.0f;
 
-    public bool isFixedTarget = false;
+    public bool isFixedTarget = true;
 
     #endregion
 
@@ -39,8 +39,9 @@ public class CameraMovement : MonoBehaviour
         dirNormalized = realCamera.localPosition.normalized;
         finalDistance = realCamera.localPosition.magnitude;
 
-        StartCoroutine(MouseMove());
+        //StartCoroutine(MouseMove());
     }
+
     private void LateUpdate()
     {
         transform.position = Vector3.MoveTowards(transform.position, objectToFollow.position, followSpeed * Time.deltaTime);
@@ -61,16 +62,14 @@ public class CameraMovement : MonoBehaviour
         finalDistance = maxDistance;
         realCamera.localPosition = Vector3.Lerp(realCamera.localPosition, dirNormalized * finalDistance, Time.deltaTime * smoothness);
 
-        if (Input.GetKeyDown("t"))
-        {
-            isFixedTarget = !isFixedTarget;
-            
-        }
-        if (isFixedTarget)
-        {
-            this.transform.LookAt(bossTarget);
-        }
+        
+        this.transform.LookAt(bossTarget);        
     }
+
+    /// <summary>
+    /// 마우스 이동에 따른 카메라 회전
+    /// </summary>
+    /// <returns></returns>
     IEnumerator MouseMove()
     {
         yield return new WaitForSeconds(1f);
