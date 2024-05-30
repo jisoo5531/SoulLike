@@ -99,7 +99,7 @@ public class E_GroundedUK : Enemy
         while (true)
         {
             yield return null;
-            if (distanceToPlayer > 10.0f)
+            if (distanceToPlayer > 13.0f)
             {
                 anim.SetBool("isRun", true);
             }
@@ -110,12 +110,9 @@ public class E_GroundedUK : Enemy
             }
         }
         anim.SetTrigger("DoAttackJump");
-
         
         
-        yield return new WaitForSeconds(2f);
-
-        
+        yield return new WaitForSeconds(2f);        
 
         
         StartCoroutine(ActionPattern());
