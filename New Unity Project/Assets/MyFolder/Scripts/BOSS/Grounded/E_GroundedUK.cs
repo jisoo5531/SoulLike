@@ -28,10 +28,13 @@ public class E_GroundedUK : Enemy
         //Debug.Log("°Å¸® : " + distanceToPlayer);
         
         
-        Vector3 loopPostion = new Vector3(playerTrans.position.x, this.transform.position.y, playerTrans.position.z);
+        Vector3 lookPostion = new Vector3(playerTrans.position.x, this.transform.position.y, playerTrans.position.z);
         if (isLook)
         {
-            this.transform.LookAt(loopPostion);
+            
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(lookPostion), 10.0f * Time.deltaTime);
+            
+            //this.transform.LookAt(lookPostion);
         }
     }
 
