@@ -11,7 +11,6 @@ public class E_GroundedUK : Enemy
 
     bool isLook = true;
 
-
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -43,18 +42,24 @@ public class E_GroundedUK : Enemy
         animEffect.skillNum = -1;
 
         // 테스트용
+        
+
 
         // 실제로 랜덤 패턴 구현할 변수
         int random = Random.Range(0, 3);
 
+
+        // 실제 패턴 구현
         if (distanceToPlayer < 13.0f)
         {
             switch (random)
             {
                 case 0:
-                case 1:
                     StartCoroutine(SlashCombo());
                     animEffect.skillNum = 0;
+                    break;
+                case 1:
+                    StartCoroutine(AttackRunJump());                    
                     break;
                 case 2:
                     StartCoroutine(Firebird());
@@ -65,23 +70,19 @@ public class E_GroundedUK : Enemy
             }
         }
         else
-        {
-            switch (random)
-            {
-                case 0:
-                case 1:
-                    StartCoroutine(AttackRunJump());
-                    break;
-                case 2:
-                    StartCoroutine(Teleport());
-                    animEffect.skillNum = 2;
-                    break;
-                default:
-                    break;
-            }
+        {            
+            StartCoroutine(Teleport());
+            animEffect.skillNum = 2;
         }
-               
+
     }
+    IEnumerator BackJump()
+    {
+        anim.SetTrigger("DoBackJump");
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(ActionPattern());
+    }
+
     IEnumerator SlashCombo()
     {
         anim.SetTrigger("DoSlashCombo");
@@ -93,9 +94,13 @@ public class E_GroundedUK : Enemy
     }
     IEnumerator Firebird()
     {
+        anim.SetTrigger("DoBackJump");
+
+        yield return new WaitForSeconds(0.5f);
+
         anim.SetTrigger("DoFireBird");        
 
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(3.5f);
 
         StartCoroutine(ActionPattern());
     }
@@ -109,19 +114,13 @@ public class E_GroundedUK : Enemy
     }
     IEnumerator AttackRunJump()
     {
-        while (true)
+        if (distanceToPlayer < 10f)
         {
-            yield return null;
-            if (distanceToPlayer > 13.0f)
-            {
-                anim.SetBool("isRun", true);
-            }
-            else
-            {
-                anim.SetBool("isRun", false);
-                break;
-            }
-        }
+            anim.SetTrigger("DoBackJump");
+
+            yield return new WaitForSeconds(0.5f);
+        }        
+
         anim.SetTrigger("DoAttackJump");
         
         
