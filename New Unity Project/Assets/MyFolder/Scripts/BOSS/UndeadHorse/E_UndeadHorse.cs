@@ -27,8 +27,7 @@ public class E_UndeadHorse : Enemy
 
     #endregion
 
-    
-
+   
     private void Awake()
     {
         HP = 200;
@@ -40,7 +39,6 @@ public class E_UndeadHorse : Enemy
         
         StartCoroutine(HorseActionPattern());
     }
-
 
     void Update()
     {
@@ -61,9 +59,7 @@ public class E_UndeadHorse : Enemy
         {
             moveCoroutine = StartCoroutine(MoveCoroutine());
         }
-    }
-
-    
+    }    
 
     #region 이동, 회전 코루틴
 
