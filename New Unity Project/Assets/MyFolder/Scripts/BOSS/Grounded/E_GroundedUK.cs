@@ -48,34 +48,43 @@ public class E_GroundedUK : Enemy
         // 실제로 랜덤 패턴 구현할 변수
         int random = Random.Range(0, 3);
 
+        StartCoroutine(SlashCombo());
+        animEffect.skillNum = 0;
 
-        // 실제 패턴 구현
-        if (distanceToPlayer < 13.0f)
-        {
-            switch (random)
-            {
-                case 0:
-                    StartCoroutine(SlashCombo());
-                    animEffect.skillNum = 0;
-                    break;
-                case 1:
-                    StartCoroutine(AttackRunJump());                    
-                    break;
-                case 2:
-                    StartCoroutine(Firebird());
-                    animEffect.skillNum = 1;
-                    break;
-                default:
-                    break;
-            }
-        }
-        else
-        {            
-            StartCoroutine(Teleport());
-            animEffect.skillNum = 2;
-        }
+        //// 실제 패턴 구현
+        //if (distanceToPlayer < 13.0f)
+        //{
+        //    switch (random)
+        //    {
+        //        case 0:
+        //            StartCoroutine(SlashCombo());
+        //            animEffect.skillNum = 0;
+        //            break;
+        //        case 1:
+        //            StartCoroutine(AttackRunJump());                    
+        //            break;
+        //        case 2:
+        //            StartCoroutine(Firebird());
+        //            animEffect.skillNum = 1;
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //}
+        //else
+        //{            
+        //    StartCoroutine(Teleport());
+        //    animEffect.skillNum = 2;
+        //}
 
     }
+    void Slash()
+    {
+        anim.SetTrigger("DoSlash1");
+
+        StartCoroutine(ActionPattern());
+    }
+
     IEnumerator BackJump()
     {
         anim.SetTrigger("DoBackJump");
