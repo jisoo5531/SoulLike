@@ -48,8 +48,8 @@ public class E_GroundedUK : Enemy
         // 실제로 랜덤 패턴 구현할 변수
         int random = Random.Range(0, 3);
 
-        StartCoroutine(SlashCombo());
-        animEffect.skillNum = 0;
+        StartCoroutine(AttackJump());
+        //animEffect.skillNum = 2;
 
         //// 실제 패턴 구현
         //if (distanceToPlayer < 13.0f)
@@ -61,7 +61,7 @@ public class E_GroundedUK : Enemy
         //            animEffect.skillNum = 0;
         //            break;
         //        case 1:
-        //            StartCoroutine(AttackRunJump());                    
+        //            StartCoroutine(AttackJump());                    
         //            break;
         //        case 2:
         //            StartCoroutine(Firebird());
@@ -97,42 +97,46 @@ public class E_GroundedUK : Enemy
         anim.SetTrigger("DoSlashCombo");
         weapon.Use();
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(4f);
 
         StartCoroutine(ActionPattern());
     }
     IEnumerator Firebird()
     {
-        anim.SetTrigger("DoBackJump");
 
-        yield return new WaitForSeconds(0.5f);
+        anim.SetTrigger("DoBackJumpFireBird");
 
-        anim.SetTrigger("DoFireBird");        
 
-        yield return new WaitForSeconds(3.5f);
+
+
+        yield return new WaitForSeconds(4f);
 
         StartCoroutine(ActionPattern());
     }
     IEnumerator Teleport()
-    {        
+    {
+        yield return new WaitForSeconds(1f);
+
         anim.SetTrigger("DoTeleport");                
 
         yield return new WaitForSeconds(3f);
 
         StartCoroutine(ActionPattern());
     }
-    IEnumerator AttackRunJump()
+    IEnumerator AttackJump()
     {
-        if (distanceToPlayer < 10f)
+        if (distanceToPlayer > 10f && distanceToPlayer < 15f)
         {
-            anim.SetTrigger("DoBackJump");
+            anim.SetTrigger("DoAttackJump");
+        }
+        else if (distanceToPlayer <= 10f)
+        {
+            anim.SetTrigger("DoBackAndJumpAttack");            
+        }
 
-            yield return new WaitForSeconds(0.5f);
-        }        
 
-        anim.SetTrigger("DoAttackJump");
         
-        
+
         yield return new WaitForSeconds(2f);        
 
         
