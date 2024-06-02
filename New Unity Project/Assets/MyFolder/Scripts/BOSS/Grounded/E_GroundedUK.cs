@@ -32,9 +32,9 @@ public class E_GroundedUK : Enemy
         if (isLook)
         {
             
-            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(lookPostion), 10.0f * Time.deltaTime);
-            
-            //this.transform.LookAt(lookPostion);
+            //this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(lookPostion), 10.0f * Time.deltaTime);
+
+            this.transform.LookAt(lookPostion);
         }
     }
 
@@ -51,8 +51,11 @@ public class E_GroundedUK : Enemy
         // 실제로 랜덤 패턴 구현할 변수
         int random = Random.Range(0, 3);
 
-        StartCoroutine(AttackJump());
-        //animEffect.skillNum = 2;
+        //StartCoroutine(SlashCombo());
+        //animEffect.skillNum = 0;
+
+        StartCoroutine(Slash2());
+        animEffect.skillNum = 0;
 
         //// 실제 패턴 구현
         //if (distanceToPlayer < 13.0f)
@@ -81,9 +84,25 @@ public class E_GroundedUK : Enemy
         //}
 
     }
-    void Slash()
+    IEnumerator Slash()
     {
         anim.SetTrigger("DoSlash1");
+
+        yield return new WaitForSeconds(0.5f);
+        SoundManager.instance.PlaySoundEffect("Slash");
+        yield return new WaitForSeconds(2f);
+        SoundManager.instance.StopSoundEffect("Slash");
+
+        StartCoroutine(ActionPattern());
+    }
+    IEnumerator Slash2()
+    {
+        anim.SetTrigger("DoSlash2");
+
+        yield return new WaitForSeconds(0.2f);
+        SoundManager.instance.PlaySoundEffect("Slash");
+        yield return new WaitForSeconds(2f);
+        SoundManager.instance.StopSoundEffect("Slash");
 
         StartCoroutine(ActionPattern());
     }
@@ -99,6 +118,31 @@ public class E_GroundedUK : Enemy
     {
         anim.SetTrigger("DoSlashCombo");
         weapon.Use();
+
+        yield return new WaitForSeconds(0.18f);
+        SoundManager.instance.PlaySoundEffect("Slash");
+        yield return new WaitForSeconds(0.5f);
+        SoundManager.instance.StopSoundEffect("Slash");
+        yield return new WaitForSeconds(0.15f);
+
+        SoundManager.instance.PlaySoundEffect("Slash");
+        yield return new WaitForSeconds(0.5f);
+        SoundManager.instance.StopSoundEffect("Slash");
+        yield return new WaitForSeconds(0.1f);
+
+        SoundManager.instance.PlaySoundEffect("Slash");
+        yield return new WaitForSeconds(0.3f);
+        SoundManager.instance.StopSoundEffect("Slash");
+        yield return new WaitForSeconds(0.03f);
+
+        SoundManager.instance.PlaySoundEffect("Slash");
+        yield return new WaitForSeconds(0.3f);
+        SoundManager.instance.StopSoundEffect("Slash");
+        yield return new WaitForSeconds(0.1f);
+
+        SoundManager.instance.PlaySoundEffect("Slash");
+        yield return new WaitForSeconds(0.5f);
+        SoundManager.instance.StopSoundEffect("Slash");
 
         yield return new WaitForSeconds(4f);
 
