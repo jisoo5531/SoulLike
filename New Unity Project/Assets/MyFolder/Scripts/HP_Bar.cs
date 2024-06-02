@@ -5,10 +5,13 @@ using UnityEngine.UI;
 
 public class HP_Bar : MonoBehaviour
 {
+    public enum Phase { One, Two }
+    public Phase phase;
+
     public enum Type { Player, Enemy }
     public Type Unit;
-    public enum Phase { One, Two }
-    public Phase which_Phase;
+
+    Setting gameSet;
 
     Player player;
     Enemy enemy;
@@ -17,11 +20,14 @@ public class HP_Bar : MonoBehaviour
     private void Awake()
     {
         player = FindObjectOfType<Player>();
-        if (which_Phase == Phase.One)
+        gameSet = FindObjectOfType<Setting>();
+
+
+        if (phase == Phase.One)
         {
             enemy = FindObjectOfType<E_UndeadHorse>();
         }
-        else if (which_Phase == Phase.Two)
+        else if (phase == Phase.Two)
         {
             enemy = FindObjectOfType<E_GroundedUK>();
         }

@@ -269,8 +269,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1af3ab850dd79934c96359bf03fcc92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  phase: 1
   Unit: 1
-  which_Phase: 1
 --- !u!114 &441545705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -575,8 +575,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1af3ab850dd79934c96359bf03fcc92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  phase: 0
   Unit: 0
-  which_Phase: 1
 --- !u!114 &607704958
 MonoBehaviour:
   m_ObjectHideFlags: 0
