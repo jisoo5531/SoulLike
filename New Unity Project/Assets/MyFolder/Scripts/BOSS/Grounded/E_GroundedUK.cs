@@ -13,6 +13,7 @@ public class E_GroundedUK : Enemy
 
     private void Awake()
     {
+        playerTrans = FindObjectOfType<Player>().transform;
         anim = GetComponent<Animator>();
         weapon = GetComponentInChildren<EnemyWeapon>();
         animEffect = GetComponent<E_G_UK_AnimationEventEffect>();
