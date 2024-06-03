@@ -30,6 +30,8 @@ public class E_UndeadHorse : Enemy
    
     private void Awake()
     {
+        isLook = false;
+
         HP = 200;
         MaxHP = 200;
 
@@ -37,17 +39,26 @@ public class E_UndeadHorse : Enemy
         horseColider = GetComponent<BoxCollider>();
         player = FindObjectOfType<Player>();
         
-        StartCoroutine(HorseActionPattern());
+        //StartCoroutine(HorseActionPattern());
     }
 
     void Update()
     {
         distancePlayer = Vector3.Magnitude(playerTrans.position - this.transform.position);
-        
+
+
+        // 수정 필요
+        if (Input.GetKeyDown("b"))
+        {
+            isLook = !isLook;
+        }
 
         if (isLook)
         {
-            this.transform.LookAt(playerTrans);
+            Vector3 dir = (playerTrans.position - this.transform.position).normalized;
+            Quaternion toRotation = Quaternion.LookRotation(dir);
+            this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, toRotation, 50.0f * Time.deltaTime);
+            //this.transform.LookAt(playerTrans);
         }
 
         // 보스 회전 테스트

@@ -2,6 +2,68 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[System.Serializable]
+/// <summary>
+/// 스킬 정보를 담고 있는 클래스
+/// 쿨타임, 우선순위를 고려해 다음 실행할 스킬 결정
+/// </summary>
+public class Skill
+{
+    // 우선 순위, 쿨타임
+    private string name { get; }
+    private float coolTime { get; }
+    private float currentCoolTime { get; set; }
+    private int priority { get; }
+
+    public Skill(string _name, float _coolTime, int _priority)
+    {
+        this.name = _name;
+        this.coolTime = _coolTime;
+        this.currentCoolTime = _coolTime;
+        this.priority = _priority;
+    }
+
+    public string SkillName { get { return name; } }
+    public float SkillCoolTime { get { return coolTime; } }
+    public int SkillPriority { get { return priority; } }
+    public float SkillCurrentCoolTime
+    {
+        get
+        {
+            return currentCoolTime;
+        }
+        set
+        {
+            if (value <= 0)
+            {
+                Debug.LogFormat("{0} 스킬 준비 완료", name);
+            }
+            else
+            {
+                currentCoolTime = value;
+            }
+        }
+    }
+
+    public void currentCoolTimeUpdate(float deltaTime)
+    {
+        if (currentCoolTime > 0)
+        {
+            currentCoolTime -= deltaTime;
+        }
+    }
+
+    public bool isReady()
+    {
+        if (this.currentCoolTime <= 0)
+        {
+            return true;
+        }
+        return false;
+    }
+}
+
 public class Enemy : MonoBehaviour
 {
     #region 전역 변수
@@ -47,7 +109,7 @@ public class Enemy : MonoBehaviour
     {
         FadeInOut fadeIO = FindObjectOfType<FadeInOut>();
         ChangeScene scene = FindObjectOfType<ChangeScene>();
-        
+
         if (HP <= 0)
         {
             fadeIO.StartFadeOut();

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class E_GroundedUK : Enemy
 {
+    List<Skill> skillList;
+
     float distanceToPlayer;
 
     Coroutine patternCoroutine;
@@ -13,17 +15,61 @@ public class E_GroundedUK : Enemy
 
     private void Awake()
     {
+        #region Skill List
+
+        skillList = new List<Skill>
+        {
+            new Skill("Basic Slash", 2f, 1),
+            new Skill("Slash Combo", 5f, 2),
+            new Skill("Fire Bird", 8f, 3),
+            new Skill("Teleport", 14f, 4)
+        };
+
+        #endregion
+
         playerTrans = FindObjectOfType<Player>().transform;
         anim = GetComponent<Animator>();
         weapon = GetComponentInChildren<EnemyWeapon>();
         animEffect = GetComponent<E_G_UK_AnimationEventEffect>();
 
-        patternCoroutine = StartCoroutine(ActionPattern());
+        //patternCoroutine = StartCoroutine(ActionPattern());
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {        
+        #region Skill List Update
+
+        foreach (Skill currentSkill in skillList)
+        {
+            if (currentSkill.SkillCurrentCoolTime > 0)
+            {
+                currentSkill.currentCoolTimeUpdate(Time.deltaTime);
+            }
+            
+        }
+
+        Skill nextSkill = null;
+        int priortiy = int.MaxValue;
+        foreach (Skill skill in skillList)
+        {
+            Debug.Log(skill.isReady());
+            if (skill.isReady() && skill.SkillPriority < priortiy)
+            {
+                priortiy = skill.SkillPriority;
+                nextSkill = skill;
+                
+            }
+        }
+
+        if (nextSkill != null)
+        {
+            Debug.Log("스킬 쓴다");
+            ExcuteSkill(nextSkill);            
+        }        
+
+        #endregion
+
 
         distanceToPlayer = Vector3.Magnitude(playerTrans.localPosition - this.transform.localPosition);
         //Debug.Log("거리 : " + distanceToPlayer);
@@ -36,6 +82,15 @@ public class E_GroundedUK : Enemy
             //this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(lookPostion), 10.0f * Time.deltaTime);
 
             this.transform.LookAt(lookPostion);
+        }
+    }
+
+    void ExcuteSkill(Skill skill)
+    {
+        if (skill.SkillName == "Basic Slash")
+        {
+            Debug.Log("현재 스킬 : " + skill.SkillName);
+            StartCoroutine(Slash());
         }
     }
 
@@ -94,7 +149,7 @@ public class E_GroundedUK : Enemy
         yield return new WaitForSeconds(2f);
         SoundManager.instance.StopSoundEffect("Slash");
 
-        StartCoroutine(ActionPattern());
+        //StartCoroutine(ActionPattern());
     }
     IEnumerator Slash2()
     {
@@ -105,7 +160,7 @@ public class E_GroundedUK : Enemy
         yield return new WaitForSeconds(2f);
         SoundManager.instance.StopSoundEffect("Slash");
 
-        StartCoroutine(ActionPattern());
+        //StartCoroutine(ActionPattern());
     }
 
     IEnumerator BackJump()
@@ -157,9 +212,9 @@ public class E_GroundedUK : Enemy
 
 
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(0.1f);
 
-        StartCoroutine(ActionPattern());
+        //StartCoroutine(ActionPattern());
     }
     IEnumerator Teleport()
     {
