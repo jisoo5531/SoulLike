@@ -6,11 +6,14 @@ public class E_GroundedUK : Enemy
 {
     List<Skill> skillList;
 
-    float distanceToPlayer;
-
-    Coroutine patternCoroutine;
     E_G_UK_AnimationEventEffect animEffect;
+    Coroutine patternCoroutine;
+    Coroutine B_SlashCoroutine;
+    Coroutine ComboSlashCoroutine;
+    Coroutine FireBirdCoroutine;
+    Coroutine TeleportCoroutine;
 
+    float distanceToPlayer;
     bool isLook = true;
     bool isPlaying;
 
@@ -18,15 +21,14 @@ public class E_GroundedUK : Enemy
     {
         #region Skill List
 
-
         skillList = new List<Skill>
         {
-            new Skill("Basic Slash", 3f, 1),
-            new Skill("Slash Combo", 5f, 2),
-            new Skill("Fire Bird", 8f, 3),
-            new Skill("Teleport", 14f, 4)
+            new Skill("Basic Slash", 5f, 4),
+            new Skill("Slash Combo", 10f, 3),
+            new Skill("Fire Bird", 15f, 2),
+            new Skill("Teleport", 20f, 1)
         };
-
+        isPlaying = false;
 
         #endregion
 
@@ -42,44 +44,44 @@ public class E_GroundedUK : Enemy
     void Update()
     {
         #region Skill List Update        
-        
+
         foreach (Skill currentSkill in skillList)
         {
-            //Debug.LogFormat("{0} : {1}", currentSkill.SkillName, currentSkill.SkillCurrentCoolTime);
+            Debug.LogFormat("{0} : {1}", currentSkill.SkillName, currentSkill.SkillCurrentCoolTime);
             if (currentSkill.SkillCurrentCoolTime > 0)
             {
                 currentSkill.currentCoolTimeUpdate(Time.deltaTime);
-            }            
+            }
         }
 
         Skill nextSkill = null;
         int priortiy = int.MaxValue;
         foreach (Skill skill in skillList)
-        {            
+        {
             if (skill.isReady() && skill.SkillPriority < priortiy)
             {
                 priortiy = skill.SkillPriority;
-                nextSkill = skill;                
+                nextSkill = skill;
             }
         }
 
         if (nextSkill != null && !isPlaying)
         {
             ExcuteSkill(nextSkill);
-            nextSkill.SkillCurrentCoolTime = nextSkill.SkillCoolTime;
-        }        
+            //nextSkill.SkillCurrentCoolTime = nextSkill.SkillCoolTime;
+        }
 
         #endregion
 
 
         distanceToPlayer = Vector3.Magnitude(playerTrans.localPosition - this.transform.localPosition);
         //Debug.Log("거리 : " + distanceToPlayer);
-        
-        
+
+
         Vector3 lookPostion = new Vector3(playerTrans.position.x, this.transform.position.y, playerTrans.position.z);
         if (isLook)
         {
-            
+
             //this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(lookPostion), 10.0f * Time.deltaTime);
 
             this.transform.LookAt(lookPostion);
@@ -90,23 +92,24 @@ public class E_GroundedUK : Enemy
     {
         Debug.Log("현재 스킬 : " + skill.SkillName);
         if (skill.SkillName == "Basic Slash")
-        {            
-            StartCoroutine(Slash());
-            
+        {
+
+            B_SlashCoroutine = StartCoroutine(Slash(skill));
+
         }
         else if (skill.SkillName == "Slash Combo")
-        {            
-            StartCoroutine(SlashCombo());
-           
+        {
+            ComboSlashCoroutine = StartCoroutine(SlashCombo(skill));
+
         }
         else if (skill.SkillName == "Fire Bird")
-        {            
-            StartCoroutine(Firebird());
-            
+        {
+            FireBirdCoroutine = StartCoroutine(Firebird(skill));
+
         }
         else if (skill.SkillName == "Teleport")
-        {            
-            StartCoroutine(Teleport());            
+        {
+            TeleportCoroutine = StartCoroutine(Teleport(skill));
         }
     }
 
@@ -117,7 +120,7 @@ public class E_GroundedUK : Enemy
         animEffect.skillNum = -1;
 
         // 테스트용
-        
+
 
 
         // 실제로 랜덤 패턴 구현할 변수
@@ -127,7 +130,7 @@ public class E_GroundedUK : Enemy
         //animEffect.skillNum = 0;
 
         //StartCoroutine(Teleport());
-        
+
 
         //// 실제 패턴 구현
         //if (distanceToPlayer < 13.0f)
@@ -156,10 +159,11 @@ public class E_GroundedUK : Enemy
         //}
 
     }
-    IEnumerator Slash()
+    IEnumerator Slash(Skill skill)
     {
+
         isPlaying = true;
-        
+
 
         animEffect.skillNum = 0;
         anim.SetTrigger("DoSlash1");
@@ -174,12 +178,13 @@ public class E_GroundedUK : Enemy
         yield return new WaitForSeconds(1f);
 
         isPlaying = false;
+        skill.SkillCurrentCoolTime = skill.SkillCoolTime;
 
         //StartCoroutine(ActionPattern());
     }
     IEnumerator Slash2()
-    {        
-        
+    {
+
         anim.SetTrigger("DoSlash2");
 
         #region Sound
@@ -189,19 +194,19 @@ public class E_GroundedUK : Enemy
         SoundManager.instance.StopSoundEffect("Slash");
         #endregion
 
-        
+
 
         //StartCoroutine(ActionPattern());
     }
 
     IEnumerator BackJump()
-    {        
+    {
         anim.SetTrigger("DoBackJump");
         yield return new WaitForSeconds(0.5f);
         StartCoroutine(ActionPattern());
     }
 
-    IEnumerator SlashCombo()
+    IEnumerator SlashCombo(Skill skill)
     {
         isPlaying = true;
 
@@ -240,11 +245,12 @@ public class E_GroundedUK : Enemy
 
 
         isPlaying = false;
+        skill.SkillCurrentCoolTime = skill.SkillCoolTime;
         //StartCoroutine(ActionPattern());
     }
-    IEnumerator Firebird()
+    IEnumerator Firebird(Skill skill)
     {
-        isPlaying = true;     
+        isPlaying = true;
         animEffect.skillNum = 1;
         Debug.Log("firebird");
         anim.SetTrigger("DoBackJumpFireBird");
@@ -254,23 +260,24 @@ public class E_GroundedUK : Enemy
         yield return new WaitForSeconds(4f);
 
         isPlaying = false;
-        
+        skill.SkillCurrentCoolTime = skill.SkillCoolTime;
 
         //StartCoroutine(ActionPattern());
     }
-    IEnumerator Teleport()
+    IEnumerator Teleport(Skill skill)
     {
         isPlaying = true;
-        
+
 
         animEffect.skillNum = 2;
-        Debug.Log("teleport");        
+        Debug.Log("teleport");
 
         anim.SetTrigger("DoTeleport");
 
         yield return new WaitForSeconds(4f);
 
         isPlaying = false;
+        skill.SkillCurrentCoolTime = skill.SkillCoolTime;
         //StartCoroutine(ActionPattern());
     }
     IEnumerator AttackJump()
@@ -281,15 +288,15 @@ public class E_GroundedUK : Enemy
         }
         else if (distanceToPlayer <= 10f)
         {
-            anim.SetTrigger("DoBackAndJumpAttack");            
+            anim.SetTrigger("DoBackAndJumpAttack");
         }
 
 
-        
 
-        yield return new WaitForSeconds(2f);        
 
-        
+        yield return new WaitForSeconds(2f);
+
+
         StartCoroutine(ActionPattern());
     }
 }
