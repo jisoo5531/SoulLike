@@ -25,9 +25,9 @@ public class E_G_UK_AnimationEventEffect : MonoBehaviour
 
     void InstantiateEffect(int EffectNumber)
     {
+            Debug.Log(skillNum);
         if (skillNum >= 0)
         {
-            
             if (effect_slots[skillNum].Effects == null || effect_slots[skillNum].Effects.Length <= EffectNumber)
             {
                 Debug.LogError("Incorrect effect number or effect is null");

@@ -12,18 +12,21 @@ public class E_GroundedUK : Enemy
     E_G_UK_AnimationEventEffect animEffect;
 
     bool isLook = true;
+    bool isPlaying;
 
     private void Awake()
     {
         #region Skill List
 
+
         skillList = new List<Skill>
         {
-            new Skill("Basic Slash", 2f, 1),
+            new Skill("Basic Slash", 3f, 1),
             new Skill("Slash Combo", 5f, 2),
             new Skill("Fire Bird", 8f, 3),
             new Skill("Teleport", 14f, 4)
         };
+
 
         #endregion
 
@@ -37,35 +40,33 @@ public class E_GroundedUK : Enemy
 
     // Update is called once per frame
     void Update()
-    {        
-        #region Skill List Update
-
+    {
+        #region Skill List Update        
+        
         foreach (Skill currentSkill in skillList)
         {
+            //Debug.LogFormat("{0} : {1}", currentSkill.SkillName, currentSkill.SkillCurrentCoolTime);
             if (currentSkill.SkillCurrentCoolTime > 0)
             {
                 currentSkill.currentCoolTimeUpdate(Time.deltaTime);
-            }
-            
+            }            
         }
 
         Skill nextSkill = null;
         int priortiy = int.MaxValue;
         foreach (Skill skill in skillList)
-        {
-            Debug.Log(skill.isReady());
+        {            
             if (skill.isReady() && skill.SkillPriority < priortiy)
             {
                 priortiy = skill.SkillPriority;
-                nextSkill = skill;
-                
+                nextSkill = skill;                
             }
         }
 
-        if (nextSkill != null)
+        if (nextSkill != null && !isPlaying)
         {
-            Debug.Log("스킬 쓴다");
-            ExcuteSkill(nextSkill);            
+            ExcuteSkill(nextSkill);
+            nextSkill.SkillCurrentCoolTime = nextSkill.SkillCoolTime;
         }        
 
         #endregion
@@ -87,10 +88,25 @@ public class E_GroundedUK : Enemy
 
     void ExcuteSkill(Skill skill)
     {
+        Debug.Log("현재 스킬 : " + skill.SkillName);
         if (skill.SkillName == "Basic Slash")
-        {
-            Debug.Log("현재 스킬 : " + skill.SkillName);
+        {            
             StartCoroutine(Slash());
+            
+        }
+        else if (skill.SkillName == "Slash Combo")
+        {            
+            StartCoroutine(SlashCombo());
+           
+        }
+        else if (skill.SkillName == "Fire Bird")
+        {            
+            StartCoroutine(Firebird());
+            
+        }
+        else if (skill.SkillName == "Teleport")
+        {            
+            StartCoroutine(Teleport());            
         }
     }
 
@@ -110,8 +126,8 @@ public class E_GroundedUK : Enemy
         //StartCoroutine(SlashCombo());
         //animEffect.skillNum = 0;
 
-        StartCoroutine(Slash2());
-        animEffect.skillNum = 0;
+        //StartCoroutine(Teleport());
+        
 
         //// 실제 패턴 구현
         //if (distanceToPlayer < 13.0f)
@@ -142,29 +158,44 @@ public class E_GroundedUK : Enemy
     }
     IEnumerator Slash()
     {
+        isPlaying = true;
+        
+
+        animEffect.skillNum = 0;
         anim.SetTrigger("DoSlash1");
 
+        #region Sound
         yield return new WaitForSeconds(0.5f);
         SoundManager.instance.PlaySoundEffect("Slash");
         yield return new WaitForSeconds(2f);
         SoundManager.instance.StopSoundEffect("Slash");
+        #endregion
+
+        yield return new WaitForSeconds(1f);
+
+        isPlaying = false;
 
         //StartCoroutine(ActionPattern());
     }
     IEnumerator Slash2()
-    {
+    {        
+        
         anim.SetTrigger("DoSlash2");
 
+        #region Sound
         yield return new WaitForSeconds(0.2f);
         SoundManager.instance.PlaySoundEffect("Slash");
         yield return new WaitForSeconds(2f);
         SoundManager.instance.StopSoundEffect("Slash");
+        #endregion
+
+        
 
         //StartCoroutine(ActionPattern());
     }
 
     IEnumerator BackJump()
-    {
+    {        
         anim.SetTrigger("DoBackJump");
         yield return new WaitForSeconds(0.5f);
         StartCoroutine(ActionPattern());
@@ -172,9 +203,13 @@ public class E_GroundedUK : Enemy
 
     IEnumerator SlashCombo()
     {
+        isPlaying = true;
+
+        animEffect.skillNum = 0;
         anim.SetTrigger("DoSlashCombo");
         weapon.Use();
 
+        #region Sound
         yield return new WaitForSeconds(0.18f);
         SoundManager.instance.PlaySoundEffect("Slash");
         yield return new WaitForSeconds(0.5f);
@@ -199,32 +234,44 @@ public class E_GroundedUK : Enemy
         SoundManager.instance.PlaySoundEffect("Slash");
         yield return new WaitForSeconds(0.5f);
         SoundManager.instance.StopSoundEffect("Slash");
+        #endregion
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(3f);
 
-        StartCoroutine(ActionPattern());
+
+        isPlaying = false;
+        //StartCoroutine(ActionPattern());
     }
     IEnumerator Firebird()
     {
-
+        isPlaying = true;     
+        animEffect.skillNum = 1;
+        Debug.Log("firebird");
         anim.SetTrigger("DoBackJumpFireBird");
 
 
 
+        yield return new WaitForSeconds(4f);
 
-        yield return new WaitForSeconds(0.1f);
+        isPlaying = false;
+        
 
         //StartCoroutine(ActionPattern());
     }
     IEnumerator Teleport()
     {
-        yield return new WaitForSeconds(1f);
+        isPlaying = true;
+        
 
-        anim.SetTrigger("DoTeleport");                
+        animEffect.skillNum = 2;
+        Debug.Log("teleport");        
 
-        yield return new WaitForSeconds(3f);
+        anim.SetTrigger("DoTeleport");
 
-        StartCoroutine(ActionPattern());
+        yield return new WaitForSeconds(4f);
+
+        isPlaying = false;
+        //StartCoroutine(ActionPattern());
     }
     IEnumerator AttackJump()
     {

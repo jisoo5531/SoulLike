@@ -16,11 +16,11 @@ public class Skill
     private float currentCoolTime { get; set; }
     private int priority { get; }
 
-    public Skill(string _name, float _coolTime, int _priority)
+    public Skill(string _name, float _coolTime, int _priority, bool _isPlaying = false)
     {
         this.name = _name;
         this.coolTime = _coolTime;
-        this.currentCoolTime = _coolTime;
+        this.currentCoolTime = 0;
         this.priority = _priority;
     }
 
