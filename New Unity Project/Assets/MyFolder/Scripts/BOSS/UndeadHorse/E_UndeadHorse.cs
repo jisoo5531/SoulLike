@@ -39,7 +39,8 @@ public class E_UndeadHorse : Enemy
         horseColider = GetComponent<BoxCollider>();
         player = FindObjectOfType<Player>();
 
-        //StartCoroutine(HorseActionPattern());
+        StartCoroutine(HorseActionPattern());
+
     }
 
     void Update()
@@ -124,24 +125,27 @@ public class E_UndeadHorse : Enemy
     IEnumerator HorseActionPattern()
     {        
         
-        isLook = true;
+        //isLook = true;
 
-        while (true)
-        {
-            yield return new WaitForSeconds(2f);            
+        //while (true)
+        //{
+        //    yield return new WaitForSeconds(2f);            
 
-            if (distancePlayer <= 10)
-            {
-                StartCoroutine(AttackFrontLeg());
+        //    if (distancePlayer <= 10)
+        //    {
+        //        StartCoroutine(AttackFrontLeg());
 
-            }
-            else if (distancePlayer > 25 && distancePlayer < 31)
-            {
-                StartCoroutine(AttackSprintJump());
-            }
+        //    }
+        //    else if (distancePlayer > 25 && distancePlayer < 31)
+        //    {
+        //        StartCoroutine(AttackSprintJump());
+        //    }
 
-            yield return null;
-        }    
+        //    yield return null;
+        //}
+        yield return new WaitForSeconds(0.1f);
+        
+        StartCoroutine(AttackSprintJump());
     }
 
     IEnumerator AttackFrontLeg()
@@ -182,6 +186,6 @@ public class E_UndeadHorse : Enemy
         
         isLook = true;
 
-        //StartCoroutine(HorseActionPattern());
+        StartCoroutine(HorseActionPattern());
     }
 }
