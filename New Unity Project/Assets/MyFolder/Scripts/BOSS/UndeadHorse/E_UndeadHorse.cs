@@ -38,7 +38,7 @@ public class E_UndeadHorse : Enemy
         anim = GetComponent<Animator>();
         horseColider = GetComponent<BoxCollider>();
         player = FindObjectOfType<Player>();
-        
+
         //StartCoroutine(HorseActionPattern());
     }
 
@@ -46,44 +46,53 @@ public class E_UndeadHorse : Enemy
     {
         distancePlayer = Vector3.Magnitude(playerTrans.position - this.transform.position);
 
-
+        
         // 수정 필요
-        if (Input.GetKeyDown("b"))
+        if (Input.GetKeyDown(KeyCode.B))
         {
-            isLook = !isLook;
+            Debug.Log("B 눌렀다.");
+            isLook = true;
+        }
+            
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            Debug.Log("V 눌렀다.");
+            isLook = false;
         }
 
         if (isLook)
         {
+            CrossDot();
             Vector3 dir = (playerTrans.position - this.transform.position).normalized;
             Quaternion toRotation = Quaternion.LookRotation(dir);
-            this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, toRotation, 50.0f * Time.deltaTime);
-            //this.transform.LookAt(playerTrans);
-        }
-
-        // 보스 회전 테스트
-        if (Input.GetKeyDown("1"))
-        {
-            turnCoroutine = StartCoroutine(TurnCoroutine());
-        }
-        if (Input.GetKeyDown("2"))
-        {
-            moveCoroutine = StartCoroutine(MoveCoroutine());
+            this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, toRotation, 50.0f * Time.deltaTime);            
         }
     }    
-
-    #region 이동, 회전 코루틴
-
-    IEnumerator TurnTest()
+    /// <summary>
+    /// 외적을 구해 플레이어가 어느 방향에 있는지 구하기
+    /// </summary>
+    void CrossDot()
     {
-        isLook = true;
-        while (true)
+        Vector3 forward = this.transform.forward;
+        Vector3 dir = (playerTrans.position - this.transform.position).normalized;
+
+        Vector3 cross = Vector3.Cross(forward, dir);
+
+        if (cross.y < 0)
         {
-            yield return null;
-
-            this.transform.LookAt(playerTrans);
-
-            yield return new WaitForSeconds(0.1f);
+            anim.SetBool("TurnRight", false);
+            anim.SetBool("TurnLeft", true);
+        }
+        else
+        {
+            anim.SetBool("TurnLeft", false);
+            anim.SetBool("TurnRight", true);
+        }
+        if (cross.y > -0.1 && cross.y < 0.1)
+        {
+            isLook = false;
+            anim.SetBool("TurnLeft", false);
+            anim.SetBool("TurnRight", false);
         }
     }
 
@@ -111,70 +120,6 @@ public class E_UndeadHorse : Enemy
         }
         anim.SetFloat("MovePow", 0f);
     }
-
-    //IEnumerator MoveAnimation()
-    //{
-    //    while (true)
-    //    {
-    //        yield return null;
-
-    //        movePow = Mathf.Lerp(movePow, 0f, Time.deltaTime);
-    //        anim.SetFloat("MovePow", movePow);
-    //    }
-    //}
-
-    /// <summary>
-    /// 캐릭터 방향에 따라 보스 회전
-    /// **** 수정 ****
-    /// 오른쪽 왼쪽 회전 원래대로 import
-    /// </summary>
-    /// <returns></returns>
-    IEnumerator TurnCoroutine()
-    {
-        Vector3 ToTargetVec = playerTrans.position - transform.position;
-        ToTargetVec = transform.InverseTransformDirection(ToTargetVec);
-        ToTargetVec.Normalize();
-
-        Vector2 ToTargetV2 = new Vector2(ToTargetVec.x, ToTargetVec.y);
-
-        float angleToRot = Vector2.Angle(Vector2.up, ToTargetV2);
-        if (ToTargetV2.x < 0)
-        {
-            angleToRot *= -1;
-        }
-        anim.SetFloat("MoveRotation", angleToRot);
-
-        Vector3 changeRotation = new Vector3(playerTrans.position.x, transform.position.y, playerTrans.position.z);
-        transform.LookAt(changeRotation);
-
-        //while (true)
-        //{
-        //    yield return null;
-        //    Vector3 changeRotation = new Vector3(playerTrans.position.x, transform.position.y, playerTrans.position.z);
-        //    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(changeRotation), Time.deltaTime);
-
-        //    RaycastHit hit;
-        //    if (Physics.Raycast(transform.position, transform.forward, out hit))
-        //    {
-        //        if (hit.collider.tag == "Player")
-        //        {
-        //            break;
-        //        }
-        //    }
-        //}
-
-        //transform.LookAt(changeRotation);
-
-        yield return new WaitForSeconds(1f);
-
-
-
-        anim.SetFloat("MoveRotation", 0f);
-
-        yield return new WaitForSeconds(1f);
-    }
-
-    #endregion
 
     IEnumerator HorseActionPattern()
     {        
