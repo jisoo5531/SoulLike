@@ -10,7 +10,8 @@ public class E_GroundedUK : Enemy
     Coroutine currentSkillCoroutine;
 
     float distanceToPlayer;
-    bool isLook = true;
+    bool isRun;
+    bool isLook;
     bool isPlaying;
 
     private void Awake()
@@ -19,18 +20,20 @@ public class E_GroundedUK : Enemy
 
         skillList = new List<Skill>
         {
-            //new Skill("Basic Slash", 5f, 4),
-            //new Skill("Basic Slash_2", 5f, 5),
-            //new Skill("Slash Combo", 10f, 3),
-            //new Skill("Fire Bird", 15f, 2),
-            //new Skill("Teleport", 20f, 1)
+            //new Skill("Teleport", 35f, 1),
+            //new Skill("Slash Combo", 12f, 3),
+            //new Skill("JumpAttack", 13f, 2),
+            //new Skill("Fire Bird", 15f, 3),
+            //new Skill("Basic Slash", 3f, 3),
+            //new Skill("Basic Slash_2", 3f, 3),
 
-            //test
-            new Skill("Teleport", 5f, 1)
-            
+            //test            
+            new Skill("Basic Slash_2", 3f, 1)
         };
-        isPlaying = false;
 
+        isLook = true;
+        isRun = false;
+        isPlaying = false;
         #endregion
 
         playerTrans = FindObjectOfType<Player>().transform;
@@ -76,7 +79,7 @@ public class E_GroundedUK : Enemy
 
         #endregion
 
-        distanceToPlayer = Vector3.Magnitude(playerTrans.localPosition - this.transform.localPosition);
+        distanceToPlayer = Vector3.Magnitude(playerTrans.position - this.transform.position);
 
         Vector3 lookPosition = new Vector3(playerTrans.position.x, this.transform.position.y, playerTrans.position.z);
         if (isLook)
@@ -111,6 +114,9 @@ public class E_GroundedUK : Enemy
             case "Teleport":
                 currentSkillCoroutine = StartCoroutine(Teleport(skill));
                 break;
+            case "JumpAttack":
+                currentSkillCoroutine = StartCoroutine(AttackJump(skill));
+                break;
         }
     }
 
@@ -120,26 +126,14 @@ public class E_GroundedUK : Enemy
         skill.SkillCurrentCoolTime = skill.SkillCoolTime;
     }
 
+    /// <summary>
+    /// 참격 1번
+    /// </summary>
+    /// <param name="skill"></param>
+    /// <returns></returns>
     IEnumerator Slash(Skill skill)
     {
-        animEffect.skillNum = 0;
         anim.SetTrigger("DoSlash1");
-        weapon.Use();
-        #region Sound
-        yield return new WaitForSeconds(0.5f);
-        SoundManager.instance.PlaySoundEffect("Slash");
-        yield return new WaitForSeconds(2f);
-        SoundManager.instance.StopSoundEffect("Slash");
-        #endregion
-
-        yield return new WaitForSeconds(1f);
-
-        FinishSkillExecution(skill);
-    }
-
-    IEnumerator Slash2(Skill skill)
-    {
-        anim.SetTrigger("DoSlash2");
         animEffect.skillNum = 0;
         weapon.Use();
         #region Sound
@@ -153,6 +147,31 @@ public class E_GroundedUK : Enemy
 
         FinishSkillExecution(skill);
     }
+
+    /// <summary>
+    /// 참격 2번
+    /// </summary>
+    /// <param name="skill"></param>
+    /// <returns></returns>
+    IEnumerator Slash2(Skill skill)
+    {
+        animEffect.skillNum = 0;
+        anim.SetTrigger("DoSlash2");
+        weapon.Use();
+
+        #region Sound
+        yield return new WaitForSeconds(0.5f);
+        SoundManager.instance.PlaySoundEffect("Slash");
+        yield return new WaitForSeconds(2f);
+        SoundManager.instance.StopSoundEffect("Slash");
+        #endregion
+
+        yield return new WaitForSeconds(2f);
+
+        FinishSkillExecution(skill);
+    }
+
+    
 
     IEnumerator BackJump()
     {
@@ -222,19 +241,51 @@ public class E_GroundedUK : Enemy
         FinishSkillExecution(skill);
     }
 
-    IEnumerator AttackJump()
+    IEnumerator AttackJump(Skill skill)
     {
-        if (distanceToPlayer > 10f && distanceToPlayer < 15f)
+        Debug.Log(distanceToPlayer);
+
+        while (true)
         {
+            if (distanceToPlayer > 13f)
+            {
+                anim.SetBool("isRun", true);
+                isRun = true;
+            }
+            else
+            {
+                anim.SetBool("isRun", false);
+                isRun = false;
+                break;
+            }
+
+            yield return null;
+        }
+        
+        if (distanceToPlayer > 10f && distanceToPlayer < 13f)
+        {
+            if (isRun)
+            {
+                anim.SetBool("isRun", false);
+                isRun = false;
+            }
             anim.SetTrigger("DoAttackJump");
+
+            yield return new WaitForSeconds(1f);
+
+            weapon.Use();            
         }
         else if (distanceToPlayer <= 10f)
         {
             anim.SetTrigger("DoBackAndJumpAttack");
+
+            yield return new WaitForSeconds(3f);
+
+            weapon.Use();            
         }
 
-        yield return new WaitForSeconds(2f);
-
-        //StartCoroutine(ActionPattern());
+        yield return new WaitForSeconds(4f);
+        
+        FinishSkillExecution(skill);        
     }
 }

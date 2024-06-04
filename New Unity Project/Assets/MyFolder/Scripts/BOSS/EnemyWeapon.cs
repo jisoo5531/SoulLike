@@ -31,7 +31,7 @@ public class EnemyWeapon : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         meleeArea.enabled = true;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         meleeArea.enabled = false;
     }
     private void OnTriggerEnter(Collider other)
