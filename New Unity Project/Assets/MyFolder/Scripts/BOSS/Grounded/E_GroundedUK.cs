@@ -29,7 +29,8 @@ public class E_GroundedUK : Enemy
 
             //test            
             //new Skill("Basic Slash_2", 3f, 1)
-            new Skill("PowerUP", 3f, 1)
+            //new Skill("PowerUP", 3f, 1)
+            new Skill("Slash Combo", 6f, 1)
         };
 
         isLook = true;

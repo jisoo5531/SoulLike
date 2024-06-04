@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 
     public int MaxHP = 100;
     public float HP = 100;
+    public int potionHP = 50;
 
     [HideInInspector] public bool isSpace;
     [HideInInspector] public bool isAttacking;
@@ -233,6 +234,12 @@ public class Player : MonoBehaviour
             {                
                 anim.SetTrigger("DrinkPotion");
                 anim.SetLayerWeight(1, 1f);
+
+                HP += potionHP;
+                if (HP > MaxHP)
+                {
+                    HP = MaxHP;
+                }
 
                 yield return new WaitForSeconds(2f);
 
