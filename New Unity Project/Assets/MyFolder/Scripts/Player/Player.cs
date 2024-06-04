@@ -18,7 +18,6 @@ public class Player : MonoBehaviour
 
     public float moveSpeed;
 
-
     Coroutine moveCoroutine;
     Coroutine dodgeCoroutine;
     Coroutine attackCoroutine;
@@ -26,22 +25,19 @@ public class Player : MonoBehaviour
 
     #endregion 
 
-    #region 컴포넌트
 
-    ThirdPersonConroller playerConroller;
+    ThirdPersonConroller playerController;
     CapsuleCollider playercolider;
     Animator anim;
     
     PlayerWeapon equipWeapon;
-
-    #endregion
 
     
 
     private void Awake()
     {
         Debug.Log("Player Awake 실행");
-        playerConroller = GetComponent<ThirdPersonConroller>();
+        playerController = GetComponent<ThirdPersonConroller>();
         playercolider = GetComponent<CapsuleCollider>();
         anim = GetComponentInChildren<Animator>();
 
@@ -129,6 +125,13 @@ public class Player : MonoBehaviour
             default:
                 break;
         }
+    }    
+
+    public void PlayerDeath()
+    {
+        StopAllCoroutines();
+        playerController.StopAllCoroutines();
+        anim.SetTrigger("Death");
     }
 
     /// <summary>
@@ -212,13 +215,13 @@ public class Player : MonoBehaviour
 
                 // 이동 막기
                 StopMethod(0);
-                playerConroller.StopMethod(0);
+                playerController.StopMethod(0);
                 
                 yield return new WaitForSeconds(1.5f);  // 공격 대기시간
 
 
                 StartMethod(0);
-                playerConroller.StartMethod(0);
+                playerController.StartMethod(0);
             }
         }
     }
@@ -247,4 +250,5 @@ public class Player : MonoBehaviour
             }
         }
     }
+    
 }
