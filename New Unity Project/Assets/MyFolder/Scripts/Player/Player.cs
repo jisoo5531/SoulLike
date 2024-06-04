@@ -143,14 +143,36 @@ public class Player : MonoBehaviour
 
     public void PlayerDeath()
     {
+        //CharacterController c_Controller = GetComponent<CharacterController>();
+        //Rigidbody rigid = GetComponent<Rigidbody>();
+        
+        //StopAllCoroutines();
+        //playerMoveController.StopAllCoroutines();
+        //anim.SetTrigger("Death");
+
+        //c_Controller.center = new Vector3(0, 1.6f, 0);
+
         CharacterController c_Controller = GetComponent<CharacterController>();
         Rigidbody rigid = GetComponent<Rigidbody>();
-        
+
         StopAllCoroutines();
         playerMoveController.StopAllCoroutines();
         anim.SetTrigger("Death");
 
-        c_Controller.center = new Vector3(0, 1.6f, 0);                
+        // 비활성화하여 더 이상 움직이지 않도록 설정
+        if (c_Controller != null)
+        {
+            c_Controller.enabled = false;
+        }
+
+        // Rigidbody를 비활성화하여 물리 효과를 막음
+        if (rigid != null)
+        {
+            rigid.isKinematic = true;
+        }
+
+        // 필요에 따라 콜라이더를 조정
+        playercolider.enabled = false;
     }
 
     /// <summary>
@@ -311,8 +333,7 @@ public class Player : MonoBehaviour
 
             if (Input.GetKeyDown("q"))
             {
-                PlayerDeath();
-                break;
+                HP = 0f;
             }
             if (HP <= 0f)
             {
