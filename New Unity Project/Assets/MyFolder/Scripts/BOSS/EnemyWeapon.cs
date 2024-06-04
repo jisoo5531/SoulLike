@@ -6,11 +6,18 @@ public class EnemyWeapon : MonoBehaviour
 {
     public enum Type { Melee, Range };
     public Type type;
-    public float damage = 10;
+    public float sword_Damage;
     public float attackSpeed;
     public BoxCollider meleeArea;
-        
 
+    Player player;
+
+    private void Awake()
+    {
+        player = FindObjectOfType<Player>();
+
+        sword_Damage = 15;
+    }
     public void Use()
     {
         if (type == Type.Melee)
@@ -22,17 +29,20 @@ public class EnemyWeapon : MonoBehaviour
     IEnumerator Swing()
     {
         yield return new WaitForSeconds(0.1f);
-        meleeArea.enabled = true;                
+        meleeArea.enabled = true;
 
+        yield return new WaitForSeconds(1f);
+        meleeArea.enabled = false;
     }
     private void OnTriggerEnter(Collider other)
     {
-        Player player = GameObject.Find("Player").GetComponent<Player>();
+
         if (other.tag == "Player")
         {
             Debug.Log("플레이어 칼맞았다.");
+            Debug.Log("칼 데미지 : " + sword_Damage);
 
-            player.HP -= damage;
+            player.HP -= sword_Damage;
 
             meleeArea.enabled = false;
         }

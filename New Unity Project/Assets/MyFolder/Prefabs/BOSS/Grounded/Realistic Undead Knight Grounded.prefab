@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 213613431}
   m_LocalRotation: {x: -0.7119466, y: 0.6903707, z: 0.03402415, w: -0.123947054}
-  m_LocalPosition: {x: 0.005975342, y: 0.6304002, z: 0.90999985}
+  m_LocalPosition: {x: 0.4720009, y: 0.6304002, z: 0.90999985}
   m_LocalScale: {x: 0.40000007, y: 0.39999995, z: 0.39999992}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -92,7 +92,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 702601150}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.20557557, y: 0.39, z: 3.09}
+  m_LocalPosition: {x: 0.6716011, y: 0.39, z: 3.09}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -122,14 +122,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 772418140}
-  m_LocalRotation: {x: 0.103320174, y: 0.90623355, z: -0.09320241, w: 0.39922312}
-  m_LocalPosition: {x: -1.11, y: 0.8445812, z: 1.8023266}
+  m_LocalRotation: {x: 0.07211877, y: 0.9144625, z: -0.019901423, w: 0.39769468}
+  m_LocalPosition: {x: 0.329, y: 0.55, z: 1.161}
   m_LocalScale: {x: 0.4000001, y: 0.40000007, z: 0.40000004}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 321356840}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 14.562, y: 133.307, z: 6.695}
+  m_LocalEulerAnglesHint: {x: 5.38, y: 133.307, z: 6.695}
 --- !u!1 &1179287123
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +185,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1456469663}
   m_LocalRotation: {x: 0.34392834, y: -0.8281635, z: 0.07785879, w: 0.43565655}
-  m_LocalPosition: {x: -0.059225466, y: 0.6836001, z: 1.0372002}
+  m_LocalPosition: {x: 0.4068001, y: 0.6836001, z: 1.0372002}
   m_LocalScale: {x: 0.4, y: 0.39999998, z: 0.40000004}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -311,7 +311,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2042463967}
   m_LocalRotation: {x: -0.2433715, y: 0.95647943, z: -0.15896979, w: -0.025417984}
-  m_LocalPosition: {x: 0.07397461, y: 0.71840006, z: 1.0379997}
+  m_LocalPosition: {x: 0.54, y: 0.71840006, z: 1.0379997}
   m_LocalScale: {x: 0.40000007, y: 0.4, z: 0.40000015}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -342,7 +342,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2080908049}
   m_LocalRotation: {x: -0.059753183, y: 0.99013317, z: -0.090336144, w: 0.08891201}
-  m_LocalPosition: {x: -0.042025756, y: 0.5224002, z: 0.91800004}
+  m_LocalPosition: {x: 0.42399982, y: 0.5224002, z: 0.91800004}
   m_LocalScale: {x: 0.4, y: 0.39999992, z: 0.39999995}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1064,7 +1064,7 @@ CapsuleCollider:
   m_Radius: 0.25
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0.92, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &-4815983164740407387
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1137,7 +1137,7 @@ MonoBehaviour:
       StartPositionRotation: {fileID: 702601151}
       DestroyAfter: 4
       UseLocalPosition: 0
-    damage: 10
+    damage: 0
   - Effects:
     - Effect: {fileID: 1543153927702632, guid: 3bd033e2ba3626744805c163c1ac71cb, type: 3}
       StartPositionRotation: {fileID: 1179287124}
@@ -2610,8 +2610,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9062251029765051263, guid: f87c2e55b95e4894c9c30592cce6d287, type: 3}
+      propertyPath: m_Center.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9062251029765051263, guid: f87c2e55b95e4894c9c30592cce6d287, type: 3}
       propertyPath: m_Center.y
       value: -0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 9062251029765051263, guid: f87c2e55b95e4894c9c30592cce6d287, type: 3}
+      propertyPath: m_Center.z
+      value: 0.14
       objectReference: {fileID: 0}
     - target: {fileID: 9062251029765051263, guid: f87c2e55b95e4894c9c30592cce6d287, type: 3}
       propertyPath: m_IsTrigger
@@ -2642,7 +2650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  damage: 0
+  sword_Damage: 0
   attackSpeed: 0
   meleeArea: {fileID: 759958591296867026}
 --- !u!4 &7677064426548258672 stripped

@@ -19,10 +19,15 @@ public class E_GroundedUK : Enemy
 
         skillList = new List<Skill>
         {
-            new Skill("Basic Slash", 5f, 4),
-            new Skill("Slash Combo", 10f, 3),
-            new Skill("Fire Bird", 15f, 2),
-            new Skill("Teleport", 20f, 1)
+            //new Skill("Basic Slash", 5f, 4),
+            //new Skill("Basic Slash_2", 5f, 5),
+            //new Skill("Slash Combo", 10f, 3),
+            //new Skill("Fire Bird", 15f, 2),
+            //new Skill("Teleport", 20f, 1)
+
+            //test
+            new Skill("Teleport", 5f, 1)
+            
         };
         isPlaying = false;
 
@@ -43,7 +48,7 @@ public class E_GroundedUK : Enemy
 
         foreach (Skill currentSkill in skillList)
         {
-            Debug.LogFormat("{0} : {1}", currentSkill.SkillName, currentSkill.SkillCurrentCoolTime);
+            //Debug.LogFormat("{0} : {1}", currentSkill.SkillName, currentSkill.SkillCurrentCoolTime);
             if (currentSkill.SkillCurrentCoolTime > 0)
             {
                 currentSkill.currentCoolTimeUpdate(Time.deltaTime);
@@ -94,6 +99,9 @@ public class E_GroundedUK : Enemy
             case "Basic Slash":
                 currentSkillCoroutine = StartCoroutine(Slash(skill));
                 break;
+            case "Basic Slash_2":
+                currentSkillCoroutine = StartCoroutine(Slash2(skill));
+                break;
             case "Slash Combo":
                 currentSkillCoroutine = StartCoroutine(SlashCombo(skill));
                 break;
@@ -116,7 +124,7 @@ public class E_GroundedUK : Enemy
     {
         animEffect.skillNum = 0;
         anim.SetTrigger("DoSlash1");
-
+        weapon.Use();
         #region Sound
         yield return new WaitForSeconds(0.5f);
         SoundManager.instance.PlaySoundEffect("Slash");
@@ -129,16 +137,21 @@ public class E_GroundedUK : Enemy
         FinishSkillExecution(skill);
     }
 
-    IEnumerator Slash2()
+    IEnumerator Slash2(Skill skill)
     {
         anim.SetTrigger("DoSlash2");
-
+        animEffect.skillNum = 0;
+        weapon.Use();
         #region Sound
         yield return new WaitForSeconds(0.2f);
         SoundManager.instance.PlaySoundEffect("Slash");
         yield return new WaitForSeconds(2f);
         SoundManager.instance.StopSoundEffect("Slash");
         #endregion
+
+        yield return new WaitForSeconds(1f);
+
+        FinishSkillExecution(skill);
     }
 
     IEnumerator BackJump()
@@ -192,7 +205,7 @@ public class E_GroundedUK : Enemy
         Debug.Log("firebird");
         anim.SetTrigger("DoBackJumpFireBird");
 
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(6f);
 
         FinishSkillExecution(skill);
     }
