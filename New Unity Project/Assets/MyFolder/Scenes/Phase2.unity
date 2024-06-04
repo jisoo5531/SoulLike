@@ -1329,6 +1329,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Realistic Undead Knight Grounded
       objectReference: {fileID: 0}
+    - target: {fileID: 2110269826669206047, guid: bad931156be3bd544a5ff3ef786ef2b0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3626257112184760055, guid: bad931156be3bd544a5ff3ef786ef2b0, type: 3}
       propertyPath: m_RootOrder
       value: 4
