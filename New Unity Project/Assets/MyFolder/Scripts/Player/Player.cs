@@ -10,15 +10,18 @@ public class Player : MonoBehaviour
     public int MaxHP = 100;
     public float HP = 100;
 
-    public bool isSpace;
-    public bool isAttacking;
+    [HideInInspector] public bool isSpace;
+    [HideInInspector] public bool isAttacking;
+    [HideInInspector] public bool isDrinking;
+    [HideInInspector] public bool isDash;
 
-    float moveSpeed;
+    public float moveSpeed;
 
 
     Coroutine moveCoroutine;
     Coroutine dodgeCoroutine;
     Coroutine attackCoroutine;
+    Coroutine drinkCoroutine;
 
     #endregion 
 
@@ -40,11 +43,16 @@ public class Player : MonoBehaviour
         playerConroller = GetComponent<ThirdPersonConroller>();
         playercolider = GetComponent<CapsuleCollider>();
         anim = GetComponentInChildren<Animator>();
+
+        isDash = false;
+        isSpace = false;
         isAttacking = false;
+        isDrinking = false;
 
         moveCoroutine = StartCoroutine(Move());
         dodgeCoroutine = StartCoroutine(Dodge());
         attackCoroutine = StartCoroutine(Attack());
+        drinkCoroutine = StartCoroutine(DrinkPotion());
 
         equipWeapon = GetComponentInChildren<PlayerWeapon>();
     }
@@ -136,19 +144,21 @@ public class Player : MonoBehaviour
 
             float forward = Input.GetAxis("Vertical");
             float right = Input.GetAxis("Horizontal");
+            isDash = Input.GetButton("Dash");
+
             if (forward == 0 && right == 0)
             {
                 float stopSpeed = 0f;
                 anim.SetFloat("MoveSpeed", Mathf.Lerp(moveSpeed, stopSpeed, Time.deltaTime));
                 moveSpeed = stopSpeed;
             }
-            else if (!Input.GetButton("Dash") && (forward != 0 || right != 0))
+            else if (!isDash && (forward != 0 || right != 0))
             {
                 float walkSpeed = 0.5f;
                 anim.SetFloat("MoveSpeed", Mathf.Lerp(moveSpeed, walkSpeed, Time.deltaTime));
                 moveSpeed = walkSpeed;
             }
-            else if (Input.GetButton("Dash") && (forward != 0 || right != 0))
+            else if (isDash && (forward != 0 || right != 0))
             {
                 float runSpeed = 1f;
                 anim.SetFloat("MoveSpeed", Mathf.Lerp(moveSpeed, runSpeed, Time.deltaTime));
@@ -208,6 +218,25 @@ public class Player : MonoBehaviour
 
                 StartMethod(0);
                 playerConroller.StartMethod(0);
+            }
+        }
+    }
+    IEnumerator DrinkPotion()
+    {        
+        while (true)
+        {
+            yield return null;
+
+            isDrinking = Input.GetButtonDown("Drink");
+
+            if (isDrinking)
+            {                
+                anim.SetTrigger("DrinkPotion");
+                anim.SetLayerWeight(1, 1f);
+
+                yield return new WaitForSeconds(2f);
+
+                anim.SetLayerWeight(1, 0f);                
             }
         }
     }
