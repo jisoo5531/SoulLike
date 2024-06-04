@@ -12,21 +12,22 @@ public class Player : MonoBehaviour
     public int potionHP = 50;
 
     [HideInInspector] public bool isSpace;
-    [HideInInspector] public bool isAttacking;
     [HideInInspector] public bool isDrinking;
     [HideInInspector] public bool isDash;
+    [HideInInspector] public bool isBlocking;
 
-    public float moveSpeed;
+    float moveSpeed;
+    
 
     Coroutine moveCoroutine;
     Coroutine dodgeCoroutine;
     Coroutine attackCoroutine;
     Coroutine drinkCoroutine;
 
-    #endregion 
+    #endregion
 
-
-    ThirdPersonConroller playerController;
+    GameObject cameraObj;
+    ThirdPersonConroller playerMoveController;    
     CapsuleCollider playercolider;
     Animator anim;
     
@@ -37,21 +38,34 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         Debug.Log("Player Awake 실행");
-        playerController = GetComponent<ThirdPersonConroller>();
+        cameraObj = GameObject.Find("Camera");
+        playerMoveController = GetComponent<ThirdPersonConroller>();
         playercolider = GetComponent<CapsuleCollider>();
         anim = GetComponentInChildren<Animator>();
 
         isDash = false;
         isSpace = false;
-        isAttacking = false;
         isDrinking = false;
+        isBlocking = false;
 
         moveCoroutine = StartCoroutine(Move());
         dodgeCoroutine = StartCoroutine(Dodge());
         attackCoroutine = StartCoroutine(Attack());
         drinkCoroutine = StartCoroutine(DrinkPotion());
+        StartCoroutine(Block());
+        StartCoroutine(Death());
 
         equipWeapon = GetComponentInChildren<PlayerWeapon>();
+
+        //PlayerDeath();
+    }
+
+    private void Update()
+    {
+        //if (Input.GetKeyDown("q"))
+        //{
+        //    PlayerDeath();
+        //}
     }
 
     //private void OnEnable()
@@ -129,9 +143,14 @@ public class Player : MonoBehaviour
 
     public void PlayerDeath()
     {
+        CharacterController c_Controller = GetComponent<CharacterController>();
+        Rigidbody rigid = GetComponent<Rigidbody>();
+        
         StopAllCoroutines();
-        playerController.StopAllCoroutines();
+        playerMoveController.StopAllCoroutines();
         anim.SetTrigger("Death");
+
+        c_Controller.center = new Vector3(0, 1.6f, 0);                
     }
 
     /// <summary>
@@ -215,13 +234,47 @@ public class Player : MonoBehaviour
 
                 // 이동 막기
                 StopMethod(0);
-                playerController.StopMethod(0);
+                playerMoveController.StopMethod(0);
                 
                 yield return new WaitForSeconds(1.5f);  // 공격 대기시간
 
 
                 StartMethod(0);
-                playerController.StartMethod(0);
+                playerMoveController.StartMethod(0);
+            }
+        }
+    }
+    IEnumerator Block()
+    {
+        bool isDownSpeed = false;
+        while (true)
+        {
+            yield return null;
+
+            isBlocking = Input.GetMouseButton(1);
+
+            if (isBlocking)
+            {
+                moveSpeed *= 0.8f;
+                isDownSpeed = true;
+
+                Vector3 forwardDir = cameraObj.transform.forward;
+                
+
+                anim.SetLayerWeight(1, 1f);
+                anim.SetBool("isBlocking", true);
+
+            }
+            else
+            {
+                if (isDownSpeed)
+                {
+                    moveSpeed /= 0.8f;
+                    isDownSpeed = false;
+                }
+                anim.SetLayerWeight(1, 0f);
+                anim.SetBool("isBlocking", false);
+                
             }
         }
     }
@@ -250,5 +303,22 @@ public class Player : MonoBehaviour
             }
         }
     }
-    
+    IEnumerator Death()
+    {        
+        while (true)
+        {
+            yield return null;
+
+            if (Input.GetKeyDown("q"))
+            {
+                PlayerDeath();
+                break;
+            }
+            if (HP <= 0f)
+            {
+                PlayerDeath();                
+                break;
+            }
+        }        
+    }
 }

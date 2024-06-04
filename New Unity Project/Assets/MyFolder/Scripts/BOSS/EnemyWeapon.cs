@@ -43,10 +43,6 @@ public class EnemyWeapon : MonoBehaviour
             Debug.Log("Ä® µ¥¹ÌÁö : " + sword_Damage);
 
             player.HP -= sword_Damage;
-            if (player.HP <= 0)
-            {
-                player.PlayerDeath();
-            }
 
             meleeArea.enabled = false;
         }

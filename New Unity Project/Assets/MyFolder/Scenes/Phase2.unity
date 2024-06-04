@@ -1863,6 +1863,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1014488903}
     m_Modifications:
+    - target: {fileID: 1440113819, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
+      propertyPath: m_Direction
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1440113819, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 109465432083264842, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1911,6 +1919,14 @@ PrefabInstance:
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 34454164}
+    - target: {fileID: 436390970238210734, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 436390970238210734, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
+      propertyPath: m_Center.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 778901285279739888, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
       propertyPath: m_Name
       value: Player

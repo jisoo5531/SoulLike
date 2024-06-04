@@ -46,10 +46,6 @@ public class EffectCollision : MonoBehaviour
             Debug.LogFormat("파티클 번호 : {0}, 데미지 : {1}", particleInfo.skillNum, particleInfo.effect_slots[particleInfo.skillNum].damage);
 
             player.HP -= particleInfo.effect_slots[particleInfo.skillNum].damage;
-            if (player.HP <= 0)
-            {
-                player.PlayerDeath();
-            }
 
             isColided = true;
         }
