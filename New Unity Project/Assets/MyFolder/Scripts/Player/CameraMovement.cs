@@ -79,7 +79,8 @@ public class CameraMovement : MonoBehaviour
             finalDistance = maxDistance;
         }        
 
-        finalDistance = maxDistance;
+        //finalDistance = maxDistance;
+
         realCamera.localPosition = Vector3.Lerp(realCamera.localPosition, dirNormalized * finalDistance, Time.deltaTime * smoothness);
 
         this.transform.LookAt(bossTarget);
