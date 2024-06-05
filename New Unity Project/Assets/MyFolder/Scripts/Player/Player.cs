@@ -254,23 +254,26 @@ public class Player : MonoBehaviour
     IEnumerator Block()
     {
         bool isDownSpeed = false;
+        
+
         while (true)
         {
             yield return null;
 
+            float right = Input.GetAxis("Horizontal");
+            float forward = Input.GetAxis("Vertical");            
+
             isBlocking = Input.GetMouseButton(1);
 
             if (isBlocking)
-            {
+            {               
                 moveSpeed *= 0.8f;
-                isDownSpeed = true;
-
-                Vector3 forwardDir = cameraObj.transform.forward;
+                isDownSpeed = true;                
                 
-
                 anim.SetLayerWeight(1, 1f);
                 anim.SetBool("isBlocking", true);
-
+                anim.SetFloat("DirForward", forward);
+                anim.SetFloat("DirRight", right);
             }
             else
             {
