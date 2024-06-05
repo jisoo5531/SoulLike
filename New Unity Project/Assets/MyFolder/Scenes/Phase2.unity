@@ -1337,6 +1337,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Realistic Undead Knight Grounded
       objectReference: {fileID: 0}
+    - target: {fileID: 3085210095434978379, guid: bad931156be3bd544a5ff3ef786ef2b0, type: 3}
+      propertyPath: effect_slots.Array.data[1].damage
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 3626257112184760055, guid: bad931156be3bd544a5ff3ef786ef2b0, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -1915,6 +1919,10 @@ PrefabInstance:
       propertyPath: targetTransform
       value: 
       objectReference: {fileID: 526701228}
+    - target: {fileID: 436390970238210735, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
+      propertyPath: m_Constraints
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 778901285279739888, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
       propertyPath: m_Name
       value: Player

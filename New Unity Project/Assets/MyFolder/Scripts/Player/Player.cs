@@ -17,25 +17,27 @@ public class Player : MonoBehaviour
     [HideInInspector] public bool isBlocking;
 
     float moveSpeed;
-    
+
 
     Coroutine moveCoroutine;
     Coroutine dodgeCoroutine;
     Coroutine attackCoroutine;
     Coroutine drinkCoroutine;
+    Coroutine KnockDownCoroutine;
 
     #endregion
 
     GameObject cameraObj;
-    ThirdPersonConroller playerMoveController;    
+    ThirdPersonConroller playerMoveController;
     CapsuleCollider playercolider;
     Animator anim;
     PlayerWeapon equipWeapon;
-    
+    EffectCollision effectCollision;
+
     public GameObject potionEffect;
     public Transform potionPos;
 
-    
+
 
     private void Awake()
     {
@@ -44,6 +46,7 @@ public class Player : MonoBehaviour
         playerMoveController = GetComponent<ThirdPersonConroller>();
         playercolider = GetComponent<CapsuleCollider>();
         anim = GetComponentInChildren<Animator>();
+        effectCollision = FindObjectOfType<EffectCollision>();
 
         isDash = false;
         isSpace = false;
@@ -68,7 +71,7 @@ public class Player : MonoBehaviour
     /// 2 : AttackAnimation 코루틴
     /// </summary>
     /// <param name="num"></param>
-    void StartMethod(int num)
+    public void StartMethod(int num)
     {
         switch (num)
         {
@@ -76,19 +79,22 @@ public class Player : MonoBehaviour
                 if (moveCoroutine != null)
                 {
                     moveCoroutine = StartCoroutine(Move());
-                }                
+                }
                 break;
             case 1:
                 if (dodgeCoroutine != null)
                 {
                     dodgeCoroutine = StartCoroutine(Dodge());
-                }                
+                }
                 break;
             case 2:
                 if (attackCoroutine != null)
                 {
                     attackCoroutine = StartCoroutine(Attack());
-                }                
+                }
+                break;
+            case 3:
+                StartCoroutine(KnockDown());
                 break;
             default:
                 break;
@@ -125,13 +131,13 @@ public class Player : MonoBehaviour
             default:
                 break;
         }
-    }    
+    }
 
     public void PlayerDeath()
     {
         //CharacterController c_Controller = GetComponent<CharacterController>();
         //Rigidbody rigid = GetComponent<Rigidbody>();
-        
+
         //StopAllCoroutines();
         //playerMoveController.StopAllCoroutines();
         //anim.SetTrigger("Death");
@@ -143,12 +149,12 @@ public class Player : MonoBehaviour
 
         StopAllCoroutines();
         playerMoveController.StopAllCoroutines();
-        anim.SetTrigger("Death");
 
         // 비활성화하여 더 이상 움직이지 않도록 설정
         if (c_Controller != null)
         {
-            c_Controller.enabled = false;
+            //c_Controller.enabled = false;
+            c_Controller.center = new Vector3(0, 1.6f, 0);
         }
 
         // Rigidbody를 비활성화하여 물리 효과를 막음
@@ -156,9 +162,13 @@ public class Player : MonoBehaviour
         {
             rigid.isKinematic = true;
         }
+        anim.SetTrigger("Death");
 
-        // 필요에 따라 콜라이더를 조정
-        playercolider.enabled = false;
+
+
+
+
+        //playercolider.enabled = false;
     }
 
     /// <summary>
@@ -210,7 +220,7 @@ public class Player : MonoBehaviour
 
             isSpace = Input.GetButtonDown("Dodge");
 
-            
+
             if (isSpace)
             {
                 anim.SetTrigger("DodgeRoll");
@@ -224,7 +234,7 @@ public class Player : MonoBehaviour
                 // 회피기 쿨타임
                 yield return new WaitForSeconds(1.5f);
             }
-            
+
         }
     }
     IEnumerator Attack()
@@ -254,22 +264,22 @@ public class Player : MonoBehaviour
     IEnumerator Block()
     {
         bool isDownSpeed = false;
-        
+
 
         while (true)
         {
             yield return null;
 
             float right = Input.GetAxis("Horizontal");
-            float forward = Input.GetAxis("Vertical");            
+            float forward = Input.GetAxis("Vertical");
 
             isBlocking = Input.GetMouseButton(1);
 
             if (isBlocking)
-            {               
+            {
                 moveSpeed *= 0.8f;
-                isDownSpeed = true;                
-                
+                isDownSpeed = true;
+
                 anim.SetLayerWeight(1, 1f);
                 anim.SetBool("isBlocking", true);
                 //anim.SetFloat("DirForward", forward);
@@ -283,14 +293,14 @@ public class Player : MonoBehaviour
                     isDownSpeed = false;
                     anim.SetLayerWeight(1, 0f);
                 }
-                
+
                 anim.SetBool("isBlocking", false);
-                
+
             }
         }
     }
     IEnumerator DrinkPotion()
-    {                
+    {
         while (true)
         {
             yield return null;
@@ -316,12 +326,34 @@ public class Player : MonoBehaviour
 
                 yield return new WaitForSeconds(2f);
 
-                anim.SetLayerWeight(1, 0f);                
+
+                anim.SetLayerWeight(1, 0f);
             }
         }
     }
+    IEnumerator KnockDown()
+    {
+        int random = 0;
+
+        if (random == 0)
+        {
+            Debug.Log("플레이어 다운");
+            anim.SetTrigger("DoKnockDown");
+
+            StopMethod(0);
+            playerMoveController.StopMethod(0);
+            this.gameObject.tag = "Untagged";
+
+            yield return new WaitForSeconds(3.5f);
+
+            StartMethod(0);
+            playerMoveController.StartMethod(0);
+            this.gameObject.tag = "Player";
+        }
+        
+    }
     IEnumerator Death()
-    {        
+    {
         while (true)
         {
             yield return null;
@@ -332,9 +364,9 @@ public class Player : MonoBehaviour
             }
             if (HP <= 0f)
             {
-                PlayerDeath();                
+                PlayerDeath();
                 break;
             }
-        }        
+        }
     }
 }

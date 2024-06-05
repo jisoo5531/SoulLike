@@ -10,7 +10,7 @@ public class EffectCollision : MonoBehaviour
 
     List<ParticleSystem.Particle> collision_Obj = new List<ParticleSystem.Particle>();
 
-    bool isColided = false;
+    [HideInInspector] public bool isColided;
 
     private void Awake()
     {
@@ -23,7 +23,6 @@ public class EffectCollision : MonoBehaviour
         p_System.trigger.AddCollider(player.transform);
 
         isColided = false;
-
     }
 
 
@@ -36,6 +35,7 @@ public class EffectCollision : MonoBehaviour
     }
     private void OnParticleCollision(GameObject other)
     {
+        int random = Random.Range(0, 4);
         if (!isColided && other.tag == "Player")
         {
             Debug.Log("플레이어 이펙트 맞았다.");
@@ -45,10 +45,17 @@ public class EffectCollision : MonoBehaviour
             {
                 Debug.Log("플레이어 방패로 스킬 막았다.");
                 player.HP -= particleInfo.effect_slots[particleInfo.skillNum].damage * 0.75f;
+
+                
             }
             else
             {
                 player.HP -= particleInfo.effect_slots[particleInfo.skillNum].damage;
+
+                if (random == 0)
+                {
+                    player.StartMethod(3);
+                }
             }
 
             isColided = true;

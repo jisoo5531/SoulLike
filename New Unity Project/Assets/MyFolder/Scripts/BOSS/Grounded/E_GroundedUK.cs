@@ -237,7 +237,7 @@ public class E_GroundedUK : Enemy
 
         yield return LookAtPlayer(2.7f);
 
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(4f);
 
         FinishSkillExecution(skill);
     }
