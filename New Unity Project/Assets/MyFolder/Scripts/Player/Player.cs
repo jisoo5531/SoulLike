@@ -272,8 +272,8 @@ public class Player : MonoBehaviour
                 
                 anim.SetLayerWeight(1, 1f);
                 anim.SetBool("isBlocking", true);
-                anim.SetFloat("DirForward", forward);
-                anim.SetFloat("DirRight", right);
+                //anim.SetFloat("DirForward", forward);
+                //anim.SetFloat("DirRight", right);
             }
             else
             {
