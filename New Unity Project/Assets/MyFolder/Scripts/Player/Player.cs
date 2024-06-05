@@ -243,9 +243,8 @@ public class Player : MonoBehaviour
                 // 이동 막기
                 StopMethod(0);
                 playerMoveController.StopMethod(0);
-                
-                yield return new WaitForSeconds(1.5f);  // 공격 대기시간
 
+                yield return new WaitForSeconds(1f);  // 공격 대기시간
 
                 StartMethod(0);
                 playerMoveController.StartMethod(0);

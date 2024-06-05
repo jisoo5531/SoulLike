@@ -956,37 +956,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3626257112184760055, guid: bad931156be3bd544a5ff3ef786ef2b0, type: 3}
   m_PrefabInstance: {fileID: 1140123686}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &805802366
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 805802367}
-  m_Layer: 7
-  m_Name: Potion Pos
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &805802367
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 805802366}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1951853055}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &880708291
 GameObject:
   m_ObjectHideFlags: 0
@@ -1899,12 +1868,8 @@ PrefabInstance:
     m_TransformParent: {fileID: 1014488903}
     m_Modifications:
     - target: {fileID: 1440113819, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
-      propertyPath: m_Direction
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1440113819, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
+      propertyPath: m_Center.y
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 109465432083264842, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
       propertyPath: m_RootOrder
@@ -1958,21 +1923,9 @@ PrefabInstance:
       propertyPath: targetTransform
       value: 
       objectReference: {fileID: 526701228}
-    - target: {fileID: 436390970238210733, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
-      propertyPath: potionPos
-      value: 
-      objectReference: {fileID: 805802367}
-    - target: {fileID: 436390970238210733, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
-      propertyPath: potionEffect
-      value: 
-      objectReference: {fileID: 2068883103050463437, guid: 6ffa26d20d09a8a4fbc21fa3079a0fac, type: 3}
-    - target: {fileID: 436390970238210734, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 436390970238210734, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
       propertyPath: m_Center.y
-      value: 1
+      value: 0.92
       objectReference: {fileID: 0}
     - target: {fileID: 778901285279739888, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
       propertyPath: m_Name

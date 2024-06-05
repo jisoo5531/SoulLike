@@ -42,7 +42,17 @@ public class EnemyWeapon : MonoBehaviour
             Debug.Log("플레이어 칼맞았다.");
             Debug.Log("칼 데미지 : " + sword_Damage);
 
-            player.HP -= sword_Damage;
+            if (player.isBlocking)
+            {
+                Debug.Log("플레이어 방패 들었다.");
+                player.HP -= sword_Damage * 0.25f;
+            }
+            else
+            {
+                player.HP -= sword_Damage;
+            }
+            
+            
 
             meleeArea.enabled = false;
         }
