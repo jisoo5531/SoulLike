@@ -19,6 +19,7 @@ public class ThirdPersonConroller : MonoBehaviour
     private Vector3 moveDirection = Vector3.zero;
 
     public Transform cameraTransform;  // 카메라 트랜스폼
+    public Transform targetTransform;  // 타겟 오브젝트 트랜스폼
     #endregion
 
     #region 컴포넌트 / 스크립트
@@ -29,10 +30,8 @@ public class ThirdPersonConroller : MonoBehaviour
 
     #endregion
 
-    
-
     private void Awake()
-    {        
+    {
         characterController = GetComponent<CharacterController>();
         player = GetComponent<Player>();
 
@@ -60,7 +59,7 @@ public class ThirdPersonConroller : MonoBehaviour
     /// <summary>
     /// 0 : MoveCoroutine
     /// </summary>
-    /// <param name="number"></param>
+    /// <param number="number"></param>
     public void StopMethod(int number)
     {
         switch (number)
@@ -98,11 +97,25 @@ public class ThirdPersonConroller : MonoBehaviour
                 right.Normalize();
 
                 Vector3 direction = (forward * vertical + right * horizontal).normalized;
-                if (direction.magnitude >= 0.1f)
+
+                if (!player.isBlocking)
                 {
-                    float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-                    float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSpeed, 0.1f);
-                    transform.rotation = Quaternion.Euler(0, angle, 0);
+                    if (direction.magnitude >= 0.1f)
+                    {
+                        float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+                        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSpeed, 0.1f);
+                        transform.rotation = Quaternion.Euler(0, angle, 0);
+
+                        moveDirection = direction * speed;
+                    }
+                }
+                else
+                {
+                    // 방패를 들고 있을 때는 타겟을 바라보도록 설정
+                    Vector3 targetDirection = (targetTransform.position - transform.position).normalized;
+                    targetDirection.y = 0; // 수직 방향은 무시
+                    float targetAngle = Mathf.Atan2(targetDirection.x, targetDirection.z) * Mathf.Rad2Deg;
+                    transform.rotation = Quaternion.Euler(0, targetAngle + 60, 0);
 
                     moveDirection = direction * speed;
                 }
@@ -112,14 +125,11 @@ public class ThirdPersonConroller : MonoBehaviour
                 moveDirection = Vector3.zero;
             }
 
-
             // 중력 적용
-            //moveDirection.y -= gravity * Time.deltaTime;
+            // moveDirection.y -= gravity * Time.deltaTime;
 
             // 캐릭터 이동
             characterController.Move(moveDirection * Time.deltaTime);
-
         }
     }
-
 }

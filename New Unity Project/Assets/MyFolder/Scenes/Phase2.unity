@@ -951,6 +951,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1010430063274604113, guid: 453af5857feb8da47be9dc950250b92e, type: 3}
   m_PrefabInstance: {fileID: 494301310}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &526701228 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3626257112184760055, guid: bad931156be3bd544a5ff3ef786ef2b0, type: 3}
+  m_PrefabInstance: {fileID: 1140123686}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &880708291
 GameObject:
   m_ObjectHideFlags: 0
@@ -1919,6 +1924,10 @@ PrefabInstance:
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 34454164}
+    - target: {fileID: 436390970238210732, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
+      propertyPath: targetTransform
+      value: 
+      objectReference: {fileID: 526701228}
     - target: {fileID: 436390970238210734, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
       propertyPath: m_Enabled
       value: 1
