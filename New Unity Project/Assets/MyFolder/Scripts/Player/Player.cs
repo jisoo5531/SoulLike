@@ -30,8 +30,10 @@ public class Player : MonoBehaviour
     ThirdPersonConroller playerMoveController;    
     CapsuleCollider playercolider;
     Animator anim;
-    
     PlayerWeapon equipWeapon;
+    
+    public GameObject potionEffect;
+    public Transform potionPos;
 
     
 
@@ -59,22 +61,6 @@ public class Player : MonoBehaviour
 
         //PlayerDeath();
     }
-
-    private void Update()
-    {
-        //if (Input.GetKeyDown("q"))
-        //{
-        //    PlayerDeath();
-        //}
-    }
-
-    //private void OnEnable()
-    //{
-    //    Debug.Log("온");
-    //    moveCoroutine = StartCoroutine(Move());
-    //    dodgeCoroutine = StartCoroutine(Dodge());
-    //    attackCoroutine = StartCoroutine(Attack());
-    //}
 
     /// <summary>
     /// 0 : MoveAnimation 코루틴
@@ -293,15 +279,16 @@ public class Player : MonoBehaviour
                 {
                     moveSpeed /= 0.8f;
                     isDownSpeed = false;
+                    anim.SetLayerWeight(1, 0f);
                 }
-                anim.SetLayerWeight(1, 0f);
+                
                 anim.SetBool("isBlocking", false);
                 
             }
         }
     }
     IEnumerator DrinkPotion()
-    {        
+    {                
         while (true)
         {
             yield return null;
@@ -309,9 +296,15 @@ public class Player : MonoBehaviour
             isDrinking = Input.GetButtonDown("Drink");
 
             if (isDrinking)
-            {                
+            {
+                Debug.Log("포션 먹었다.");
                 anim.SetTrigger("DrinkPotion");
+
                 anim.SetLayerWeight(1, 1f);
+
+                GameObject potionAura = Instantiate(potionEffect, potionPos.position, potionPos.rotation);
+                potionAura.transform.SetParent(potionPos);
+                Destroy(potionAura, 2f);
 
                 HP += potionHP;
                 if (HP > MaxHP)
@@ -319,7 +312,7 @@ public class Player : MonoBehaviour
                     HP = MaxHP;
                 }
 
-                yield return new WaitForSeconds(2f);
+                yield return new WaitForSeconds(4f);
 
                 anim.SetLayerWeight(1, 0f);                
             }
