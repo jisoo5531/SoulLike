@@ -312,7 +312,7 @@ public class Player : MonoBehaviour
                     HP = MaxHP;
                 }
 
-                yield return new WaitForSeconds(4f);
+                yield return new WaitForSeconds(2f);
 
                 anim.SetLayerWeight(1, 0f);                
             }

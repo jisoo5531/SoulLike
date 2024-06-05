@@ -1370,7 +1370,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3085210095434978379, guid: bad931156be3bd544a5ff3ef786ef2b0, type: 3}
       propertyPath: effect_slots.Array.data[0].damage
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3626257112184760055, guid: bad931156be3bd544a5ff3ef786ef2b0, type: 3}
       propertyPath: m_RootOrder
