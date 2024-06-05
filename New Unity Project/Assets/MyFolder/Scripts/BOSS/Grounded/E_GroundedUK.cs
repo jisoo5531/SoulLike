@@ -33,7 +33,7 @@ public class E_GroundedUK : Enemy
             new Skill("Fire Bird", 6f, 1)
         };
 
-        isLook = true;
+        isLook = false;
         isRun = false;
         isPlaying = false;
         #endregion
@@ -83,10 +83,21 @@ public class E_GroundedUK : Enemy
 
         distanceToPlayer = Vector3.Magnitude(playerTrans.position - this.transform.position);
 
-        Vector3 lookPosition = new Vector3(playerTrans.position.x, this.transform.position.y, playerTrans.position.z);
+        //Vector3 lookPosition = new Vector3(playerTrans.position.x, this.transform.position.y, playerTrans.position.z);
+        
+        if (Input.GetKeyDown("p"))
+        {
+            isLook = !isLook;
+        }
+
         if (isLook)
         {
-            this.transform.LookAt(lookPosition);
+            Vector3 dir = (playerTrans.position - this.transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(dir);
+            lookRotation.x = lookRotation.z = 0;
+            this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, lookRotation, 100.0f * Time.deltaTime);
+
+            //this.transform.LookAt(lookPosition);
         }
     }
 
@@ -172,14 +183,12 @@ public class E_GroundedUK : Enemy
 
         FinishSkillExecution(skill);
     }
-
     IEnumerator BackJump()
     {
         anim.SetTrigger("DoBackJump");
         yield return new WaitForSeconds(0.5f);
         //StartCoroutine(ActionPattern());
     }
-
     IEnumerator SlashCombo(Skill skill)
     {
         animEffect.skillNum = 0;
@@ -217,18 +226,21 @@ public class E_GroundedUK : Enemy
 
         FinishSkillExecution(skill);
     }
-
     IEnumerator Firebird(Skill skill)
     {
+
         animEffect.skillNum = 1;
         Debug.Log("firebird");
         anim.SetTrigger("DoBackJumpFireBird");
+
+        yield return new WaitForSeconds(1f);
+
+        yield return LookAtPlayer(2.7f);
 
         yield return new WaitForSeconds(6f);
 
         FinishSkillExecution(skill);
     }
-
     IEnumerator Teleport(Skill skill)
     {
         animEffect.skillNum = 2;
@@ -240,7 +252,6 @@ public class E_GroundedUK : Enemy
 
         FinishSkillExecution(skill);
     }
-
     IEnumerator AttackJump(Skill skill)
     {
         Debug.Log(distanceToPlayer);
@@ -287,5 +298,13 @@ public class E_GroundedUK : Enemy
         yield return new WaitForSeconds(4f);
         
         FinishSkillExecution(skill);        
+    }
+    IEnumerator LookAtPlayer(float waitTime)
+    {
+        isLook = true;
+
+        yield return new WaitForSeconds(waitTime);
+
+        isLook = false;
     }
 }
