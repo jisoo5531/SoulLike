@@ -1137,7 +1137,7 @@ MonoBehaviour:
       StartPositionRotation: {fileID: 702601151}
       DestroyAfter: 4
       UseLocalPosition: 0
-    damage: 0
+    damage: 20
   - Effects:
     - Effect: {fileID: 1543153927702632, guid: 3bd033e2ba3626744805c163c1ac71cb, type: 3}
       StartPositionRotation: {fileID: 1179287124}
