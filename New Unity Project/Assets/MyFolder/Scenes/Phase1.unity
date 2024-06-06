@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4533006, g: 0.44690603, b: 0.44005507, a: 1}
+  m_IndirectSpecularColor: {r: 0.45330018, g: 0.44690567, b: 0.4400544, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1827,10 +1827,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1687698223}
     m_Modifications:
-    - target: {fileID: 1440113819, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 109465432083264842, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1879,51 +1875,16 @@ PrefabInstance:
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 312761772}
-    - target: {fileID: 436390970238210733, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
-      propertyPath: HP
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 436390970238210733, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
-      propertyPath: MaxHP
-      value: 100
-      objectReference: {fileID: 0}
+    - target: {fileID: 436390970238210732, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
+      propertyPath: targetTransform
+      value: 
+      objectReference: {fileID: 7299649836802005583}
     - target: {fileID: 778901285279739888, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 7081141716486637295, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
-      propertyPath: m_TagString
-      value: PlayerMelee
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1802593535, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
---- !u!1 &436390970172292469 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7081141716486637295, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
-  m_PrefabInstance: {fileID: 436390970172292468}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &436390970172292470 stripped
-BoxCollider:
-  m_CorrespondingSourceObject: {fileID: 1802593534, guid: 386bf40fd6de3964390aa166e684dff8, type: 3}
-  m_PrefabInstance: {fileID: 436390970172292468}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &436390970172292471
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 436390970172292469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60018030ea4b39341865017db2bb5e29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 0
-  damage: 50
-  attackSpeed: 0.4
-  meleeArea: {fileID: 436390970172292470}
 --- !u!1001 &548382391213407465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2155,6 +2116,10 @@ PrefabInstance:
       propertyPath: playerTrans
       value: 
       objectReference: {fileID: 1440113813}
+    - target: {fileID: 3633384475794433266, guid: 99ae38c09f4659149a8cfae6c98e746e, type: 3}
+      propertyPath: playerLayer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 3633384476556186913, guid: 99ae38c09f4659149a8cfae6c98e746e, type: 3}
       propertyPath: m_Center.y
       value: 0.89

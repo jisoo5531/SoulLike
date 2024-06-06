@@ -8,7 +8,10 @@ public class E_UndeadHorse : Enemy
 
     public float moveSpeed = 10.0f;
 
-    float distancePlayer = 0.0f;
+    public float detectionRange;
+    public LayerMask playerLayer;
+
+    float distancePlayer;
 
     bool isLook;
     
@@ -31,6 +34,7 @@ public class E_UndeadHorse : Enemy
     private void Awake()
     {
         isLook = false;
+        detectionRange = 100f;
 
         HP = 200;
         MaxHP = 200;
@@ -39,14 +43,14 @@ public class E_UndeadHorse : Enemy
         horseColider = GetComponent<BoxCollider>();
         player = FindObjectOfType<Player>();
 
-        StartCoroutine(HorseActionPattern());
+        StartCoroutine(StartAction());       
 
     }
 
     void Update()
     {
         distancePlayer = Vector3.Magnitude(playerTrans.position - this.transform.position);
-
+        //Debug.Log(distancePlayer);
         
         // 수정 필요
         if (Input.GetKeyDown(KeyCode.B))
@@ -96,30 +100,40 @@ public class E_UndeadHorse : Enemy
             anim.SetBool("TurnRight", false);
         }
     }
-
-    IEnumerator MoveCoroutine()
+    IEnumerator CheckForPlayer()
     {
-        float movePow = 0.0f;
-        //this.transform.position = Vector3.MoveTowards(this.transform.position, playerTrans.position, moveSpeed * Time.deltaTime);
-
+        anim.SetBool("isTurnRunning", true);
         while (true)
         {
-            yield return null;
+            Debug.Log("감지 중");
+            Vector3 rayPosition = this.transform.position + new Vector3(0, 1, 0);
+            Ray ray = new Ray(rayPosition, transform.forward);
+            RaycastHit hit;
 
-            Vector3 distance = playerTrans.position - this.transform.position;
+            Debug.DrawRay(rayPosition, transform.forward * detectionRange, Color.red);
 
-            movePow = Mathf.Lerp(movePow, 1f, 2.0f * Time.deltaTime);
-            anim.SetFloat("MovePow", movePow);
-
-
-            this.transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
-
-            if (distance.magnitude <= 10)
+            if (Physics.Raycast(ray, out hit, detectionRange, playerLayer))
             {
-                break;
+                if (hit.collider.CompareTag("Player"))
+                {
+                    anim.SetBool("isTurnRunning", false);
+                    Debug.Log("플레이어 감지");
+                    break;
+                }
             }
+            yield return null;
         }
-        anim.SetFloat("MovePow", 0f);
+    }
+
+    IEnumerator StartAction()
+    {
+        yield return new WaitForSeconds(1f);
+
+        anim.SetTrigger("StartAction");
+
+        yield return new WaitForSeconds(3f);
+
+        StartCoroutine(HorseActionPattern());
     }
 
     IEnumerator HorseActionPattern()
@@ -177,6 +191,8 @@ public class E_UndeadHorse : Enemy
         Attack_Sprint_Jump.enabled = true;
 
         yield return new WaitForSeconds(1.5f);
+
+        StartCoroutine(CheckForPlayer());
 
         horseColider.enabled = true;
         Attack_Sprint_Jump.enabled = false;

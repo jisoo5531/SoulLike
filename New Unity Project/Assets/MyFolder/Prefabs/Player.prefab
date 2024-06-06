@@ -423,7 +423,6 @@ GameObject:
   - component: {fileID: 1440113819}
   - component: {fileID: 436390970238210732}
   - component: {fileID: 436390970238210733}
-  - component: {fileID: 1440113820}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -515,7 +514,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 778901285279739888}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.52
   m_Height: 3
@@ -559,43 +558,6 @@ MonoBehaviour:
   isBlocking: 0
   potionEffect: {fileID: 2068883103050463437, guid: 6ffa26d20d09a8a4fbc21fa3079a0fac, type: 3}
   potionPos: {fileID: 805802367}
---- !u!114 &1440113820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 778901285279739888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8e9d17796fd47c46976ba2f17284603, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Effects:
-  - Effect: {fileID: 1819066416490906, guid: f71e64e1ba018eb419bd5e9e3ca8a65c, type: 3}
-    StartPositionRotation: {fileID: 0}
-    DestroyAfter: 4
-    UseLocalPosition: 0
-  - Effect: {fileID: 1107296871017770, guid: 82a583916db5b7842a722df7756825eb, type: 3}
-    StartPositionRotation: {fileID: 0}
-    DestroyAfter: 4
-    UseLocalPosition: 0
-  - Effect: {fileID: 1819066416490906, guid: f71e64e1ba018eb419bd5e9e3ca8a65c, type: 3}
-    StartPositionRotation: {fileID: 0}
-    DestroyAfter: 4
-    UseLocalPosition: 0
-  - Effect: {fileID: 1107296871017770, guid: 82a583916db5b7842a722df7756825eb, type: 3}
-    StartPositionRotation: {fileID: 0}
-    DestroyAfter: 4
-    UseLocalPosition: 0
-  - Effect: {fileID: 1819066416490906, guid: f71e64e1ba018eb419bd5e9e3ca8a65c, type: 3}
-    StartPositionRotation: {fileID: 0}
-    DestroyAfter: 6
-    UseLocalPosition: 0
-  - Effect: {fileID: 1115641076847360, guid: 73ccedaa8ed8dc14594ca7cc04041f4c, type: 3}
-    StartPositionRotation: {fileID: 0}
-    DestroyAfter: 4
-    UseLocalPosition: 0
 --- !u!1 &1283002171598922282
 GameObject:
   m_ObjectHideFlags: 0
@@ -2390,6 +2352,7 @@ GameObject:
   - component: {fileID: 8744347637449978183}
   - component: {fileID: 1802593534}
   - component: {fileID: 5675864458976053629}
+  - component: {fileID: 436390970172292471}
   m_Layer: 7
   m_Name: mixamorig:Sword_joint
   m_TagString: PlayerMelee
@@ -2439,6 +2402,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   damage: 10
+  attackSpeed: 0.4
+  meleeArea: {fileID: 1802593534}
+--- !u!114 &436390970172292471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7081141716486637295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60018030ea4b39341865017db2bb5e29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  damage: 50
   attackSpeed: 0.4
   meleeArea: {fileID: 1802593534}
 --- !u!1 &7286575247566870037
