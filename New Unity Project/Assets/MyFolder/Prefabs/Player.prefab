@@ -2390,7 +2390,6 @@ GameObject:
   - component: {fileID: 8744347637449978183}
   - component: {fileID: 1802593534}
   - component: {fileID: 5675864458976053629}
-  - component: {fileID: 1951853058}
   m_Layer: 7
   m_Name: mixamorig:Sword_joint
   m_TagString: PlayerMelee
@@ -2440,22 +2439,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   damage: 10
-  attackSpeed: 0.4
-  meleeArea: {fileID: 1802593534}
---- !u!114 &1951853058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7081141716486637295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60018030ea4b39341865017db2bb5e29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 0
-  damage: 50
   attackSpeed: 0.4
   meleeArea: {fileID: 1802593534}
 --- !u!1 &7286575247566870037

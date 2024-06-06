@@ -32,7 +32,6 @@ public class PlayerWeapon : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
-
             meleeArea.enabled = false;
         }
     }

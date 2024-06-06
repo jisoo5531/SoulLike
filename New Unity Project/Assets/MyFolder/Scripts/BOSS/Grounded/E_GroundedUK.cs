@@ -20,20 +20,21 @@ public class E_GroundedUK : Enemy
 
         skillList = new List<Skill>
         {
-            //new Skill("Teleport", 35f, 1),
-            //new Skill("Slash Combo", 12f, 3),
-            //new Skill("JumpAttack", 13f, 2),
-            //new Skill("Fire Bird", 15f, 3),
-            //new Skill("Basic Slash", 3f, 3),
-            //new Skill("Basic Slash_2", 3f, 3),
+            new Skill("Teleport", 35f, 1),
+            new Skill("Slash Combo", 12f, 3),
+            new Skill("JumpAttack", 13f, 2),
+            new Skill("Fire Bird", 15f, 3),
+            new Skill("Basic Slash", 3f, 3),
+            new Skill("Basic Slash_2", 3f, 3),
 
             //test            
             //new Skill("Basic Slash_2", 3f, 1)
             //new Skill("PowerUP", 3f, 1)
-            new Skill("Fire Bird", 6f, 1)
+            //new Skill("Fire Bird", 6f, 1)
+            //new Skill("Slash Combo", 5f, 1)
         };
 
-        isLook = false;
+        isLook = true;
         isRun = false;
         isPlaying = false;
         #endregion
@@ -79,7 +80,7 @@ public class E_GroundedUK : Enemy
             }
         }
 
-        #endregion
+        #endregion        
 
         distanceToPlayer = Vector3.Magnitude(playerTrans.position - this.transform.position);
 
@@ -103,13 +104,15 @@ public class E_GroundedUK : Enemy
 
     void ExcuteSkill(Skill skill)
     {
+        isLook = false;
+        isPlaying = true;
         Debug.Log("현재 스킬 : " + skill.SkillName);
+
         if (currentSkillCoroutine != null)
         {
             StopCoroutine(currentSkillCoroutine);
         }
 
-        isPlaying = true;
         switch (skill.SkillName)
         {
             case "Basic Slash":
@@ -137,6 +140,7 @@ public class E_GroundedUK : Enemy
     {
         isPlaying = false;
         skill.SkillCurrentCoolTime = skill.SkillCoolTime;
+        isLook = true;
     }
 
     /// <summary>
@@ -146,6 +150,8 @@ public class E_GroundedUK : Enemy
     /// <returns></returns>
     IEnumerator Slash(Skill skill)
     {
+        yield return LookAtPlayer(2f);
+
         anim.SetTrigger("DoSlash1");
         animEffect.skillNum = 0;
         weapon.Use();
@@ -168,6 +174,7 @@ public class E_GroundedUK : Enemy
     /// <returns></returns>
     IEnumerator Slash2(Skill skill)
     {
+
         animEffect.skillNum = 0;
         anim.SetTrigger("DoSlash2");
         weapon.Use();
@@ -191,6 +198,7 @@ public class E_GroundedUK : Enemy
     }
     IEnumerator SlashCombo(Skill skill)
     {
+
         animEffect.skillNum = 0;
         anim.SetTrigger("DoSlashCombo");
         weapon.Use();
@@ -222,7 +230,7 @@ public class E_GroundedUK : Enemy
         SoundManager.instance.StopSoundEffect("Slash");
         #endregion
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
 
         FinishSkillExecution(skill);
     }
@@ -234,8 +242,6 @@ public class E_GroundedUK : Enemy
         anim.SetTrigger("DoBackJumpFireBird");
 
         yield return new WaitForSeconds(1f);
-
-        yield return LookAtPlayer(2.7f);
 
         yield return new WaitForSeconds(4f);
 
@@ -260,11 +266,13 @@ public class E_GroundedUK : Enemy
         {
             if (distanceToPlayer > 13f)
             {
+                isLook = true;
                 anim.SetBool("isRun", true);
                 isRun = true;
             }
             else
             {
+                isLook = false;
                 anim.SetBool("isRun", false);
                 isRun = false;
                 break;
@@ -294,8 +302,7 @@ public class E_GroundedUK : Enemy
 
             weapon.Use();            
         }
-
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(3f);
         
         FinishSkillExecution(skill);        
     }
@@ -306,5 +313,13 @@ public class E_GroundedUK : Enemy
         yield return new WaitForSeconds(waitTime);
 
         isLook = false;
+    }
+    IEnumerator DontLookAtPlayer(float waitTime)
+    {
+        isLook = false;
+
+        yield return new WaitForSeconds(waitTime);
+
+        isLook = true;
     }
 }
