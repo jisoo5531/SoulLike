@@ -66,8 +66,12 @@ public class FadeInOut : MonoBehaviour
 
     IEnumerator FadeOut()
     {
-        playerHpBar.gameObject.SetActive(false);
-        enemyHpBar.gameObject.SetActive(false);
+        if (scene.currentSceneNumber != 1.5f)
+        {
+            playerHpBar.gameObject.SetActive(false);
+            enemyHpBar.gameObject.SetActive(false);
+        }
+        
 
         img = GetComponentInChildren<Image>();
         Color alphaColor = img.color;
@@ -83,5 +87,6 @@ public class FadeInOut : MonoBehaviour
             }
             yield return null;
         }
+
     }
 }

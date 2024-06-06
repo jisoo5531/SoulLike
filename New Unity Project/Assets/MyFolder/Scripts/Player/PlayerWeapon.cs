@@ -29,10 +29,11 @@ public class PlayerWeapon : MonoBehaviour
 
     }
     private void OnTriggerEnter(Collider other)
-    {
+    {        
         if (other.tag == "Enemy")
         {
-            meleeArea.enabled = false;
+            Debug.Log("보스 맞았다.");
+            meleeArea.enabled = false;                        
         }
     }
     // Use() 메인루틴 -> Swing() 서브루틴 -> Use() 메인루틴

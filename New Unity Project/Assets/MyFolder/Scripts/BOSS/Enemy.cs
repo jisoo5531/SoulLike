@@ -96,7 +96,7 @@ public class Enemy : MonoBehaviour
 
 
     private void OnTriggerEnter(Collider other)
-    {
+    {        
         if (other.tag == "PlayerMelee")
         {
             HP -= FindObjectOfType<PlayerWeapon>().damage;
@@ -105,7 +105,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void Damaged()
+    public void Damaged()
     {
         FadeInOut fadeIO = FindObjectOfType<FadeInOut>();
         ChangeScene scene = FindObjectOfType<ChangeScene>();

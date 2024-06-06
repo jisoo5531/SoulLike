@@ -15,9 +15,6 @@ public class E_UndeadHorse : Enemy
 
     bool isLook;
 
-    Coroutine turnCoroutine;
-    Coroutine moveCoroutine;
-
     BoxCollider horseColider;
 
     #endregion
@@ -78,7 +75,13 @@ public class E_UndeadHorse : Enemy
         if (other.tag == "Player")
         {
             Debug.Log("플레이어 부딪힘");
-            horseColider.enabled = false;
+            
+        }
+        else if (other.tag == "PlayerMelee")
+        {
+            HP -= FindObjectOfType<PlayerWeapon>().damage;
+            Debug.Log("맞았다. 체력 : " + HP);
+            Damaged();
         }
     }
 

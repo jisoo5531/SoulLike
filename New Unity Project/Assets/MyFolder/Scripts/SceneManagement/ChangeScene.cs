@@ -10,7 +10,7 @@ public class ChangeScene : MonoBehaviour
     public float currentSceneNumber;
 
     [Tooltip("FadeOut 시 넘어갈 씬 넘버를 입력 / 없으면 0")]
-    public int fadeOutSceneNum;        
+    public float fadeOutSceneNum;        
 
     /// <summary>
     /// Fade In / Out
@@ -23,9 +23,13 @@ public class ChangeScene : MonoBehaviour
 
     IEnumerator PhaseSceneChange()
     {
-        player = FindObjectOfType<Player>();
+        if (currentSceneNumber != 1.5f)
+        {
+            player = FindObjectOfType<Player>();
 
-        player.StopAllCoroutines();
+            player.StopAllCoroutines();
+        }
+        
 
         yield return new WaitForSeconds(4f);
 

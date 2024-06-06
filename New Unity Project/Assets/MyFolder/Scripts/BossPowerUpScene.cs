@@ -19,15 +19,23 @@ public class BossPowerUpScene : MonoBehaviour
 
     IEnumerator PowerUp()
     {
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(5f);
+
+        anim.SetTrigger("DoAction");
+
+        yield return new WaitForSeconds(11.5f);
 
         var currentInstance = Instantiate(Effect) as GameObject;
         var psUpdater = currentInstance.GetComponent<PSMeshRendererUpdater>();
         psUpdater.UpdateMeshEffect(BodyObject);
         psUpdater.UpdateMeshEffect(SwordObject);
 
-        yield return new WaitForSeconds(2f);
-        
-        anim.SetTrigger("DoAction");
+        yield return new WaitForSeconds(5f);
+
+        ChangeScene scene = FindObjectOfType<ChangeScene>();
+        FadeInOut fadeIO = FindObjectOfType<FadeInOut>();
+
+        fadeIO.StartFadeOut();
+        scene.StartChangeScene();
     }
 }
