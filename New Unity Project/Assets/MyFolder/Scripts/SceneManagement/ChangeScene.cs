@@ -7,11 +7,10 @@ using UnityEngine.SceneManagement;
 public class ChangeScene : MonoBehaviour
 {
     Player player;
+    public float currentSceneNumber;
 
     [Tooltip("FadeOut 시 넘어갈 씬 넘버를 입력 / 없으면 0")]
-    public int fadeOutSceneNum;
-
-    
+    public int fadeOutSceneNum;        
 
     /// <summary>
     /// Fade In / Out
@@ -30,7 +29,11 @@ public class ChangeScene : MonoBehaviour
 
         yield return new WaitForSeconds(4f);
 
-        if (fadeOutSceneNum == 2)
+        if (fadeOutSceneNum == 1.5f)
+        {
+            SceneManager.LoadScene("Phase1_End");
+        }
+        else if (fadeOutSceneNum == 2)
         {
             SceneManager.LoadScene("Phase2");
         }

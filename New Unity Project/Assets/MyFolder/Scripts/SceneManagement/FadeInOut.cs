@@ -19,8 +19,11 @@ public class FadeInOut : MonoBehaviour
     {
         scene = GetComponent<ChangeScene>();
 
-        playerHpBar = GameObject.Find("UI").transform.GetChild(1);
-        enemyHpBar = GameObject.Find("UI").transform.GetChild(2);
+        if (scene.currentSceneNumber != 1.5f)
+        {
+            playerHpBar = GameObject.Find("UI").transform.GetChild(1);
+            enemyHpBar = GameObject.Find("UI").transform.GetChild(2);
+        }        
 
         StartFadeIn();
     }
@@ -38,9 +41,13 @@ public class FadeInOut : MonoBehaviour
     }
 
     IEnumerator FadeIn()
-    {        
-        playerHpBar.gameObject.SetActive(true);
-        enemyHpBar.gameObject.SetActive(true);
+    {
+        if (scene.currentSceneNumber != 1.5f)
+        {
+            playerHpBar.gameObject.SetActive(true);
+            enemyHpBar.gameObject.SetActive(true);
+        }
+        
 
         img = GetComponentInChildren<Image>();
         Color alphaColor = img.color;

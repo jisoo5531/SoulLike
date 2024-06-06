@@ -6,7 +6,7 @@ public class CameraMovement : MonoBehaviour
 {
     #region 전역 변수
 
-    public enum Type { One, Two }
+    public enum Type { One, OneEnd, Two, End }
     public Type Phase;
 
     GameObject enemy;

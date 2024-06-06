@@ -1288,6 +1288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39ec23bbb15c276468280ad8e82ccc50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentSceneNumber: 2
   fadeOutSceneNum: 2
 --- !u!114 &1014488902
 MonoBehaviour:

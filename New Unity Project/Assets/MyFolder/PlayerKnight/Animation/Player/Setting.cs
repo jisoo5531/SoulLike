@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Setting : MonoBehaviour
-{
-    
+{    
+
     void Start()
     {
         //Time.timeScale = 0.3f;
@@ -14,8 +14,7 @@ public class Setting : MonoBehaviour
 
    
     void Update()
-    {
-        
+    {        
         if (Input.GetKeyDown(KeyCode.F1))
         {
             Time.timeScale = 0.4f;
