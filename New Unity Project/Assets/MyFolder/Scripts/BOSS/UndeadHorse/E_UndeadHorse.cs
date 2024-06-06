@@ -14,7 +14,7 @@ public class E_UndeadHorse : Enemy
     float distancePlayer;
 
     bool isLook;
-    
+
     Coroutine turnCoroutine;
     Coroutine moveCoroutine;
 
@@ -30,7 +30,7 @@ public class E_UndeadHorse : Enemy
 
     #endregion
 
-   
+
     private void Awake()
     {
         isLook = false;
@@ -43,7 +43,7 @@ public class E_UndeadHorse : Enemy
         horseColider = GetComponent<BoxCollider>();
         player = FindObjectOfType<Player>();
 
-        StartCoroutine(StartAction());       
+        StartCoroutine(StartAction());
 
     }
 
@@ -51,14 +51,14 @@ public class E_UndeadHorse : Enemy
     {
         distancePlayer = Vector3.Magnitude(playerTrans.position - this.transform.position);
         //Debug.Log(distancePlayer);
-        
+
         // 수정 필요
         if (Input.GetKeyDown(KeyCode.B))
         {
             Debug.Log("B 눌렀다.");
             isLook = true;
         }
-            
+
         if (Input.GetKeyDown(KeyCode.V))
         {
             Debug.Log("V 눌렀다.");
@@ -70,9 +70,18 @@ public class E_UndeadHorse : Enemy
             CrossDot();
             Vector3 dir = (playerTrans.position - this.transform.position).normalized;
             Quaternion toRotation = Quaternion.LookRotation(dir);
-            this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, toRotation, 50.0f * Time.deltaTime);            
+            this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, toRotation, 50.0f * Time.deltaTime);
         }
-    }    
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            Debug.Log("플레이어 부딪힘");
+            horseColider.enabled = false;
+        }
+    }
+
     /// <summary>
     /// 외적을 구해 플레이어가 어느 방향에 있는지 구하기
     /// </summary>
@@ -137,8 +146,8 @@ public class E_UndeadHorse : Enemy
     }
 
     IEnumerator HorseActionPattern()
-    {        
-        
+    {
+
         //isLook = true;
 
         //while (true)
@@ -158,12 +167,12 @@ public class E_UndeadHorse : Enemy
         //    yield return null;
         //}
         yield return new WaitForSeconds(0.1f);
-        
+
         StartCoroutine(AttackSprintJump());
     }
 
     IEnumerator AttackFrontLeg()
-    {        
+    {
         BoxCollider Attack_F_Leg = GameObject.Find("AttackFront Pos").GetComponent<BoxCollider>();
 
         isLook = false;
@@ -179,27 +188,34 @@ public class E_UndeadHorse : Enemy
         isLook = true;
         //StartCoroutine(HorseActionPattern());
     }
-    
+
     IEnumerator AttackSprintJump()
     {
         BoxCollider Attack_Sprint_Jump = GameObject.Find("SprintJumpAttack Pos").GetComponent<BoxCollider>();
 
         isLook = false;
-        horseColider.enabled = false;
-        anim.SetTrigger("DoSprintJump");
 
-        Attack_Sprint_Jump.enabled = true;
+        if (!horseColider.enabled)
+        {
+            horseColider.enabled = true;
+        }
+
+        if (distancePlayer < 30.0f && distancePlayer > 25.0f)
+        {
+            anim.SetTrigger("DoSprintJump");
+            Attack_Sprint_Jump.enabled = true;
+        }
+
 
         yield return new WaitForSeconds(1.5f);
 
         StartCoroutine(CheckForPlayer());
 
-        horseColider.enabled = true;
         Attack_Sprint_Jump.enabled = false;
 
         yield return new WaitForSeconds(1f);
 
-        
+
         isLook = true;
 
         StartCoroutine(HorseActionPattern());
