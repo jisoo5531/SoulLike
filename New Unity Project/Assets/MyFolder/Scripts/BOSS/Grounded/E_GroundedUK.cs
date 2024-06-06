@@ -150,7 +150,6 @@ public class E_GroundedUK : Enemy
     /// <returns></returns>
     IEnumerator Slash(Skill skill)
     {
-        yield return LookAtPlayer(2f);
 
         anim.SetTrigger("DoSlash1");
         animEffect.skillNum = 0;
