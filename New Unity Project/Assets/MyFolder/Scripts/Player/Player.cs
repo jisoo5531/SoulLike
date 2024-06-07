@@ -69,6 +69,7 @@ public class Player : MonoBehaviour
     /// 0 : MoveAnimation 코루틴
     /// 1 : DodgeAnimation 코루틴
     /// 2 : AttackAnimation 코루틴
+    /// 3 : KnockDownAnimation 코루틴
     /// </summary>
     /// <param name="num"></param>
     public void StartMethod(int num)
@@ -333,24 +334,22 @@ public class Player : MonoBehaviour
     }
     IEnumerator KnockDown()
     {
-        int random = 0;
 
-        if (random == 0)
-        {
-            Debug.Log("플레이어 다운");
-            anim.SetTrigger("DoKnockDown");
 
-            StopMethod(0);
-            playerMoveController.StopMethod(0);
-            this.gameObject.tag = "Untagged";
+        Debug.Log("플레이어 다운");
+        anim.SetTrigger("DoKnockDown");
 
-            yield return new WaitForSeconds(3.5f);
+        StopMethod(0);
+        playerMoveController.StopMethod(0);
+        this.gameObject.tag = "Untagged";
 
-            StartMethod(0);
-            playerMoveController.StartMethod(0);
-            this.gameObject.tag = "Player";
-        }
-        
+        yield return new WaitForSeconds(3.5f);
+
+        StartMethod(0);
+        playerMoveController.StartMethod(0);
+        this.gameObject.tag = "Player";
+
+
     }
     IEnumerator Death()
     {
@@ -364,6 +363,7 @@ public class Player : MonoBehaviour
             }
             if (HP <= 0f)
             {
+                this.gameObject.tag = "Untagged";
                 PlayerDeath();
                 break;
             }

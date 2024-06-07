@@ -19,6 +19,8 @@ public class AttackSprintJump : MonoBehaviour
         {
             this.gameObject.GetComponent<BoxCollider>().enabled = false;
             player.HP -= damage;
+            Debug.Log("플레이어 점프 공격 맞음");
+            player.StartMethod(3);
         }
     }
 }

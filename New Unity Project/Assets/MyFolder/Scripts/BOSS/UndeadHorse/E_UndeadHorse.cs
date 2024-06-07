@@ -7,7 +7,7 @@ public class E_UndeadHorse : Enemy
     #region 전역 변수
 
     public float moveSpeed = 10.0f;
-
+    public float bodyCrushDamage = 15.0f;
     public float detectionRange;
     public LayerMask playerLayer;
 
@@ -16,6 +16,7 @@ public class E_UndeadHorse : Enemy
     bool isLook;
 
     BoxCollider horseColider;
+    BoxCollider Attack_Sprint_Jump;
 
     #endregion
 
@@ -27,18 +28,27 @@ public class E_UndeadHorse : Enemy
 
     #endregion
 
+    bool isTurnning;
+
 
     private void Awake()
     {
-        isLook = false;
         detectionRange = 100f;
 
-        HP = 200;
-        MaxHP = 200;
+        HP = 100;
+        MaxHP = 100;
 
+        BoxCollider Attack_Sprint_Jump = transform.GetChild(3).GetComponent<BoxCollider>();
         anim = GetComponent<Animator>();
         horseColider = GetComponent<BoxCollider>();
         player = FindObjectOfType<Player>();
+
+        isLook = true;
+        isTurnning = false;
+        if (Attack_Sprint_Jump != null)
+        {            
+            Attack_Sprint_Jump.enabled = true;
+        }
 
         StartCoroutine(StartAction());
 
@@ -67,15 +77,23 @@ public class E_UndeadHorse : Enemy
             CrossDot();
             Vector3 dir = (playerTrans.position - this.transform.position).normalized;
             Quaternion toRotation = Quaternion.LookRotation(dir);
+            toRotation.x = toRotation.z = 0;
             this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, toRotation, 50.0f * Time.deltaTime);
         }
     }
     private void OnTriggerEnter(Collider other)
     {
+        int random = Random.Range(0, 4);
         if (other.tag == "Player")
         {
             Debug.Log("플레이어 부딪힘");
-            
+            horseColider.enabled = false;
+            player.HP -= bodyCrushDamage;
+
+            if (random == 0)
+            {
+                player.StartMethod(3);
+            }
         }
         else if (other.tag == "PlayerMelee")
         {
@@ -107,7 +125,6 @@ public class E_UndeadHorse : Enemy
         }
         if (cross.y > -0.1 && cross.y < 0.1)
         {
-            isLook = false;
             anim.SetBool("TurnLeft", false);
             anim.SetBool("TurnRight", false);
         }
@@ -115,6 +132,9 @@ public class E_UndeadHorse : Enemy
     IEnumerator CheckForPlayer()
     {
         anim.SetBool("isTurnRunning", true);
+        isTurnning = true;
+
+        Debug.Log("Turn 시작");
         while (true)
         {
             Debug.Log("감지 중");
@@ -129,7 +149,9 @@ public class E_UndeadHorse : Enemy
                 if (hit.collider.CompareTag("Player"))
                 {
                     anim.SetBool("isTurnRunning", false);
+                    isTurnning = false;
                     Debug.Log("플레이어 감지");
+
                     break;
                 }
             }
@@ -143,7 +165,7 @@ public class E_UndeadHorse : Enemy
 
         anim.SetTrigger("StartAction");
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
 
         StartCoroutine(HorseActionPattern());
     }
@@ -151,25 +173,15 @@ public class E_UndeadHorse : Enemy
     IEnumerator HorseActionPattern()
     {
 
-        //isLook = true;
+        yield return new WaitForSeconds(3f);
 
-        //while (true)
-        //{
-        //    yield return new WaitForSeconds(2f);            
+        Debug.Log("패턴 테스트");
 
-        //    if (distancePlayer <= 10)
-        //    {
-        //        StartCoroutine(AttackFrontLeg());
 
-        //    }
-        //    else if (distancePlayer > 25 && distancePlayer < 31)
-        //    {
-        //        StartCoroutine(AttackSprintJump());
-        //    }
-
-        //    yield return null;
-        //}
-        yield return new WaitForSeconds(0.1f);
+        if (!horseColider.enabled)
+        {
+            horseColider.enabled = true;
+        }
 
         StartCoroutine(AttackSprintJump());
     }
@@ -194,32 +206,23 @@ public class E_UndeadHorse : Enemy
 
     IEnumerator AttackSprintJump()
     {
-        BoxCollider Attack_Sprint_Jump = GameObject.Find("SprintJumpAttack Pos").GetComponent<BoxCollider>();
-
-        isLook = false;
-
-        if (!horseColider.enabled)
+        Debug.Log("점프 공격 테스트");
+        if (distancePlayer < 30.0f && distancePlayer > 15.0f)
         {
-            horseColider.enabled = true;
-        }
-
-        if (distancePlayer < 30.0f && distancePlayer > 25.0f)
-        {
+            Debug.Log("점프 공격 한다.");
             anim.SetTrigger("DoSprintJump");
             Attack_Sprint_Jump.enabled = true;
         }
 
 
-        yield return new WaitForSeconds(1.5f);
-
         StartCoroutine(CheckForPlayer());
 
-        Attack_Sprint_Jump.enabled = false;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitUntil(() => !isTurnning);
 
-
-        isLook = true;
+        Debug.Log("turn 끝");
+        
+        Debug.Log("점프 콜라이더 테스트");
 
         StartCoroutine(HorseActionPattern());
     }
