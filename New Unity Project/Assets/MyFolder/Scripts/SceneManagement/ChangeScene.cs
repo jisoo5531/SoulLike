@@ -18,12 +18,16 @@ public class ChangeScene : MonoBehaviour
     /// <param name="num"></param>
     public void StartChangeScene()
     {
+        if (currentSceneNumber == 0.5f)
+        {
+            SceneManager.LoadScene("Phase1");
+        }
         StartCoroutine(PhaseSceneChange());
     }
 
     IEnumerator PhaseSceneChange()
     {
-        if (currentSceneNumber != 1.5f)
+        if (currentSceneNumber != 0.5f && currentSceneNumber != 1.5f)
         {
             player = FindObjectOfType<Player>();
 
@@ -33,6 +37,7 @@ public class ChangeScene : MonoBehaviour
 
         yield return new WaitForSeconds(4f);
 
+       
         if (fadeOutSceneNum == 1.5f)
         {
             SceneManager.LoadScene("Phase1_End");

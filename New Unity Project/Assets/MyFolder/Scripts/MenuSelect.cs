@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MenuSelect : MonoBehaviour
 {
+    ChangeScene sceneChange;
+    FadeInOut fadeIO;
+
     Transform StartGame;
     Transform ExitGame;
 
@@ -12,6 +15,9 @@ public class MenuSelect : MonoBehaviour
 
     private void Awake()
     {
+        sceneChange = FindObjectOfType<ChangeScene>();
+        fadeIO = FindObjectOfType<FadeInOut>();
+
         StartGame = transform.GetChild(1).GetChild(0);
         ExitGame = transform.GetChild(2).GetChild(0);
 
@@ -22,11 +28,7 @@ public class MenuSelect : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            isStart = !isStart;
-            isExit = !isExit;
-        }
+        InputKey();
         if (isStart)
         {
             StartGame.gameObject.SetActive(true);
@@ -36,6 +38,27 @@ public class MenuSelect : MonoBehaviour
         {
             StartGame.gameObject.SetActive(false);
             ExitGame.gameObject.SetActive(true);
+        }
+    }
+    void InputKey()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            isStart = !isStart;
+            isExit = !isExit;
+        }
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            if (isStart)
+            {
+                
+                sceneChange.StartChangeScene();
+                // 게임 스타트
+            }
+            else if (isExit)
+            {
+
+            }
         }
     }
 }
