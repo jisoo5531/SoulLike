@@ -23,8 +23,8 @@ public class FadeInOut : MonoBehaviour
         {
             playerHpBar = GameObject.Find("UI").transform.GetChild(1);
             enemyHpBar = GameObject.Find("UI").transform.GetChild(2);
-        }        
-
+        }
+        
         StartFadeIn();
     }
 
