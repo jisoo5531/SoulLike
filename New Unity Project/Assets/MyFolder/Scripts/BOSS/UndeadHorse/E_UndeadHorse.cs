@@ -46,8 +46,9 @@ public class E_UndeadHorse : Enemy
         isLook = true;
         isTurnning = false;
         if (Attack_Sprint_Jump != null)
-        {            
+        {
             Attack_Sprint_Jump.enabled = true;
+
         }
 
         StartCoroutine(StartAction());
@@ -180,8 +181,8 @@ public class E_UndeadHorse : Enemy
 
         if (!horseColider.enabled)
         {
-            horseColider.enabled = true;
-        }
+            Debug.Log("꺼져 있나?");            
+        }        
 
         StartCoroutine(AttackSprintJump());
     }
@@ -205,24 +206,27 @@ public class E_UndeadHorse : Enemy
     }
 
     IEnumerator AttackSprintJump()
-    {
-        Debug.Log("점프 공격 테스트");
-        if (distancePlayer < 30.0f && distancePlayer > 15.0f)
-        {
-            Debug.Log("점프 공격 한다.");
-            anim.SetTrigger("DoSprintJump");
-            Attack_Sprint_Jump.enabled = true;
-        }
-
-
+    {                
         StartCoroutine(CheckForPlayer());
 
 
         yield return new WaitUntil(() => !isTurnning);
 
-        Debug.Log("turn 끝");
-        
-        Debug.Log("점프 콜라이더 테스트");
+        Debug.Log("turn 끝");        
+
+        if (distancePlayer < 28.0f && distancePlayer > 15.0f)
+        {
+            Debug.Log("점프 공격 한다.");
+            anim.SetTrigger("DoSprintJump");
+            if (Attack_Sprint_Jump != null && !Attack_Sprint_Jump.enabled)
+            {
+                Debug.Log("점프 콜라이더 있다.");
+                Attack_Sprint_Jump.enabled = true;
+
+            }
+        }
+
+        yield return new WaitForSeconds(1f);
 
         StartCoroutine(HorseActionPattern());
     }
