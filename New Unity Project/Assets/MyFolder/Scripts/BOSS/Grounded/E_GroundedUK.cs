@@ -10,12 +10,25 @@ public class E_GroundedUK : Enemy
     Coroutine currentSkillCoroutine;
 
     float distanceToPlayer;
+    float detectionRange;
     bool isRun;
     bool isLook;
     bool isPlaying;
+    bool isTurning;
 
     private void Awake()
     {
+        detectionRange = 100f;
+        isLook = true;
+        isRun = false;
+        isPlaying = false;
+        isTurning = false;
+
+        playerTrans = FindObjectOfType<Player>().transform;
+        anim = GetComponent<Animator>();
+        weapon = GetComponentInChildren<EnemyWeapon>();
+        animEffect = GetComponent<E_G_UK_AnimationEventEffect>();
+
         #region Skill List
 
         skillList = new List<Skill>
@@ -33,17 +46,8 @@ public class E_GroundedUK : Enemy
             //new Skill("Fire Bird", 6f, 1)            
         };
 
-        isLook = true;
-        isRun = false;
-        isPlaying = false;
+        
         #endregion
-
-        playerTrans = FindObjectOfType<Player>().transform;
-        anim = GetComponent<Animator>();
-        weapon = GetComponentInChildren<EnemyWeapon>();
-        animEffect = GetComponent<E_G_UK_AnimationEventEffect>();
-
-        //patternCoroutine = StartCoroutine(ActionPattern());
     }
 
     // Update is called once per frame
@@ -103,36 +107,41 @@ public class E_GroundedUK : Enemy
 
     void ExcuteSkill(Skill skill)
     {
-        isLook = false;
-        isPlaying = true;
-        Debug.Log("현재 스킬 : " + skill.SkillName);
+        StartCoroutine(CheckForPlayer());
 
-        if (currentSkillCoroutine != null)
+        if (!isTurning)
         {
-            StopCoroutine(currentSkillCoroutine);
-        }
+            isPlaying = true;
+            Debug.Log("현재 스킬 : " + skill.SkillName);
 
-        switch (skill.SkillName)
-        {
-            case "Basic Slash":
-                currentSkillCoroutine = StartCoroutine(Slash(skill));
-                break;
-            case "Basic Slash_2":
-                currentSkillCoroutine = StartCoroutine(Slash2(skill));
-                break;
-            case "Slash Combo":
-                currentSkillCoroutine = StartCoroutine(SlashCombo(skill));
-                break;
-            case "Fire Bird":
-                currentSkillCoroutine = StartCoroutine(Firebird(skill));
-                break;
-            case "Teleport":
-                currentSkillCoroutine = StartCoroutine(Teleport(skill));
-                break;
-            case "JumpAttack":
-                currentSkillCoroutine = StartCoroutine(AttackJump(skill));
-                break;
+            if (currentSkillCoroutine != null)
+            {
+                StopCoroutine(currentSkillCoroutine);
+            }
+
+            switch (skill.SkillName)
+            {
+                case "Basic Slash":
+                    currentSkillCoroutine = StartCoroutine(Slash(skill));
+                    break;
+                case "Basic Slash_2":
+                    currentSkillCoroutine = StartCoroutine(Slash2(skill));
+                    break;
+                case "Slash Combo":
+                    currentSkillCoroutine = StartCoroutine(SlashCombo(skill));
+                    break;
+                case "Fire Bird":
+                    currentSkillCoroutine = StartCoroutine(Firebird(skill));
+                    break;
+                case "Teleport":
+                    currentSkillCoroutine = StartCoroutine(Teleport(skill));
+                    break;
+                case "JumpAttack":
+                    currentSkillCoroutine = StartCoroutine(AttackJump(skill));
+                    break;
+            }
         }
+        
     }
 
     void FinishSkillExecution(Skill skill)
@@ -140,6 +149,33 @@ public class E_GroundedUK : Enemy
         isPlaying = false;
         skill.SkillCurrentCoolTime = skill.SkillCoolTime;
         isLook = true;
+    }
+
+    IEnumerator CheckForPlayer()
+    {        
+        isTurning = true;
+        
+        while (true)
+        {
+            Debug.Log("감지 중");
+            Vector3 rayPosition = this.transform.position + new Vector3(0, 1, 0);
+            Ray ray = new Ray(rayPosition, transform.forward);
+            RaycastHit hit;
+
+            Debug.DrawRay(rayPosition, transform.forward * detectionRange, Color.red);
+
+            if (Physics.Raycast(ray, out hit, detectionRange, playerLayer))
+            {
+                if (hit.collider.CompareTag("Player"))
+                {                    
+                    isTurning = false;
+                    Debug.Log("플레이어 감지");
+
+                    break;
+                }
+            }
+            yield return null;
+        }
     }
 
     /// <summary>
@@ -176,12 +212,7 @@ public class E_GroundedUK : Enemy
 
         FinishSkillExecution(skill);
     }
-    IEnumerator BackJump()
-    {
-        anim.SetTrigger("DoBackJump");
-        yield return new WaitForSeconds(0.5f);
-        //StartCoroutine(ActionPattern());
-    }
+
     IEnumerator SlashCombo(Skill skill)
     {
 

@@ -9,7 +9,7 @@ public class E_UndeadHorse : Enemy
     public float moveSpeed = 10.0f;
     public float bodyCrushDamage = 15.0f;
     public float detectionRange;
-    public LayerMask playerLayer;
+    
 
     float distancePlayer;
 

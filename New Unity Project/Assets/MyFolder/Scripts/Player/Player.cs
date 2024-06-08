@@ -26,14 +26,13 @@ public class Player : MonoBehaviour
     Coroutine KnockDownCoroutine;
 
     #endregion
-
-    GameObject cameraObj;
+    
     ThirdPersonConroller playerMoveController;
     CapsuleCollider playercolider;
     Animator anim;
-    PlayerWeapon equipWeapon;
-    EffectCollision effectCollision;
+    PlayerWeapon equipWeapon;    
 
+    public AudioSource audioSource;
     public GameObject potionEffect;
     public Transform potionPos;
 
@@ -41,12 +40,11 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("Player Awake 실행");
-        cameraObj = GameObject.Find("Camera");
+        Debug.Log("Player Awake 실행");        
         playerMoveController = GetComponent<ThirdPersonConroller>();
         playercolider = GetComponent<CapsuleCollider>();
-        anim = GetComponentInChildren<Animator>();
-        effectCollision = FindObjectOfType<EffectCollision>();
+        audioSource = GetComponent<AudioSource>();
+        anim = GetComponentInChildren<Animator>();        
 
         isDash = false;
         isSpace = false;

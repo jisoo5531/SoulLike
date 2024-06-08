@@ -84,6 +84,8 @@ public class Enemy : MonoBehaviour
     [HideInInspector]
     public EnemyWeapon weapon;
 
+    public LayerMask playerLayer;
+
     public float Get_HP()
     {
         return HP;

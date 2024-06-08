@@ -10,6 +10,12 @@ public class PlayerWeapon : MonoBehaviour
     public float attackSpeed;
     public BoxCollider meleeArea;
 
+    Player player;
+
+    private void Awake()
+    {
+        player = FindObjectOfType<Player>();
+    }
 
     public void Use()
     {
@@ -33,7 +39,9 @@ public class PlayerWeapon : MonoBehaviour
         if (other.tag == "Enemy")
         {
             Debug.Log("보스 맞았다.");
-            meleeArea.enabled = false;                        
+            meleeArea.enabled = false;
+
+            player.audioSource.Play();
         }
     }
     // Use() 메인루틴 -> Swing() 서브루틴 -> Use() 메인루틴
