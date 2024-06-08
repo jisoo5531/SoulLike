@@ -16,7 +16,7 @@ public class EnemyWeapon : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
 
-        sword_Damage = 15;
+        sword_Damage = 20;
     }
     public void Use()
     {
