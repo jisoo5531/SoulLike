@@ -30,8 +30,7 @@ public class E_GroundedUK : Enemy
             //test            
             //new Skill("Basic Slash_2", 3f, 1)
             //new Skill("PowerUP", 3f, 1)
-            //new Skill("Fire Bird", 6f, 1)
-            //new Skill("Slash Combo", 5f, 1)
+            //new Skill("Fire Bird", 6f, 1)            
         };
 
         isLook = true;
@@ -154,14 +153,8 @@ public class E_GroundedUK : Enemy
         anim.SetTrigger("DoSlash1");
         animEffect.skillNum = 0;
         weapon.Use();
-        #region Sound
-        yield return new WaitForSeconds(0.2f);
-        SoundManager.instance.PlaySoundEffect("Slash");
-        yield return new WaitForSeconds(2f);
-        SoundManager.instance.StopSoundEffect("Slash");
-        #endregion
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         FinishSkillExecution(skill);
     }
@@ -178,14 +171,8 @@ public class E_GroundedUK : Enemy
         anim.SetTrigger("DoSlash2");
         weapon.Use();
 
-        #region Sound
-        yield return new WaitForSeconds(0.5f);
-        SoundManager.instance.PlaySoundEffect("Slash");
-        yield return new WaitForSeconds(2f);
-        SoundManager.instance.StopSoundEffect("Slash");
-        #endregion
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
 
         FinishSkillExecution(skill);
     }
@@ -202,34 +189,7 @@ public class E_GroundedUK : Enemy
         anim.SetTrigger("DoSlashCombo");
         weapon.Use();
 
-        #region Sound
-        yield return new WaitForSeconds(0.18f);
-        SoundManager.instance.PlaySoundEffect("Slash");
-        yield return new WaitForSeconds(0.5f);
-        SoundManager.instance.StopSoundEffect("Slash");
-        yield return new WaitForSeconds(0.15f);
-
-        SoundManager.instance.PlaySoundEffect("Slash");
-        yield return new WaitForSeconds(0.5f);
-        SoundManager.instance.StopSoundEffect("Slash");
-        yield return new WaitForSeconds(0.1f);
-
-        SoundManager.instance.PlaySoundEffect("Slash");
-        yield return new WaitForSeconds(0.3f);
-        SoundManager.instance.StopSoundEffect("Slash");
-        yield return new WaitForSeconds(0.03f);
-
-        SoundManager.instance.PlaySoundEffect("Slash");
-        yield return new WaitForSeconds(0.3f);
-        SoundManager.instance.StopSoundEffect("Slash");
-        yield return new WaitForSeconds(0.1f);
-
-        SoundManager.instance.PlaySoundEffect("Slash");
-        yield return new WaitForSeconds(0.5f);
-        SoundManager.instance.StopSoundEffect("Slash");
-        #endregion
-
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(6f);
 
         FinishSkillExecution(skill);
     }
@@ -240,9 +200,8 @@ public class E_GroundedUK : Enemy
         Debug.Log("firebird");
         anim.SetTrigger("DoBackJumpFireBird");
 
-        yield return new WaitForSeconds(1f);
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(5f);
 
         FinishSkillExecution(skill);
     }
@@ -301,7 +260,7 @@ public class E_GroundedUK : Enemy
 
             weapon.Use();            
         }
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(4f);
         
         FinishSkillExecution(skill);        
     }
