@@ -1,162 +1,464 @@
 fileFormatVersion: 2
 guid: 87df432f7bcc7ff40ace9de5743a9d72
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: ' BackNub'
-    100002: ' ChestNub'
-    100004: ' Footsteps'
-    100006: ' HeadNub'
-    100008: ' JawNub'
-    100010: ' L Finger0Nub'
-    100012: ' L Toe0Nub'
-    100014: ' Ponytail1Nub'
-    100016: ' Ponytail2Nub'
-    100018: ' R Finger0Nub'
-    100020: ' R Toe0Nub'
-    100022: ' TailNub'
-    100024: Back
-    100026: Box001
-    100028: CG
-    100030: Chest
-    100032: Ear L
-    100034: Ear R
-    100036: //RootNode
-    100038: Head
-    100040: Horsito Body 004
-    100042: Horsito Eye
-    100044: Horsito Mane
-    100046: Horsito Mouth
-    100048: Horsito Tail
-    100050: Jaw
-    100052: L Calf
-    100054: L Clavicle
-    100056: L Finger0
-    100058: L Foot
-    100060: L Forearm
-    100062: L Hand
-    100064: L HorseLink
-    100066: L Thigh
-    100068: L Toe0
-    100070: L UpperArm
-    100072: Neck
-    100074: Neck1
-    100076: Neck2
-    100078: Omni001
-    100080: Omni002
-    100082: Omni003
-    100084: Pelvis
-    100086: R Calf
-    100088: R Clavicle
-    100090: R Finger0
-    100092: R Foot
-    100094: R Forearm
-    100096: R Hand
-    100098: R HorseLink
-    100100: R Thigh
-    100102: R Toe0
-    100104: R UpperArm
-    100106: Sky001
-    100108: Spine
-    100110: Spine1
-    100112: Spine2
-    100114: Tail
-    100116: Tail1
-    100118: Tail2
-    100120: Tail3
-    100122: Tail4
-    100124: Root
-    100126: Tail01
-    100128: Tail02
-    100130: Tail03
-    100132: Tail04
-    100134: Tail05
-    400000: ' BackNub'
-    400002: ' ChestNub'
-    400004: ' Footsteps'
-    400006: ' HeadNub'
-    400008: ' JawNub'
-    400010: ' L Finger0Nub'
-    400012: ' L Toe0Nub'
-    400014: ' Ponytail1Nub'
-    400016: ' Ponytail2Nub'
-    400018: ' R Finger0Nub'
-    400020: ' R Toe0Nub'
-    400022: ' TailNub'
-    400024: Back
-    400026: Box001
-    400028: CG
-    400030: Chest
-    400032: Ear L
-    400034: Ear R
-    400036: //RootNode
-    400038: Head
-    400040: Horsito Body 004
-    400042: Horsito Eye
-    400044: Horsito Mane
-    400046: Horsito Mouth
-    400048: Horsito Tail
-    400050: Jaw
-    400052: L Calf
-    400054: L Clavicle
-    400056: L Finger0
-    400058: L Foot
-    400060: L Forearm
-    400062: L Hand
-    400064: L HorseLink
-    400066: L Thigh
-    400068: L Toe0
-    400070: L UpperArm
-    400072: Neck
-    400074: Neck1
-    400076: Neck2
-    400078: Omni001
-    400080: Omni002
-    400082: Omni003
-    400084: Pelvis
-    400086: R Calf
-    400088: R Clavicle
-    400090: R Finger0
-    400092: R Foot
-    400094: R Forearm
-    400096: R Hand
-    400098: R HorseLink
-    400100: R Thigh
-    400102: R Toe0
-    400104: R UpperArm
-    400106: Sky001
-    400108: Spine
-    400110: Spine1
-    400112: Spine2
-    400114: Tail
-    400116: Tail1
-    400118: Tail2
-    400120: Tail3
-    400122: Tail4
-    400124: Root
-    400126: Tail01
-    400128: Tail02
-    400130: Tail03
-    400132: Tail04
-    400134: Tail05
-    2300000: Box001
-    3300000: Box001
-    4300000: Horsito Eye
-    4300002: Horsito Mane
-    4300004: Horsito Tail
-    4300006: Horsito Body 004
-    4300008: Horsito Mouth
-    4300010: Box001
-    7400000: H_Gallop_Right
-    9500000: //RootNode
-    13700000: Horsito Body 004
-    13700002: Horsito Eye
-    13700004: Horsito Mane
-    13700006: Horsito Mouth
-    13700008: Horsito Tail
+  serializedVersion: 21202
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: ' BackNub'
+  - first:
+      1: 100002
+    second: ' ChestNub'
+  - first:
+      1: 100004
+    second: ' Footsteps'
+  - first:
+      1: 100006
+    second: ' HeadNub'
+  - first:
+      1: 100008
+    second: ' JawNub'
+  - first:
+      1: 100010
+    second: ' L Finger0Nub'
+  - first:
+      1: 100012
+    second: ' L Toe0Nub'
+  - first:
+      1: 100014
+    second: ' Ponytail1Nub'
+  - first:
+      1: 100016
+    second: ' Ponytail2Nub'
+  - first:
+      1: 100018
+    second: ' R Finger0Nub'
+  - first:
+      1: 100020
+    second: ' R Toe0Nub'
+  - first:
+      1: 100022
+    second: ' TailNub'
+  - first:
+      1: 100024
+    second: Back
+  - first:
+      1: 100026
+    second: Box001
+  - first:
+      1: 100028
+    second: CG
+  - first:
+      1: 100030
+    second: Chest
+  - first:
+      1: 100032
+    second: Ear L
+  - first:
+      1: 100034
+    second: Ear R
+  - first:
+      1: 100036
+    second: //RootNode
+  - first:
+      1: 100038
+    second: Head
+  - first:
+      1: 100040
+    second: Horsito Body 004
+  - first:
+      1: 100042
+    second: Horsito Eye
+  - first:
+      1: 100044
+    second: Horsito Mane
+  - first:
+      1: 100046
+    second: Horsito Mouth
+  - first:
+      1: 100048
+    second: Horsito Tail
+  - first:
+      1: 100050
+    second: Jaw
+  - first:
+      1: 100052
+    second: L Calf
+  - first:
+      1: 100054
+    second: L Clavicle
+  - first:
+      1: 100056
+    second: L Finger0
+  - first:
+      1: 100058
+    second: L Foot
+  - first:
+      1: 100060
+    second: L Forearm
+  - first:
+      1: 100062
+    second: L Hand
+  - first:
+      1: 100064
+    second: L HorseLink
+  - first:
+      1: 100066
+    second: L Thigh
+  - first:
+      1: 100068
+    second: L Toe0
+  - first:
+      1: 100070
+    second: L UpperArm
+  - first:
+      1: 100072
+    second: Neck
+  - first:
+      1: 100074
+    second: Neck1
+  - first:
+      1: 100076
+    second: Neck2
+  - first:
+      1: 100078
+    second: Omni001
+  - first:
+      1: 100080
+    second: Omni002
+  - first:
+      1: 100082
+    second: Omni003
+  - first:
+      1: 100084
+    second: Pelvis
+  - first:
+      1: 100086
+    second: R Calf
+  - first:
+      1: 100088
+    second: R Clavicle
+  - first:
+      1: 100090
+    second: R Finger0
+  - first:
+      1: 100092
+    second: R Foot
+  - first:
+      1: 100094
+    second: R Forearm
+  - first:
+      1: 100096
+    second: R Hand
+  - first:
+      1: 100098
+    second: R HorseLink
+  - first:
+      1: 100100
+    second: R Thigh
+  - first:
+      1: 100102
+    second: R Toe0
+  - first:
+      1: 100104
+    second: R UpperArm
+  - first:
+      1: 100106
+    second: Sky001
+  - first:
+      1: 100108
+    second: Spine
+  - first:
+      1: 100110
+    second: Spine1
+  - first:
+      1: 100112
+    second: Spine2
+  - first:
+      1: 100114
+    second: Tail
+  - first:
+      1: 100116
+    second: Tail1
+  - first:
+      1: 100118
+    second: Tail2
+  - first:
+      1: 100120
+    second: Tail3
+  - first:
+      1: 100122
+    second: Tail4
+  - first:
+      1: 100124
+    second: Root
+  - first:
+      1: 100126
+    second: Tail01
+  - first:
+      1: 100128
+    second: Tail02
+  - first:
+      1: 100130
+    second: Tail03
+  - first:
+      1: 100132
+    second: Tail04
+  - first:
+      1: 100134
+    second: Tail05
+  - first:
+      4: 400000
+    second: ' BackNub'
+  - first:
+      4: 400002
+    second: ' ChestNub'
+  - first:
+      4: 400004
+    second: ' Footsteps'
+  - first:
+      4: 400006
+    second: ' HeadNub'
+  - first:
+      4: 400008
+    second: ' JawNub'
+  - first:
+      4: 400010
+    second: ' L Finger0Nub'
+  - first:
+      4: 400012
+    second: ' L Toe0Nub'
+  - first:
+      4: 400014
+    second: ' Ponytail1Nub'
+  - first:
+      4: 400016
+    second: ' Ponytail2Nub'
+  - first:
+      4: 400018
+    second: ' R Finger0Nub'
+  - first:
+      4: 400020
+    second: ' R Toe0Nub'
+  - first:
+      4: 400022
+    second: ' TailNub'
+  - first:
+      4: 400024
+    second: Back
+  - first:
+      4: 400026
+    second: Box001
+  - first:
+      4: 400028
+    second: CG
+  - first:
+      4: 400030
+    second: Chest
+  - first:
+      4: 400032
+    second: Ear L
+  - first:
+      4: 400034
+    second: Ear R
+  - first:
+      4: 400036
+    second: //RootNode
+  - first:
+      4: 400038
+    second: Head
+  - first:
+      4: 400040
+    second: Horsito Body 004
+  - first:
+      4: 400042
+    second: Horsito Eye
+  - first:
+      4: 400044
+    second: Horsito Mane
+  - first:
+      4: 400046
+    second: Horsito Mouth
+  - first:
+      4: 400048
+    second: Horsito Tail
+  - first:
+      4: 400050
+    second: Jaw
+  - first:
+      4: 400052
+    second: L Calf
+  - first:
+      4: 400054
+    second: L Clavicle
+  - first:
+      4: 400056
+    second: L Finger0
+  - first:
+      4: 400058
+    second: L Foot
+  - first:
+      4: 400060
+    second: L Forearm
+  - first:
+      4: 400062
+    second: L Hand
+  - first:
+      4: 400064
+    second: L HorseLink
+  - first:
+      4: 400066
+    second: L Thigh
+  - first:
+      4: 400068
+    second: L Toe0
+  - first:
+      4: 400070
+    second: L UpperArm
+  - first:
+      4: 400072
+    second: Neck
+  - first:
+      4: 400074
+    second: Neck1
+  - first:
+      4: 400076
+    second: Neck2
+  - first:
+      4: 400078
+    second: Omni001
+  - first:
+      4: 400080
+    second: Omni002
+  - first:
+      4: 400082
+    second: Omni003
+  - first:
+      4: 400084
+    second: Pelvis
+  - first:
+      4: 400086
+    second: R Calf
+  - first:
+      4: 400088
+    second: R Clavicle
+  - first:
+      4: 400090
+    second: R Finger0
+  - first:
+      4: 400092
+    second: R Foot
+  - first:
+      4: 400094
+    second: R Forearm
+  - first:
+      4: 400096
+    second: R Hand
+  - first:
+      4: 400098
+    second: R HorseLink
+  - first:
+      4: 400100
+    second: R Thigh
+  - first:
+      4: 400102
+    second: R Toe0
+  - first:
+      4: 400104
+    second: R UpperArm
+  - first:
+      4: 400106
+    second: Sky001
+  - first:
+      4: 400108
+    second: Spine
+  - first:
+      4: 400110
+    second: Spine1
+  - first:
+      4: 400112
+    second: Spine2
+  - first:
+      4: 400114
+    second: Tail
+  - first:
+      4: 400116
+    second: Tail1
+  - first:
+      4: 400118
+    second: Tail2
+  - first:
+      4: 400120
+    second: Tail3
+  - first:
+      4: 400122
+    second: Tail4
+  - first:
+      4: 400124
+    second: Root
+  - first:
+      4: 400126
+    second: Tail01
+  - first:
+      4: 400128
+    second: Tail02
+  - first:
+      4: 400130
+    second: Tail03
+  - first:
+      4: 400132
+    second: Tail04
+  - first:
+      4: 400134
+    second: Tail05
+  - first:
+      23: 2300000
+    second: Box001
+  - first:
+      33: 3300000
+    second: Box001
+  - first:
+      43: 4300000
+    second: Horsito Eye
+  - first:
+      43: 4300002
+    second: Horsito Mane
+  - first:
+      43: 4300004
+    second: Horsito Tail
+  - first:
+      43: 4300006
+    second: Horsito Body 004
+  - first:
+      43: 4300008
+    second: Horsito Mouth
+  - first:
+      43: 4300010
+    second: Box001
+  - first:
+      74: 7400000
+    second: H_Gallop_Right
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: Horsito Body 004
+  - first:
+      137: 13700002
+    second: Horsito Eye
+  - first:
+      137: 13700004
+    second: Horsito Mane
+  - first:
+      137: 13700006
+    second: Horsito Mouth
+  - first:
+      137: 13700008
+    second: Horsito Tail
   externalObjects: {}
   materials:
-    importMaterials: 0
+    materialImportMode: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 0
@@ -165,6 +467,7 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -185,6 +488,7 @@ ModelImporter:
     - serializedVersion: 16
       name: H_Gallop_Right
       takeName: Take 001
+      internalID: 0
       firstFrame: 0
       lastFrame: 18
       wrapMode: 0
@@ -200,7 +504,7 @@ ModelImporter:
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
+      keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
@@ -217,25 +521,34 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 0
     importBlendShapes: 0
     importCameras: 0
     importLights: 0
+    nodeNameCollisionStrategy: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 0
     keepQuads: 0
     weldVertices: 0
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: 1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -244,10 +557,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 1
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -257,14 +570,17 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: CG
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: a05d6a3b33caf354b8868fd4f04362ee,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: a05d6a3b33caf354b8868fd4f04362ee, type: 3}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 2
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
