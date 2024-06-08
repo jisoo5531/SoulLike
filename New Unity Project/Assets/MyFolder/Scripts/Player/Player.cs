@@ -95,7 +95,7 @@ public class Player : MonoBehaviour
                 }
                 break;
             case 3:
-                StartCoroutine(KnockDown());
+                KnockDownCoroutine = StartCoroutine(KnockDown());
                 break;
             default:
                 break;
@@ -334,8 +334,6 @@ public class Player : MonoBehaviour
     }
     IEnumerator KnockDown()
     {
-
-
         Debug.Log("플레이어 다운");
         anim.SetTrigger("DoKnockDown");
 

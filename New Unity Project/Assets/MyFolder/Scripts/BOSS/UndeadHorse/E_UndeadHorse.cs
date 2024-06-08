@@ -84,17 +84,12 @@ public class E_UndeadHorse : Enemy
     }
     private void OnTriggerEnter(Collider other)
     {
-        int random = Random.Range(0, 4);
         if (other.tag == "Player")
         {
             Debug.Log("플레이어 부딪힘");
             horseColider.enabled = false;
             player.HP -= bodyCrushDamage;
 
-            if (random == 0)
-            {
-                player.StartMethod(3);
-            }
         }
         else if (other.tag == "PlayerMelee")
         {
@@ -212,7 +207,8 @@ public class E_UndeadHorse : Enemy
 
         yield return new WaitUntil(() => !isTurnning);
 
-        Debug.Log("turn 끝");        
+        Debug.Log("turn 끝");
+        horseColider.enabled = true;
 
         if (distancePlayer < 28.0f && distancePlayer > 15.0f)
         {
@@ -222,7 +218,6 @@ public class E_UndeadHorse : Enemy
             {
                 Debug.Log("점프 콜라이더 있다.");
                 Attack_Sprint_Jump.enabled = true;
-
             }
         }
 
