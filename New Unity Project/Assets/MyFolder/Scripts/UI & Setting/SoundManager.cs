@@ -18,8 +18,7 @@ public class SoundManager : MonoBehaviour
     {
         if (instance == null)
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
+            instance = this;            
         }
         else
         {
@@ -40,6 +39,7 @@ public class SoundManager : MonoBehaviour
     private void Start()
     {
         float currentSceneNumber = FindObjectOfType<ChangeScene>().currentSceneNumber;
+        Debug.Log(currentSceneNumber);
         
         if (currentSceneNumber == 1)
         {
@@ -49,7 +49,23 @@ public class SoundManager : MonoBehaviour
         {
             enemySound = GameObject.Find("Realistic Undead Knight Grounded").GetComponents<AudioSource>();
         }
-        audioSourceEffects = enemySound;
+        else
+        {
+            return;
+        }
+
+        audioSourceEffects = new AudioSource[enemySound.Length + 1];
+        for (int i = 0; i < audioSourceEffects.Length; i++)
+        {            
+            if (i == audioSourceEffects.Length - 1)
+            {
+                audioSourceEffects[i] = GameObject.Find("Player").GetComponent<AudioSource>();
+            }
+            else
+            {
+                audioSourceEffects[i] = enemySound[i];
+            }
+        }        
         
         playSoundName = new string[audioSourceEffects.Length];
     }
