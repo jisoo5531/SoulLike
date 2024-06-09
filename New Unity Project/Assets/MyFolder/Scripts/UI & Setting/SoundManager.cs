@@ -34,8 +34,23 @@ public class SoundManager : MonoBehaviour
 
     public string[] playSoundName;
 
+    AudioSource[] enemySound;
+    
+
     private void Start()
     {
+        float currentSceneNumber = FindObjectOfType<ChangeScene>().currentSceneNumber;
+        
+        if (currentSceneNumber == 1)
+        {
+            enemySound = GameObject.Find("Enemy_Red").GetComponents<AudioSource>();            
+        }
+        else if (currentSceneNumber == 2)
+        {
+            enemySound = GameObject.Find("Realistic Undead Knight Grounded").GetComponents<AudioSource>();
+        }
+        audioSourceEffects = enemySound;
+        
         playSoundName = new string[audioSourceEffects.Length];
     }
 
