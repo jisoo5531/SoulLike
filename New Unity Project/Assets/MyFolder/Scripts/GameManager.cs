@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         fadeIO = FindObjectOfType<FadeInOut>();
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
 

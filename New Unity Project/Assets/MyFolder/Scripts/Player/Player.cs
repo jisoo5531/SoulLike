@@ -163,11 +163,21 @@ public class Player : MonoBehaviour
         }
         anim.SetTrigger("Death");
 
+        FindObjectOfType<FadeInOut>().StartFadeOut();
 
+        Invoke("CallDefeat", 3f);
 
 
 
         //playercolider.enabled = false;
+    }
+    void CallDefeat()
+    {
+        EndGame endGame = FindObjectOfType<EndGame>();
+        if (endGame != null)
+        {
+            endGame.Defeat();
+        }        
     }
 
     /// <summary>

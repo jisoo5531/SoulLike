@@ -34,11 +34,9 @@ public class E_GroundedUK : Enemy
         skillList = new List<Skill>
         {
             new Skill("Teleport", 35f, 1),
-            new Skill("Slash Combo", 12f, 3),
             new Skill("JumpAttack", 13f, 2),
-            new Skill("Fire Bird", 15f, 3),
-            new Skill("Basic Slash", 3f, 3),
-            new Skill("Basic Slash_2", 3f, 3),
+            new Skill("Slash Combo", 12f, 3),
+            new Skill("Fire Bird", 15f, 3),                        
 
             //test            
             //new Skill("Basic Slash_2", 3f, 1)

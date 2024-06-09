@@ -34,6 +34,7 @@ public class SoundManager : MonoBehaviour
     public string[] playSoundName;
 
     AudioSource[] enemySound;
+    AudioSource[] playerSound;
     
 
     private void Start()
@@ -53,17 +54,20 @@ public class SoundManager : MonoBehaviour
         {
             return;
         }
+        playerSound = GameObject.Find("Player").GetComponents<AudioSource>();
 
-        audioSourceEffects = new AudioSource[enemySound.Length + 1];
+        audioSourceEffects = new AudioSource[enemySound.Length + playerSound.Length];
+        int playerSoundIndex = 0;
         for (int i = 0; i < audioSourceEffects.Length; i++)
-        {            
-            if (i == audioSourceEffects.Length - 1)
+        {
+            if (i < enemySound.Length)
             {
-                audioSourceEffects[i] = GameObject.Find("Player").GetComponent<AudioSource>();
+                audioSourceEffects[i] = enemySound[i];
             }
             else
             {
-                audioSourceEffects[i] = enemySound[i];
+                audioSourceEffects[i] = playerSound[playerSoundIndex];
+                playerSoundIndex++;
             }
         }        
         

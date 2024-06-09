@@ -113,9 +113,32 @@ public class Enemy : MonoBehaviour
         ChangeScene scene = FindObjectOfType<ChangeScene>();
 
         if (HP <= 0)
-        {
+        {            
+            if (scene.currentSceneNumber == 2)
+            {
+                fadeIO.StartFadeOut();
+                Invoke("Victory", 3f);
+                return;
+            }
             fadeIO.StartFadeOut();
             scene.StartChangeScene();
+        }
+    }
+    void Victory()
+    {
+        EndGame endGame = FindObjectOfType<EndGame>();
+        if (endGame != null)
+        {
+            endGame.Victory();
+            Invoke("EndGame", 2f);
+        }
+    }
+    void EndGame()
+    {
+        EndGame endGame = FindObjectOfType<EndGame>();
+        if (endGame != null)
+        {
+            endGame.QuitGame();
         }
     }
 }
